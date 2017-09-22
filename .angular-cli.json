@@ -19,13 +19,26 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/typeface-exo/index.css",
+        "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
+        "../node_modules/ionicons/dist/scss/ionicons.scss",
+        "../node_modules/font-awesome/scss/font-awesome.scss",
+        "../node_modules/nebular-icons/scss/nebular-icons.scss",
+        "../node_modules/socicon/css/socicon.css",
+        "styles.scss"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/tinymce/tinymce.min.js",
+        "../node_modules/tinymce/themes/modern/theme.min.js",
+        "../node_modules/tinymce/plugins/link/plugin.min.js",
+        "../node_modules/tinymce/plugins/paste/plugin.min.js",
+        "../node_modules/tinymce/plugins/table/plugin.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
+        "prod": "etnvironments/environment.prod.ts"
       }
     }
   ],
@@ -54,7 +67,7 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "scss",
     "component": {}
   }
 }

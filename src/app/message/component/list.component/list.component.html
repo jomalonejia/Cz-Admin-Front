@@ -1,0 +1,8 @@
+<div class="m-list">
+  <ul *ngFor="let friend of friends">
+    <li [ngClass]="{'active':(activeUser$ | async) === friend.username }" (click)="toggleUser(friend.username)">
+      <img class="avatar"  width="30" height="30" src="{{ ( friend.imgUrl | czProfilePipe ) }}">
+      <p class="name">{{friend.username}}</p>
+    </li>
+  </ul>
+</div>

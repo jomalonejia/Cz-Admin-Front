@@ -1,0 +1,10 @@
+  <div id="chat">
+    <div class="sidebar">
+      <message-card [username]="username" [profile]="profile"></message-card>
+      <message-list [friends]="friends" [username]="username"></message-list>
+    </div>
+    <div class="main">
+      <message-messages [messages]="messages$ | async" [username]="username"></message-messages>
+      <message-text (sendMessage)="send($event)"></message-text>
+    </div>
+  </div>

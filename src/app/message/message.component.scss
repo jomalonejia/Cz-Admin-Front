@@ -1,0 +1,39 @@
+
+#chat {
+  margin: 20px auto;
+  width: 800px;
+  height: 600px;
+  color: #4d4d4d;
+  font: 14px/1.4em 'Helvetica Neue', Helvetica, 'Microsoft Yahei', Arial, sans-serif;
+  background: #f5f5f5  no-repeat center;
+  background-size: cover;
+  font-smoothing: antialiased;
+}
+#chat {
+  overflow: hidden;
+  border-radius: 3px;
+
+  .sidebar, .main {
+    height: 100%;
+  }
+  .sidebar {
+    float: left;
+    width: 200px;
+    color: #f4f4f4;
+    background-color: #2e3238;
+  }
+  .main {
+    position: relative;
+    overflow: hidden;
+    background-color: #eee;
+  }
+  .m-text {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+  }
+  .m-message {
+    height: 160px;
+  }
+}
