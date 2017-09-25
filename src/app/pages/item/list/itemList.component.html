@@ -1,0 +1,86 @@
+<div class="widgets">
+  <div class="row">
+    <div class="col-md-12">
+      <cz-card title="Item List" baCardClass="with-scroll" class="data-table-container">
+        <div class="row">
+          <div class="col-sm-2">
+            <label class="label-control">Rows on page</label>
+            <select class="form-control input-sm" [(ngModel)]="rowsOnPage">
+              <option [ngValue]="5">5</option>
+              <option [ngValue]="10">10</option>
+              <option [ngValue]="15">15</option>
+            </select>
+          </div>
+          <div class="col-sm-4">
+            <div class="row">
+              <label class="col-sm-12 label-control">Sort by</label>
+            </div>
+            <div class="row">
+              <div class="offset-sm-1 col-sm-5">
+                <div class="row">
+                  <select class="form-control input-sm" [(ngModel)]="sortBy">
+                    <option ngValue="name">Name</option>
+                    <option ngValue="email">Email</option>
+                    <option ngValue="age">Age</option>
+                    <option [ngValue]="sortByWordLength">City</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item-add-button">
+            <button type="button" class="btn btn-success btn-lg">Add</button>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+            <thead>
+            <tr>
+              <th colspan="5">
+                Filter by name:
+                <div *ngIf="animal">
+                  You chose: <i>{{animal}}</i>
+                </div>
+                <input class="form-control" [(ngModel)]="filterQuery" />
+              </th>
+            </tr>
+            <tr>
+              <th class="item-list-title-col">
+                <mfDefaultSorter by="title"><b>Title</b></mfDefaultSorter>
+              </th>
+              <th class="item-list-image-col"><b>Image</b></th>
+              <th class="item-list-describe-col">
+                <b>Describe</b>
+              </th>
+              <th class="item-list-price-col">
+                <mfDefaultSorter by="price"><b>Price</b></mfDefaultSorter>
+              </th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of mf.data">
+
+              <td class="item-list-title-col">{{item.title}}</td>
+              <td class="item-list-image-col"><img class="item-list-img" src={{item.image}}></td>
+              <td class="item-list-describe-col">{{item.describe1}}</td>
+              <td class="item-list-price-col">{{item.price}}</td>
+              <td>
+                <button  class="btn btn-outline-secondary" title="delete"><i class="ion-close-round"></i></button>
+                <button  class="btn btn-outline-secondary" title="edit" (click)="openDialog()"><i class="ion-edit"></i></button>
+              </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+              <td colspan="5">
+                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+              </td>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+      </cz-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+
+td,th{
+  text-align: center;
+}
+
+.item-list-title-col{
+  width: 25%;
+}
+.item-list-describe-col{
+  width: 40%;
+}
+.item-list-price-col{
+  width: 10%;
+}
+.item-list-image-col{
+  width: 10%;
+
+  .item-list-img{
+    width:45px;
+  }
+}
+
+.item-add-button{
+  position: absolute;
+  right: 40px;
+  cursor: pointer;
+}
+
+
+

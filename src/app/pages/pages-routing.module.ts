@@ -11,6 +11,10 @@ const routes: Routes = [{
     {
       path:'dashboard',
       component:DashboardComponent
+    },
+    {
+      path:'item',
+      loadChildren:'./item/item.module#ItemModule'
     }
   ]
 }];
