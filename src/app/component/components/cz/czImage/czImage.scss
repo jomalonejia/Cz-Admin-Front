@@ -1,0 +1,53 @@
+/*img {
+  width: 120px;
+  height: 120px;
+}*/
+.meduim{
+  width: 120px;
+}
+
+.large{
+  width: 300px;
+}
+
+.picture-wrapper {
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.picture-handler {
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  opacity: 0;
+  transition: .5s ease;
+}
+
+.ion-image {
+  color: #3F51B5;
+}
+
+.ion-close {
+  color: #ff4081;
+}
+
+i {
+  font-size: 40px;
+  margin: 10px;
+}
+
+i:hover {
+  font-size: 50px;
+}
+
+
+.picture-group:hover {
+  cursor: pointer;
+  .picture-wrapper {
+    opacity: 0.6;
+  }
+  .picture-handler {
+    opacity: 1;
+  }
+}
+

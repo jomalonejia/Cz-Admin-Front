@@ -7,6 +7,9 @@ import { ItemListComponent} from './list/itemList.component';
 import {ItemEditComponent,
         ItemEditContentComponent,
         ItemEditImageComponent} from './list/component'
+import {ModalComponent} from './list/component/modal.component';
+import {Modal2Component} from './list/component/modal2.component';
+import {Modal3Component} from './list/component/modal3.component';
 
 const routes: Routes = [{
   path: '',
@@ -38,7 +41,10 @@ export const routedComponents = [
 export const routedEntryComponents = [
   ItemEditComponent,
   ItemEditContentComponent,
-  ItemEditImageComponent
+  ItemEditImageComponent,
+  ModalComponent,
+  Modal2Component,
+  Modal3Component
 ]
 
 

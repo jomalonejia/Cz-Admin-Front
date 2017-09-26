@@ -2,44 +2,20 @@
   <div class="row">
     <div class="col-md-12">
       <cz-card title="Item List" baCardClass="with-scroll" class="data-table-container">
-        <div class="row">
-          <div class="col-sm-2">
-            <label class="label-control">Rows on page</label>
-            <select class="form-control input-sm" [(ngModel)]="rowsOnPage">
-              <option [ngValue]="5">5</option>
-              <option [ngValue]="10">10</option>
-              <option [ngValue]="15">15</option>
-            </select>
-          </div>
-          <div class="col-sm-4">
-            <div class="row">
-              <label class="col-sm-12 label-control">Sort by</label>
-            </div>
-            <div class="row">
-              <div class="offset-sm-1 col-sm-5">
-                <div class="row">
-                  <select class="form-control input-sm" [(ngModel)]="sortBy">
-                    <option ngValue="name">Name</option>
-                    <option ngValue="email">Email</option>
-                    <option ngValue="age">Age</option>
-                    <option [ngValue]="sortByWordLength">City</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="item-add-button">
-            <button type="button" class="btn btn-success btn-lg">Add</button>
-          </div>
-        </div>
         <div class="panel panel-default">
           <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
             <thead>
             <tr>
+              <th>
+                <div>
+                  <button type="button" class="btn btn-hero-primary btn-demo">Add</button>
+                  <button type="button" class="btn btn-hero-primary btn-demo">Delete</button>
+                </div>
+              </th>
               <th colspan="5">
                 Filter by name:
-                <div *ngIf="animal">
-                  You chose: <i>{{animal}}</i>
+                <div *ngIf="filterQuery">
+                  You chose: <i>{{filterQuery}}</i>
                 </div>
                 <input class="form-control" [(ngModel)]="filterQuery" />
               </th>
@@ -55,19 +31,22 @@
               <th class="item-list-price-col">
                 <mfDefaultSorter by="price"><b>Price</b></mfDefaultSorter>
               </th>
-
+              <th class="item-list-operation-col">
+                Operation
+              </th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let item of mf.data">
+            <tr id="item-table-line" *ngFor="let item of mf.data">
 
               <td class="item-list-title-col">{{item.title}}</td>
-              <td class="item-list-image-col"><img class="item-list-img" src={{item.image}}></td>
-              <td class="item-list-describe-col">{{item.describe1}}</td>
+              <td class="item-list-image-col"><img class="item-list-img" src={{item.image}} (click)="openImageModal()"></td>
+              <td class="item-list-describe-col">{{item.describe}}</td>
               <td class="item-list-price-col">{{item.price}}</td>
               <td>
-                <button  class="btn btn-outline-secondary" title="delete"><i class="ion-close-round"></i></button>
-                <button  class="btn btn-outline-secondary" title="edit" (click)="openDialog()"><i class="ion-edit"></i></button>
+                  <button class="btn btn-hero-secondary btn-demo"><i class="ion-close-round"></i></button>
+                  <button class="btn btn-hero-secondary btn-demo" (click)="openEditModal()"><i class="ion-edit"></i></button>
+                  <button class="btn btn-hero-secondary btn-demo" (click)="openContentModal()"><i class="ion-document-text"></i></button>
               </td>
             </tr>
             </tbody>

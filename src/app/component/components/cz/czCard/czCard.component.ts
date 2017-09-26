@@ -2,7 +2,8 @@ import {Component, Input} from "@angular/core";
 
 @Component({
   selector:'cz-card',
-  templateUrl:'./czCard.html'
+  templateUrl:'./czCard.html',
+  styleUrls: ['./czCard.scss'],
 })
 
 export class CzCard{

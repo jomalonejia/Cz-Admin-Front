@@ -1,53 +1,56 @@
-import {Component, Inject} from "@angular/core";
-import {MD_DIALOG_DATA, MdDialogRef} from "@angular/material";
+import {Component, Inject} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'item-edit-content',
-  template: `
-    <div>
-      <h1 md-dialog-title>Edit</h1>
-      <div md-dialog-content>
-        <quill-editor [(ngModel)]="content"
-                      [options]="editorOptions" (change)="change()">
-        </quill-editor>
-      </div>
-      <div md-dialog-actions>
-        <button md-raised-button color="primary" (click)="addItemContent()" tabindex="2">Ok</button>
-        <button md-raised-button color="warn" (click)="close()" tabindex="-1">Cancel</button>
-      </div>
-    </div>
-  `
+  template: `    
+   <div class="modal1">
+     <div class="modal-header">
+       <span>Item Content</span>
+       <button class="close" aria-label="Close" (click)="closeModal()">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <div class="modal-body">
+       <div class="item-edit-content">
+         <quill-editor [(ngModel)]="content"
+                       [options]="editorOptions">
+         </quill-editor>
+       </div>
+     </div>
+     <div class="modal-footer">
+       <button class="btn btn-md btn-primary" (click)="closeModal()">Cancel</button>
+       <button class="btn btn-md btn-primary" (click)="saveItemContent()">Cancel</button>
+     </div>
+   </div>
+  `,
+  styles:[
+    '.item-edit-content {background-color:#fff;}',
+
+  ],
 })
 export class ItemEditContentComponent {
 
 
-  constructor(/*public itemService:ItemService,*/
-              public dialogRef: MdDialogRef<ItemEditContentComponent>,
-              @Inject(MD_DIALOG_DATA) public data: any){
+  constructor(private activeModal: NgbActiveModal){
   }
 
   public content = ``;
   public editorOptions = {
-    placeholder: "insert content..."
+    placeholder: 'insert content...'
   };
 
-
-  ngOnInit() {
-
+  closeModal() {
+    this.activeModal.close();
   }
 
-  change(){
 
-  }
 
-  addItemContent(){
+  saveItemContent(){
     /*this.itemService.addContent({itemContent:this.content})
       .subscribe(v => console.log(v));*/
     //this.close();
   }
 
-  close(){
-    this.dialogRef.close();
-  }
 
 }

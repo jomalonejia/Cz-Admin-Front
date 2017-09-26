@@ -1,29 +1,45 @@
 
-td,th{
+td, th {
   text-align: center;
 }
 
-.item-list-title-col{
-  width: 25%;
+.item-list-title-col {
+  width: 20%;
 }
-.item-list-describe-col{
-  width: 40%;
+
+.item-list-describe-col {
+  width: 35%;
 }
-.item-list-price-col{
+
+.item-list-price-col {
   width: 10%;
 }
-.item-list-image-col{
+
+.item-list-image-col {
   width: 10%;
 
-  .item-list-img{
-    width:45px;
+  .item-list-img {
+    width: 45px;
   }
 }
+.item-list-operation-col{
+  width: 25%;
+}
 
-.item-add-button{
-  position: absolute;
-  right: 40px;
+.btn{
   cursor: pointer;
+}
+
+.card {
+  background: none;
+}
+
+.card-header {
+  background: none;
+}
+
+#item-table-line{
+  line-height: 3;
 }
 
 

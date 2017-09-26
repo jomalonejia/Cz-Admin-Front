@@ -1,8 +1,10 @@
 import {Component, ViewChild} from "@angular/core";
 import {FileItem, FileUploader, ParsedResponseHeaders} from "ng2-file-upload";
 import {MdDialog, MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {ItemEditComponent} from "./component/itemEdit.component";
+import {ModalComponent} from './component/modal.component';
+import {ItemEditContentComponent, ItemEditImageComponent} from './component';
 
 @Component({
   selector: 'itemList',
@@ -19,15 +21,22 @@ export class ItemListComponent {
   sortOrder = "asc";
   name: string;
 
-  openDialog(): void {
-    let dialogRef = this.dialog.open(ItemEditComponent, {
-      width: '250px',
-      data: { item : this.data[0] }
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+
+  openEditModal() {
+    const activeModal = this.modalService.open(ModalComponent, { size: 'lg'});
+
+    activeModal.componentInstance.item = this.data[0];
+  }
+
+  openImageModal(){
+    const activeModal = this.modalService.open(ItemEditImageComponent, { size: 'lg'});
+    activeModal.componentInstance.image = this.data[0].image;
+    activeModal.componentInstance.minusImages = this.data[0].minusImages;
+  }
+
+  openContentModal(){
+    const activeModal = this.modalService.open(ItemEditContentComponent, { size: 'lg'});
   }
 
   toInt(num: string) {
@@ -38,12 +47,12 @@ export class ItemListComponent {
     return a.city.length;
   }
 
-  constructor(public dialog: MdDialog) {
+  constructor(public dialog: MdDialog,private modalService:NgbModal) {
       this.data = [
         {
           title:'iphone8',
           price:999,
-          describe1:'只要998，买不了吃亏！',
+          describe:'只要998，买不了吃亏！',
           image:'http://otlht2gvo.bkt.clouddn.com/front/test1.jpg',
           minusImages:[
             'http://otlht2gvo.bkt.clouddn.com/FgCT5ZtZiSXTC8tHZohHVBhrPxgc',
@@ -57,7 +66,7 @@ export class ItemListComponent {
         {
           title:'小米not6',
           price:998,
-          describe1:'只要998，买不了吃亏！',
+          describe:'只要998，买不了吃亏！',
           image:'http://otlht2gvo.bkt.clouddn.com/Nick.png',
           minusImages:[
             'http://otlht2gvo.bkt.clouddn.com/FgCT5ZtZiSXTC8tHZohHVBhrPxgc',

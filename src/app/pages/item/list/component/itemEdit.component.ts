@@ -8,8 +8,9 @@ import {ItemEditContentComponent} from "./itemEditContent.component";
   styles:[
     'i {font-size: 30px}',
     '.item-edit-image-button {margin:20px}',
-    '.item-edit-button {margin:3px}'
-  ],
+    '.item-edit-button {margin:3px}',
+
+],
   template: `
     <div>
       <h1 md-dialog-title>Edit</h1>

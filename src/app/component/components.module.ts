@@ -2,6 +2,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {FileUploadModule} from 'ng2-file-upload';
 
 import {
   NbActionsModule,
@@ -24,7 +25,8 @@ import {
   ThemeSettingsComponent,
   ThemeSwitcherComponent,
   TinyMCEComponent,
-  CzCard
+  CzCard,
+  CzImage
 } from './components';
 
 import {
@@ -46,6 +48,8 @@ import {
 } from './service'
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
+
+const MODULES = [ FileUploadModule];
 
 const NB_MODULES = [
   NbCardModule,
@@ -69,6 +73,7 @@ const COMPONENTS = [
   ThemeSwitcherComponent,
   TinyMCEComponent,
   CzCard,
+  CzImage,
   OneColumnLayoutComponent,
   SampleLayoutComponent,
   ThreeColumnsLayoutComponent,
@@ -94,7 +99,7 @@ const NB_THEME_PROVIDERS = [
 ];
 
 @NgModule({
-  imports: [...BASE_MODULES, ...NB_MODULES],
+  imports: [...BASE_MODULES,...MODULES, ...NB_MODULES],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
   declarations: [...COMPONENTS, ...PIPES],
 })

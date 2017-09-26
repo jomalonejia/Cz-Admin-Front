@@ -1,0 +1,22 @@
+<div class="picture-group" [ngClass]="{uploading: uploadInProgress}">
+  <div class="picture-wrapper">
+    <img [class]="size" [src]="image" *ngIf="image">
+    <img [class]="size" [src]="defaultPicture | czImageFrontPipe" *ngIf="!!!image && !!defaultPicture">
+    <div class="loading" *ngIf="uploader.isUploading">
+      <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+    </div>
+  </div>
+  <div class="picture-handler">
+    <span></span>
+    <span></span>
+    <i title="change image" class="ion-image" (click)="bringFileSelector()"></i>
+    <i title="delete image" class="ion-close" (click)="removePicture();" ></i>
+  </div>
+  <input type="file" hidden="true" id="fileUpload"
+         ng2FileSelect
+         [uploader]="uploader"
+         (change)="selectedFileOnChanged($event)"/>
+</div>
