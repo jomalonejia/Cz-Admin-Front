@@ -7,6 +7,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
   selector: 'item-edit-image',
   styles: [
     '.image-body{min-height: 350px;margin-left:35px;}',
+    '.image-index{margin-left: 20%}',
     'li{float:left;width: 30%;margin: 10px}',
   ],
   template: `
@@ -19,24 +20,13 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
         </button>
       </div>
       <div class="modal-body">
-        <!--<div class="image-body">
-          
-        </div>-->
-        <!--<nb-card size="small">
-          <nb-card-header>
-            Index Images
-          </nb-card-header>
-          <nb-card-body>
-            <cz-image [image]="this.image"></cz-image>
-          </nb-card-body>
-        </nb-card>-->
         <nb-card size="small">
           <nb-card-header>
             Index Images
           </nb-card-header>
           <nb-card-body>
-            <div>
-              <cz-image [size]="large" [image]="this.image"></cz-image>
+            <div class="image-index">
+              <cz-image [size]="'large'" [image]="this.image"></cz-image>
             </div>
           </nb-card-body>
         </nb-card>
@@ -47,7 +37,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
           <nb-card-body>
             <ul>
               <li *ngFor="let image of this.minusImages">
-                <cz-image [image]="image"></cz-image>
+                <cz-image [image]="image" [size]="'meduim'"></cz-image>
               </li>
             </ul>
           </nb-card-body>
@@ -58,68 +48,6 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
         <button class="btn btn-md btn-primary" (click)="saveItemContent()">Cancel</button>
       </div>
     </div>
-
-    <!--<div>
-      <h1 md-dialog-title>Edit</h1>
-      <div md-dialog-content>
-        <md-expansion-panel>
-          <md-expansion-panel-header>
-            <md-panel-description>
-              Item Edit
-            </md-panel-description>
-          </md-expansion-panel-header>
-
-          <div>
-            <ul>
-              <li *ngFor="let image of this.images">
-                <md-card class="example-card">
-                 &lt;!&ndash; <cz-image [image]="image">
-                  </cz-image>&ndash;&gt;
-                </md-card>
-              </li>
-            </ul>
-          </div>
-        </md-expansion-panel>
-        
-        <br><br>
-        
-        <md-expansion-panel>
-          <md-expansion-panel-header>
-            <md-panel-title>
-              Showing Images
-            </md-panel-title>
-            <md-panel-description>
-              Upload Showing images
-            </md-panel-description>
-          </md-expansion-panel-header>
-
-          <div>
-            <md-card class="example-card">
-              <img md-card-sm-image src="http://otlht2gvo.bkt.clouddn.com/FgCT5ZtZiSXTC8tHZohHVBhrPxgc" alt="Photo of a Shiba Inu">
-            </md-card>
-            <md-card class="example-card">
-              <img md-card-sm-image src="http://otlht2gvo.bkt.clouddn.com/FgCT5ZtZiSXTC8tHZohHVBhrPxgc" alt="Photo of a Shiba Inu">
-            </md-card>
-            <md-card class="example-card">
-              <img md-card-sm-image src="http://otlht2gvo.bkt.clouddn.com/FgCT5ZtZiSXTC8tHZohHVBhrPxgc" alt="Photo of a Shiba Inu">
-            </md-card>
-            <md-card class="example-card">
-              <img md-card-sm-image src="http://otlht2gvo.bkt.clouddn.com/FgCT5ZtZiSXTC8tHZohHVBhrPxgc" alt="Photo of a Shiba Inu">
-            </md-card>
-            <md-card class="example-card">
-              <img md-card-sm-image src="http://otlht2gvo.bkt.clouddn.com/FgCT5ZtZiSXTC8tHZohHVBhrPxgc" alt="Photo of a Shiba Inu">
-            </md-card>
-            <md-card class="example-card">
-              <img md-card-sm-image src="http://otlht2gvo.bkt.clouddn.com/FgCT5ZtZiSXTC8tHZohHVBhrPxgc" alt="Photo of a Shiba Inu">
-            </md-card>
-          </div>
-        </md-expansion-panel>
-      </div>
-      <div md-dialog-actions>
-        <button md-raised-button color="primary" [md-dialog-close]="" tabindex="2">Ok</button>
-        <button md-raised-button color="warn" (click)="onNoClick()" tabindex="-1">Cancel</button>
-      </div>
-    </div>-->
   `
 })
 

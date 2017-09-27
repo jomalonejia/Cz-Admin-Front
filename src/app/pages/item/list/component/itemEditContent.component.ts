@@ -1,5 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {ItemService} from '../../item.service';
 
 @Component({
   selector: 'item-edit-content',
@@ -17,10 +18,13 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
                        [options]="editorOptions">
          </quill-editor>
        </div>
+       <div *ngIf="saveProgress">
+         <md-spinner></md-spinner>
+       </div>
      </div>
      <div class="modal-footer">
        <button class="btn btn-md btn-primary" (click)="closeModal()">Cancel</button>
-       <button class="btn btn-md btn-primary" (click)="saveItemContent()">Cancel</button>
+       <button class="btn btn-md btn-primary" (click)="saveItemContent()">Save</button>
      </div>
    </div>
   `,
@@ -32,8 +36,11 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 export class ItemEditContentComponent {
 
 
-  constructor(private activeModal: NgbActiveModal){
+  constructor(private activeModal: NgbActiveModal,
+              private itemService:ItemService){
   }
+
+  saveProgress:boolean = true;
 
   public content = ``;
   public editorOptions = {
@@ -47,9 +54,9 @@ export class ItemEditContentComponent {
 
 
   saveItemContent(){
-    /*this.itemService.addContent({itemContent:this.content})
-      .subscribe(v => console.log(v));*/
-    //this.close();
+   this.itemService.addContent({itemContent:this.content})
+      .subscribe(v => console.log(v));
+
   }
 
 

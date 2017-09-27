@@ -1,10 +1,9 @@
 import {Component, ViewChild} from "@angular/core";
 import {FileItem, FileUploader, ParsedResponseHeaders} from "ng2-file-upload";
-import {MdDialog, MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {ItemEditComponent} from "./component/itemEdit.component";
-import {ModalComponent} from './component/modal.component';
-import {ItemEditContentComponent, ItemEditImageComponent} from './component';
+  import { ItemEditComponent,
+           ItemEditContentComponent,
+           ItemEditImageComponent } from './component';
 
 @Component({
   selector: 'itemList',
@@ -24,9 +23,11 @@ export class ItemListComponent {
 
 
   openEditModal() {
-    const activeModal = this.modalService.open(ModalComponent, { size: 'lg'});
+    const activeModal = this.modalService.open(ItemEditComponent, { size: 'lg'});
 
-    activeModal.componentInstance.item = this.data[0];
+    activeModal.componentInstance.title = this.data[0].title;
+    activeModal.componentInstance.price = this.data[0].price;
+    activeModal.componentInstance.describe = this.data[0].describe;
   }
 
   openImageModal(){
@@ -47,7 +48,7 @@ export class ItemListComponent {
     return a.city.length;
   }
 
-  constructor(public dialog: MdDialog,private modalService:NgbModal) {
+  constructor(private modalService:NgbModal) {
       this.data = [
         {
           title:'iphone8',

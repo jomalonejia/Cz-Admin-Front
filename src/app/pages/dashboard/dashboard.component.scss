@@ -20,3 +20,34 @@
     }
   }
 }
+
+.parent {
+  border: 5px solid black;
+
+  .child {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    &:hover {
+      background-color: purple;
+      @at-root {
+        .child3{
+            display: block;
+        }
+      }
+    }
+  }
+
+  .child2 {
+    width: 50px;
+    height: 50px;
+    background-color: green;
+  }
+}
+
+.child3{
+  display: none;
+  width: 50px;
+  height: 50px;
+  background-color: yellow;
+}

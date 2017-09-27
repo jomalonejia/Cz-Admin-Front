@@ -11,7 +11,8 @@ import * as constants from '../../../constants';
 export class CzImage{
 
   @Input() image:string;
-  @Input() size:string = 'meduim';
+  @Input() size:string;
+
   defaultPicture = 'default.png';
 
   uploader:FileUploader;
@@ -47,7 +48,9 @@ export class CzImage{
     return false;
   }
 
-  selectedFileOnChanged() {
-    //console.log('change');
+  removePicture(){
+    console.log('aa');
   }
+
+
 }

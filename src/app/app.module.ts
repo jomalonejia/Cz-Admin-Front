@@ -10,15 +10,19 @@ import {AppRoutingModule} from './app-routing.module';
 import {ComponentsModule} from "./component/components.module";
 import {CoreModule} from "./core/core.module";
 import * as constants from './component/constants';
+import {NbAuthService, NbTokenService} from '@nebular/auth';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {LoginInterceptor} from './component/service'
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+
   return new AuthHttp(new AuthConfig({
     tokenName: constants.TOKEN_NAME,
     headerName: constants.TOKEN_HEADER,
     noTokenScheme: true,
     noJwtError: false,
-    tokenGetter: (() => JSON.parse(localStorage.getItem('login'))['token']),
+    tokenGetter: (() => sessionStorage.getItem('token')),
   }), http, options);
 }
 
@@ -37,6 +41,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   ],
   providers: [
     JwtHelper,
+    { provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true },
     {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,

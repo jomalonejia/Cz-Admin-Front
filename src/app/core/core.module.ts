@@ -74,8 +74,7 @@ const NB_CORE_PROVIDERS = [
             resetPasswordTokenKey: 'reset_password_token',
             defaultErrors: ['Something went wrong, please try again.'],
             defaultMessages: ['Your password has been successfully changed.'],
-          },
-
+          }
         },
       },
     },

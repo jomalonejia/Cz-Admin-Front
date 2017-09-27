@@ -1,95 +1,63 @@
-import {Component, Inject} from "@angular/core";
-import {MD_DIALOG_DATA, MdDialog, MdDialogRef} from "@angular/material";
+import {Component} from '@angular/core';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ItemEditContentComponent} from './itemEditContent.component';
 import {ItemEditImageComponent} from './itemEditImage.component';
-import {ItemEditContentComponent} from "./itemEditContent.component";
 
 @Component({
-  selector: 'item-edit',
-  styles:[
-    'i {font-size: 30px}',
-    '.item-edit-image-button {margin:20px}',
-    '.item-edit-button {margin:3px}',
-
-],
+  selector: 'ngx-modal',
   template: `
-    <div>
-      <h1 md-dialog-title>Edit</h1>
-      <div md-dialog-content>
-        <form class="example-form">
-          <p>
-            <md-form-field class="full-width">
-              <input mdInput placeholder="title" [value]="this.item.title">
-            </md-form-field>
-          </p>
-          <p>
-            <md-form-field class="full-width">
-              <input mdInput placeholder="price" [value]="this.item.price">
-            </md-form-field>
-          </p>
-          <p>
-            <md-form-field class="full-width">
-              <textarea mdInput placeholder="describe" [value]="this.item.describe1"></textarea>
-            </md-form-field>
-          </p>
-          <p>
-            <button class="item-edit-image-button"  md-fab color="accent" (click)="openImageDialog()">
-              <i class="ion-images"></i>
-            </button>
-            
-            <button class="item-edit-image-button"  md-fab color="accent" (click)="openContentDialog()">
-              <i class="ion-ios-paper"></i>
-            </button>
-          </p>
+    <div class="modal1">
+      <div class="modal-header">
+        <span>Item Edit</span>
+        <button class="close" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group row">
+            <label for="inputTitle" class="col-sm-3 col-form-label">Title</label>
+            <div class="col-sm-9">
+              <input type="text" [value]="title" class="form-control" id="inputTitle" placeholder="Title">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPrice" class="col-sm-3 col-form-label">Price</label>
+            <div class="col-sm-9">
+              <input type="number" [value]="price" class="form-control" id="inputPrice" placeholder="Price">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3">Description</label>
+            <div class="col-sm-9">
+              <textarea rows="5" [value]="describe" placeholder="Text Area" class="form-control"></textarea>
+            </div>
+          </div>
+         
         </form>
       </div>
-      <div md-dialog-actions>
-        <button class="item-edit-button" md-raised-button color="primary" [md-dialog-close]="" tabindex="2">Ok</button>
-        <button class="item-edit-button" md-raised-button color="warn" (click)="onNoClick()" tabindex="-1">Cancel</button>
+      <div class="modal-footer">
+        <button class="btn btn-md btn-primary" (click)="closeModal()">Cancel</button>
+        <button class="btn btn-md btn-primary" (click)="update()">Update</button>
       </div>
     </div>
-  `
+  `,
 })
 export class ItemEditComponent {
 
-  item:object;
+  title:string;
+  price:number;
+  describe:string;
 
-  constructor(public imageDialog: MdDialog,
-              public contentDialog:MdDialog,
-              public dialogRef: MdDialogRef<ItemEditComponent>,
-              @Inject(MD_DIALOG_DATA) public data: any) {
-
-    this.item = this.data.item;
-  }
-
-  ngOnInit(){
-    console.log(this.item['minusImages']);
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  openImageDialog(){
-    let dialogRef = this.imageDialog.open(ItemEditImageComponent, {
-      width: '550px',
-      data: { minusImages:this.item['minusImages'] }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
-
-  openContentDialog(){
-    let dialogRef = this.contentDialog.open(ItemEditContentComponent, {
-      width: '800px',
-      data: {minusImages:this.item['minusImages'] }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+  constructor(private activeModal: NgbActiveModal) {
   }
 
 
+  update(){
+
+  }
+
+  closeModal() {
+    this.activeModal.close();
+  }
 }

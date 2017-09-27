@@ -1,26 +1,73 @@
-/*img {
-  width: 120px;
-  height: 120px;
-}*/
+$small-size : 70px;
+$meduim-size : 135px;
+$large-size : 400px;
+
+
+.picture-wrapper {
+  position: relative;
+  transition: .5s ease;
+  backface-visibility: hidden;
+
+  &:hover{
+    img{
+      opacity: 0.4;
+    }
+  }
+
+  &:hover > .icon-remove, &:hover> .image-change{
+    display: block;
+  }
+
+  .icon-remove{
+    display: none;
+    position: absolute;
+    top:0;
+    right:6%;
+    i{
+      color:white;
+    }
+  }
+
+  .image-change{
+    display: none;
+    position: absolute;
+    bottom: 1%;
+    left:2%;
+  }
+}
+
+.small{
+  width: $small-size;
+
+  img{
+    width: $small-size;
+  }
+}
+
 .meduim{
-  width: 120px;
+  width: $meduim-size;
+  img{
+    width: $meduim-size;
+  }
 }
 
 .large{
-  width: 300px;
+  width: $large-size;
+  img{
+    width: $large-size;
+  }
 }
 
-.picture-wrapper {
-  transition: .5s ease;
-  backface-visibility: hidden;
-}
+
+
+
 
 .picture-handler {
-  position: absolute;
+  /*position: absolute;
   left: 30px;
   top: 50%;
   opacity: 0;
-  transition: .5s ease;
+  transition: .5s ease;*/
 }
 
 .ion-image {
@@ -34,20 +81,8 @@
 i {
   font-size: 40px;
   margin: 10px;
-}
-
-i:hover {
-  font-size: 50px;
-}
-
-
-.picture-group:hover {
-  cursor: pointer;
-  .picture-wrapper {
-    opacity: 0.6;
-  }
-  .picture-handler {
-    opacity: 1;
+  &:hover{
+    font-size: 50px;
   }
 }
 

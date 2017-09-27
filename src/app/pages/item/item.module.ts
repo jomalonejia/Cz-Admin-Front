@@ -5,12 +5,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { DataTableModule } from "angular2-datatable";
 import { QuillEditorModule } from 'ngx-quill-editor';
 import {
-  MdDialogModule,
-  MdInputModule,
-  MdButtonModule,
-  MdExpansionModule,
-  MdChipsModule,
-  MdCardModule
+  MatProgressSpinnerModule
 }
   from '@angular/material';
 
@@ -18,6 +13,7 @@ import {DataFilterPipe} from './data-filter.pipe';
 import { ComponentsModule } from '../../component/components.module';
 import { TablesRoutingModule, routedComponents,routedEntryComponents} from './item-routing.module';
 import { SmartTableService } from '../../core/data/smart-table.service';
+import {ItemService} from './item.service';
 
 @NgModule({
   imports: [
@@ -28,12 +24,7 @@ import { SmartTableService } from '../../core/data/smart-table.service';
     DataTableModule,
     Ng2SmartTableModule,
     QuillEditorModule,
-    MdDialogModule,
-    MdInputModule,
-    MdButtonModule,
-    MdExpansionModule,
-    MdChipsModule,
-    MdCardModule
+    MatProgressSpinnerModule
   ],
   declarations: [
     DataFilterPipe,
@@ -42,6 +33,7 @@ import { SmartTableService } from '../../core/data/smart-table.service';
   ],
   providers: [
     SmartTableService,
+    ItemService,
   ],
   entryComponents:[
     ...routedEntryComponents
