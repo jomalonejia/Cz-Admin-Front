@@ -78,6 +78,20 @@ export class ItemListComponent {
             ''
           ]
         },
+        {
+          title:'小米not6',
+          price:998,
+          describe:'只要998，买不了吃亏！',
+          image:'http://otlht2gvo.bkt.clouddn.com/Nick.png',
+          minusImages:[
+            'http://otlht2gvo.bkt.clouddn.com/FgCT5ZtZiSXTC8tHZohHVBhrPxgc',
+            'http://otlht2gvo.bkt.clouddn.com/FhJjx2HL0l0OCLo6bb-MGKYc-UhG',
+            'http://otlht2gvo.bkt.clouddn.com/Fiv9XUxhQWeX2MdtrjPqRR30MhyD',
+            'http://otlht2gvo.bkt.clouddn.com/FmcEZZUaGhj9DKm9j_drFYh7BmNc',
+            '',
+            ''
+          ]
+        },
     ]
   }
 

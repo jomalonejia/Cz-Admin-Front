@@ -128,6 +128,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-tables',
     children: [
       {
+        title: 'List',
+        link: '/pages/item/list',
+      },
+      {
         title: 'Smart Table',
         link: '/pages/item/smart-table',
       },

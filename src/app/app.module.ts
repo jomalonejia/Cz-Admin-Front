@@ -10,7 +10,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {ComponentsModule} from "./component/components.module";
 import {CoreModule} from "./core/core.module";
 import * as constants from './component/constants';
-import {NbAuthService, NbTokenService} from '@nebular/auth';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {LoginInterceptor} from './component/service'
 
