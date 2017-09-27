@@ -19,7 +19,7 @@ import {ItemService} from '../../item.service';
          </quill-editor>
        </div>
        <div *ngIf="saveProgress">
-         <md-spinner></md-spinner>
+         <h1>loading......</h1>
        </div>
      </div>
      <div class="modal-footer">
