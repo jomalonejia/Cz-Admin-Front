@@ -7,20 +7,21 @@ import {AuthConfig, AuthHttp, JwtHelper} from "angular2-jwt";
 
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {ComponentsModule} from "./component/components.module";
+import {ComponentsModule} from "./components/components.module";
 import {CoreModule} from "./core/core.module";
-import * as constants from './component/constants';
+import * as constants from 'app/constants';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {LoginInterceptor} from './component/service';
+import {LoginInterceptor} from 'app/services';
 
 
 import {RouterStateSerializer, StoreRouterConnectingModule} from '@ngrx/router-store';
 import {EffectsModule} from '@ngrx/effects';
 import {DBModule} from '@ngrx/db';
-import { reducers, metaReducers } from './component/reducers';
-import { schema } from './component/db';
+import { reducers, metaReducers } from './reducers';
+import { schema } from './components/db';
 import {StoreModule} from '@ngrx/store';
-import { CustomRouterStateSerializer } from './component/utils';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { CustomRouterStateSerializer } from './components/utils';
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -43,18 +44,18 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     NgbModule.forRoot(),
     ComponentsModule.forRoot(),
     CoreModule.forRoot(),
-
     StoreModule.forRoot(reducers, { metaReducers }),
-    StoreRouterConnectingModule,
+    /*StoreRouterConnectingModule,*/
     EffectsModule.forRoot([]),
     DBModule.provideDB(schema),
+    StoreDevtoolsModule.instrument()
   ],
   declarations: [
     AppComponent
   ],
   providers: [
     JwtHelper,
-    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
+    /*{ provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },*/
     { provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true },
     {
       provide: AuthHttp,

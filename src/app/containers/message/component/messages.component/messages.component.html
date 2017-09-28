@@ -1,0 +1,12 @@
+<div class="m-message" >
+    <ul *ngFor="let message of messages">
+      <li>
+        <p class="time"><span>{{message.sentTime | amTimeAgo}}</span></p>
+        <div class="main" [ngClass]="{'self':message.username === username }">
+          <img class="avatar" width="30" height="30" src="{{message.profile}}"/>
+          <i *ngIf="message.isFailed" class="ion-ios-refresh" ng-click="startSearch()"></i>
+          <div class="text">{{message.text}}</div>
+        </div>
+      </li>
+    </ul>
+</div>
