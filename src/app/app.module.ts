@@ -11,7 +11,16 @@ import {ComponentsModule} from "./component/components.module";
 import {CoreModule} from "./core/core.module";
 import * as constants from './component/constants';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {LoginInterceptor} from './component/service'
+import {LoginInterceptor} from './component/service';
+
+
+import {RouterStateSerializer, StoreRouterConnectingModule} from '@ngrx/router-store';
+import {EffectsModule} from '@ngrx/effects';
+import {DBModule} from '@ngrx/db';
+import { reducers, metaReducers } from './component/reducers';
+import { schema } from './component/db';
+import {StoreModule} from '@ngrx/store';
+import { CustomRouterStateSerializer } from './component/utils';
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -33,13 +42,19 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AppRoutingModule,
     NgbModule.forRoot(),
     ComponentsModule.forRoot(),
-    CoreModule.forRoot()
+    CoreModule.forRoot(),
+
+    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreRouterConnectingModule,
+    EffectsModule.forRoot([]),
+    DBModule.provideDB(schema),
   ],
   declarations: [
     AppComponent
   ],
   providers: [
     JwtHelper,
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
     { provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true },
     {
       provide: AuthHttp,
