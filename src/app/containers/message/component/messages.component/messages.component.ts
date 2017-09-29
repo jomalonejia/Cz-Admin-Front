@@ -10,4 +10,5 @@ import {Message} from "app/models";
 export class MessagesComponent{
   @Input() messages:Message[] = [];
   @Input() username:string;
+
 }

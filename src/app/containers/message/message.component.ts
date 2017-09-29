@@ -9,6 +9,7 @@ import * as fromAuth from 'app/reducers/auth';
 import * as fromRoot from 'app/reducers';
 import * as fromRootMessage from './reducers';
 import * as fromMessage from './reducers/message';
+import * as messageActions from './actions/message';
 import {Observable} from "rxjs/Observable";
 import {MessageService} from "./services/message.service";
 import {MessageUser} from "./models/message.user";
@@ -31,6 +32,7 @@ export class MessageComponent {
   fullname: string;
   profile:string;
   activateUser:string;
+  activateUser$:Observable<string>;
   userId:number;
 
   constructor(private authStore:Store<fromAuth.State>,
@@ -44,10 +46,12 @@ export class MessageComponent {
         this.userId = +state.userId;
         this.fullname = state.fullname;
       });
+    this.activateUser$ = this.messageStore.select(fromRootMessage.getMessageActiveUser);
+    this.activateUser$
+      .subscribe(activateUser => {console.log(activateUser);this.activateUser = activateUser});
 
 
-
-    /*this.messages$ = this.store.select(reducers.getMessages);*/
+    this.messages$ = this.messageStore.select(fromRootMessage.getMessages);
   }
 
   ngOnInit(){
@@ -122,16 +126,18 @@ export class MessageComponent {
   }
 
   send(messageStr) {
-    /*let newMessage = this.createMessage(messageStr);
+    console.log(messageStr);
+    let newMessage = this.createMessage(messageStr);
+    console.log(newMessage);
     this.ws.send(newMessage).subscribe({
       error: () => {
         let errorMessage = Object.assign(newMessage, {'isFailed': true});
-        this.store.dispatch(new messageAction.SendMessage(errorMessage));
+        this.messageStore.dispatch(new messageActions.SendMessageAction(errorMessage));
       },
       complete: () => {
-        this.store.dispatch(new messageAction.SendMessage(newMessage));
+        this.messageStore.dispatch(new messageActions.SendMessageAction(newMessage));
       }
-    });*/
+    });
   }
 
 

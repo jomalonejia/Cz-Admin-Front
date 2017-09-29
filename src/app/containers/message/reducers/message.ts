@@ -14,7 +14,6 @@ const initialState:State = {
 export function reducer(state:State=initialState,action:message.messageActions):State{
   switch (action.type) {
     case message.TOGGLE_MESSAGE_USER_SUCCESS:
-      console.log(action.payload);
       return Object.assign({}, state, {
         activeUser:action.payload['activeUser'],
         messages:action.payload['messages']

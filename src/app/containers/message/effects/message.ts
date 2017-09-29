@@ -77,17 +77,15 @@ export class MessageEffects {
       }
     });*/
 
-  /*@Effect()
-  readMessage$: Observable<Action> = this.action$
+  @Effect()
+  readMessage$: Observable<Action> = this.actions$
     .ofType(actions.READ_MESSAGE)
-    .throttleTime(1000)
-    .map(toPayload)
+    .map((action:actions.ReadMessageAction) => action.payload)
+    .throttleTime(500)
     .switchMap(obj => {
-      return this.messageService.readMessage(constants.KOA_READMESSAGE_URL, obj.threadId)
+      return this.messageService.readMessage(constants.KOA_READMESSAGE_URL, obj['threadId'])
         .map(res => {
-          this.router.navigateByUrl('/view/message');
-          return new actions.ReadMessageSuccess({activeUser: obj.activeUser, messages: res.json()});
+          return new actions.ReadMessageSuccessAction({activeUser: obj['activeUser'], messages: res.json()});
         })
     });
-*/
 }

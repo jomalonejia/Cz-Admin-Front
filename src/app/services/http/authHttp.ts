@@ -28,9 +28,6 @@ export class AuthHttp extends Http {
       this.router.navigateByUrl('/auth/login');
       return;
     }
-    console.log(url);
-    console.log(options);
-    console.log(this.token);
     if (typeof url === 'string') { // meaning we have to add the token to the options, not in url
       if (!options) {
         // let's make option object

@@ -20,7 +20,6 @@ export class ListComponent{
 
   constructor(private store:Store<fromMessage.State>){
     this.activeUser$ = store.select(fromMessage.getMessageActiveUser);
-    this.activeUser$.subscribe(v => console.log(v));
   }
 
   toggleUser(oppositeName:string){

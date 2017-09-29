@@ -1,3 +1,4 @@
+<div id="body">
   <div id="chat">
     <div class="sidebar">
       <message-card [username]="username" [fullname]="fullname" [profile]="profile"></message-card>
@@ -5,6 +6,8 @@
     </div>
     <div class="main">
       <message-messages [messages]="messages$ | async" [username]="username"></message-messages>
-      <message-text (sendMessage)="send($event)"></message-text>
+      <message-text [activateUser]="activateUser$ | async"  (sendMessage)="send($event)"></message-text>
     </div>
   </div>
+</div>
+

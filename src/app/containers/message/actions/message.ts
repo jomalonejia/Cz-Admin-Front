@@ -30,27 +30,27 @@ export class ToggleMessageUserFailedAction implements Action {
   }
 }
 
-export class ReadMessage implements Action{
+export class ReadMessageAction implements Action{
   readonly type: string = READ_MESSAGE;
   constructor(public payload:object){
 
   }
 }
-export class ReadMessageSuccess implements Action{
+export class ReadMessageSuccessAction implements Action{
   readonly type: string = READ_MESSAGE_SUCCESS;
   constructor(public payload:object){
 
   }
 }
 
-export class ClearMessage implements Action {
+export class ClearMessageAction implements Action {
   readonly type: string = CLEAR_MESSAGE;
   constructor(public payload?) {
 
   }
 }
 
-export class SendMessage implements Action{
+export class SendMessageAction implements Action{
   readonly type: string = SEND_MESSAGE;
   constructor(public payload:Message) {
 
@@ -60,7 +60,7 @@ export class SendMessage implements Action{
 export type messageActions = ToggleMessageUserAction|
                              ToggleMessageUserSuccessAction|
                              ToggleMessageUserFailedAction|
-                             ReadMessage|
-                             ReadMessageSuccess|
-                             ClearMessage|
-                             SendMessage;
+                             ReadMessageAction|
+                             ReadMessageSuccessAction|
+                             ClearMessageAction|
+                             SendMessageAction;
