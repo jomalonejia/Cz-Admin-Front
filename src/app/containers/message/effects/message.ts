@@ -45,8 +45,6 @@ export class MessageEffects {
         return this.messageService.listMessages(obj['username'], obj['oppositeName'])
           .map(res => {
             let response = res.json()[0];
-            console.log(res);
-            console.log(response);
             this.messageService.setMessageThreadId(obj['username'],obj['oppositeName'],res.json()._id);
             return new actions.ToggleMessageUserSuccessAction({activeUser:obj['oppositeName'],messages:response.messages?response.message:null});
           })

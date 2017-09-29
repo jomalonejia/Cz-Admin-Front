@@ -42,8 +42,8 @@ export class HeaderComponent implements OnInit {
 
   toggleMessage(){
     //window.open(document.URL, '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
-    //window.open('/#/message','_blank');
-    window.open('/#/message','_blank',"toolbar=false, location=false, directories=no, status=no, menubar=false, scrollbars=false, resizable=no, copyhistory=yes, width=850, height=650")
+    window.open('/#/message','_blank');
+    //window.open('/#/message','_blank',"toolbar=false, location=false, directories=no, status=no, menubar=false, scrollbars=false, resizable=no, copyhistory=yes, width=850, height=650")
   }
 
   goToHome() {

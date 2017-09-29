@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {AuthHttp} from 'app/services/http';
+import {Http} from '@angular/http';
 
 @Component({
   selector: 'ngx-dashboard',
@@ -7,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+  constructor(){}
 }

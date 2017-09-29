@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Http, RequestOptionsArgs} from "@angular/http";
-import {AuthHttp} from "angular2-jwt";
+import {AuthHttp} from 'app/services/http';
 import * as constants from 'app/constants';
 
 @Injectable()

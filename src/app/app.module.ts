@@ -3,7 +3,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { NgModule } from '@angular/core';
 import {Http, HttpModule, RequestOptions} from "@angular/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {AuthConfig, AuthHttp, JwtHelper} from "angular2-jwt";
+/*import {AuthConfig, AuthHttp, JwtHelper} from "angular2-jwt";*/
+import {AuthHttp} from './services/http'
 
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -11,7 +12,7 @@ import {ComponentsModule} from "./components/components.module";
 import {CoreModule} from "./core/core.module";
 import * as constants from 'app/constants';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {LoginInterceptor} from 'app/services';
+import {AuthInterceptor} from 'app/services';
 
 
 import {RouterStateSerializer, StoreRouterConnectingModule} from '@ngrx/router-store';
@@ -24,7 +25,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { CustomRouterStateSerializer } from './components/utils';
 
 
-export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+/*export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
   return new AuthHttp(new AuthConfig({
     tokenName: constants.TOKEN_NAME,
@@ -33,7 +34,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     noJwtError: false,
     tokenGetter: (() => sessionStorage.getItem('token')),
   }), http, options);
-}
+}*/
 
 @NgModule({
   imports: [
@@ -54,14 +55,14 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AppComponent
   ],
   providers: [
-    JwtHelper,
+    AuthHttp,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     /*{ provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },*/
-    { provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true },
-    {
+    /*{
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
       deps: [Http, RequestOptions]
-    }
+    }*/
   ],
   bootstrap: [AppComponent]
 })

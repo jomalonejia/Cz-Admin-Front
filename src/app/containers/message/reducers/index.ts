@@ -3,12 +3,12 @@ import * as fromMessage from './message';
 import * as fromRoot from 'app/reducers';
 import * as fromAuth from 'app/reducers/auth';
 
-export interface MessageState {
+export interface MessageRootState {
   message: fromMessage.State;
 }
 
 export interface State extends fromRoot.State {
-  message: MessageState;
+  message: MessageRootState;
 }
 
 export const reducers = {
@@ -16,7 +16,12 @@ export const reducers = {
 };
 
 
-export const getMessageState = createFeatureSelector<fromMessage.State>('message');
+export const getMessageRootState = createFeatureSelector<MessageRootState>('message');
+
+export const getMessageState = createSelector(
+  getMessageRootState,
+  (state: MessageRootState) => state.message
+);
 
 export const getMessageActiveUser = createSelector(
   getMessageState,
