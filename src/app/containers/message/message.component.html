@@ -5,7 +5,7 @@
       <message-list [friends]="friends" [username]="username"></message-list>
     </div>
     <div class="main">
-      <message-messages [messages]="messages$ | async" [username]="username"></message-messages>
+      <message-messages [activateUser]="activateUser$ | async" [messages]="messages$ | async" [username]="username"></message-messages>
       <message-text [activateUser]="activateUser$ | async"  (sendMessage)="send($event)"></message-text>
     </div>
   </div>

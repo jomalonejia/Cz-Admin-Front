@@ -23,6 +23,7 @@ import { schema } from './components/db';
 import {StoreModule} from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { CustomRouterStateSerializer } from './components/utils';
+import {ServicesModule} from 'app/services/service.module';
 
 
 /*export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -49,14 +50,15 @@ import { CustomRouterStateSerializer } from './components/utils';
     /*StoreRouterConnectingModule,*/
     EffectsModule.forRoot([]),
     DBModule.provideDB(schema),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    ServicesModule.forRoot()
   ],
   declarations: [
     AppComponent
   ],
   providers: [
-    AuthHttp,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    AuthHttp,
     /*{ provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },*/
     /*{
       provide: AuthHttp,

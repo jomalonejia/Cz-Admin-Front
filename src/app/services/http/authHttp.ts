@@ -3,14 +3,23 @@ import {Http, XHRBackend, RequestOptions, Request, RequestOptionsArgs, Response,
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import * as constants from 'app/constants';
 import * as fromRoot from 'app/reducers';
 import * as fromAuth from 'app/reducers/auth';
 
+
+
+/*
+* THIS SERVICE HAS BEEN DEPRECATED !!!!!!!!!!
+* */
+
+
+
 @Injectable()
-export class AuthHttp extends Http {
+export class AuthHttp extends Http{
 
   token : string;
 
@@ -78,9 +87,9 @@ export class AuthHttp extends Http {
   private catchAuthError (self: AuthHttp) {
     // we have to pass HttpService's own instance here as `self`
     return (res: Response) => {
-      if (res.status === 401 || res.status === 403) {
+      if (res.status === 401) {
         // if not authenticated
-        console.log(res);
+        this.router.navigateByUrl('/auth/login');
       }
       return Observable.throw(res);
     };

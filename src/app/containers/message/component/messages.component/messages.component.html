@@ -1,4 +1,7 @@
 <div class="m-message" >
+    <div class="not-chat" *ngIf="activateUser == null || activateUser == ''">
+      <img src="assets/images/no-chat.PNG">
+    </div>
     <ul *ngFor="let message of messages">
       <li>
         <p class="time"><span>{{message.sentTime | amTimeAgo}}</span></p>

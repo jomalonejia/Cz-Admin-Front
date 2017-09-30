@@ -15,6 +15,7 @@ import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {reducers} from './reducers';
 import {MessageEffects} from './effects';
+import {AuthGuardActivate} from 'app/services/routerActivate';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {MessageEffects} from './effects';
     TextComponent,
   ],
   providers: [
-    MessageService
+    MessageService,
+    AuthGuardActivate
   ]
 })
 

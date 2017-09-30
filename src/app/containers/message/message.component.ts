@@ -48,7 +48,7 @@ export class MessageComponent {
       });
     this.activateUser$ = this.messageStore.select(fromRootMessage.getMessageActiveUser);
     this.activateUser$
-      .subscribe(activateUser => {console.log(activateUser);this.activateUser = activateUser});
+      .subscribe(activateUser => this.activateUser = activateUser);
 
 
     this.messages$ = this.messageStore.select(fromRootMessage.getMessages);
@@ -56,19 +56,19 @@ export class MessageComponent {
 
   ngOnInit(){
     this.messageService.listRelatedUsers(this.userId)
-      .map(res => res.json())
-      .subscribe(v => {
+      .subscribe((v:object[]) =>{
         v.map(user => {
           let friend = new MessageUser();
           Object.assign(friend, user);
           this.friends.push(friend);
+          /*bug:会出现四个user 2017/9/30*/
         })
       });
 
-    this.messageStore.select(fromRootMessage.getMessageState)
+   /* this.messageStore.select(fromRootMessage.getMessageState)
       .subscribe(v => {
         console.log(v);
-      });
+      });*/
     //this.toggleUsername(this.activateUser);
   }
 

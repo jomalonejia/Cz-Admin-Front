@@ -8,6 +8,7 @@ import {Message} from "app/models";
 })
 
 export class MessagesComponent{
+  @Input() activateUser:string = '';
   @Input() messages:Message[] = [];
   @Input() username:string;
 

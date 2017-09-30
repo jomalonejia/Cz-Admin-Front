@@ -1,13 +1,12 @@
 import {Injectable} from "@angular/core";
-import {Http, RequestOptionsArgs} from "@angular/http";
 import {AuthHttp} from 'app/services/http';
 import * as constants from 'app/constants';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Injectable()
 export class MessageService{
 
-  constructor(private http:Http,
-              private authHttp:AuthHttp){
+  constructor(private http:HttpClient){
 
   }
 
@@ -32,12 +31,12 @@ export class MessageService{
   }
 
   public listMessages(user1:string,user2:string){
-    let params = [user1,user2];
+    let params = new HttpParams().set('user1', user1).set('user2',user2);
     return this.http.get(constants.KOA_LISTMESSAGES_URL,{params:params})
   }
 
   public listRelatedUsers(userId:Number){
-    let params = {'userId':userId};
-    return this.authHttp.get(constants.LISTRELATEDUSERS_URL,{params:params});
+    let params = new HttpParams().set('userId', userId+'');
+    return this.http.get(constants.LISTRELATEDUSERS_URL,{params:params});
   }
 }

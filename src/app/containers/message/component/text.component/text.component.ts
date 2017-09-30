@@ -16,8 +16,4 @@ export class TextComponent{
     this.sendMessage.next(message);
     this.messageArea.nativeElement.value = '';
   }
-
-  ngOnInit(){
-    console.log(this.activateUser);
-  }
 }
