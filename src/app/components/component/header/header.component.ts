@@ -16,11 +16,15 @@ export class HeaderComponent implements OnInit {
 
   user: object;
 
-  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  userMenu = [{ title: 'Profile',link: '/auth/login'}, { title: 'Log out',link: '/auth/logout'}];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private store: Store<fromAuth.State>) {
+  }
+
+  test(event){
+    console.log(event);
   }
 
   ngOnInit() {

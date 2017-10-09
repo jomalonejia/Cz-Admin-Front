@@ -26,7 +26,8 @@ import {
   ThemeSwitcherComponent,
   TinyMCEComponent,
   CzCard,
-  CzImage
+  CzImage,
+  CzTree
 } from './component';
 
 import {
@@ -70,6 +71,7 @@ const COMPONENTS = [
   TinyMCEComponent,
   CzCard,
   CzImage,
+  CzTree,
   OneColumnLayoutComponent,
   SampleLayoutComponent,
   ThreeColumnsLayoutComponent,

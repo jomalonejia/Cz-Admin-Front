@@ -1,0 +1,22 @@
+<div>
+  <cz-card>
+    <!--<ul>
+      <li><i class="ion-arrow-right-b"></i>123</li>
+      <li><i class="ion-arrow-right-b"></i>123</li>
+      <li><i class="ion-arrow-right-b"></i>123</li>
+      <li><i class="ion-arrow-right-b"></i>123</li>
+    </ul>-->
+    <ul *ngFor="let data1 of data; let x = index">
+      <li><i *ngIf="data1.children && data1.children.length > 0"
+             [ngClass]="{'ion-plus-round': !data1.open, 'ion-minus-round': data1.open}"
+             (click)="toggle(x)"></i>
+        {{data1.name}}
+        <div *ngIf="data1.children && data1.open ">
+          <ul *ngFor="let data2 of data1.children">
+            <li>{{data2.name}}</li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </cz-card>
+</div>

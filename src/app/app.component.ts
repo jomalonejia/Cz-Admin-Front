@@ -17,9 +17,10 @@ import {HttpClient} from '@angular/common/http';
 export class AppComponent {
   title = 'app';
 
-  constructor(private http:AuthHttp,private http2:HttpClient,
+  constructor(private http:HttpClient,
               private router:Router,private store: Store<fromAuth.State>) {
-    this.http2.get(constants.REFRESH_TOKEN_URL)
+
+    this.http.get(constants.REFRESH_TOKEN_URL)
       .catch(err => {
         this.store.dispatch(new authActions.RefreshFailedAction());
         return of(err);
@@ -28,5 +29,4 @@ export class AppComponent {
         this.store.dispatch(new authActions.RefreshSuccessAction(res));
       });
   }
-
 }

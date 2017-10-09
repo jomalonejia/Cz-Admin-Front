@@ -6,3 +6,4 @@ export * from './theme-settings/theme-settings.component';
 export * from './theme-switcher/theme-switcher.component';
 export * from './cz/czCard';
 export * from './cz/czImage';
+export * from './cz/czTree';

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {AuthHttp} from 'app/services/http';
 import {Http} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'ngx-dashboard',
@@ -9,5 +10,10 @@ import {Http} from '@angular/http';
 })
 export class DashboardComponent {
 
-  constructor(){}
+  constructor(private http:HttpClient){
+    this.http.get('api/item/test')
+      .subscribe(v => console.log(v));
+  }
+
+
 }

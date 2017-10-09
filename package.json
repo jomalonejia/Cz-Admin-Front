@@ -31,6 +31,7 @@
     "@ngrx/router-store": "^4.0.4",
     "@ngrx/store": "^4.0.3",
     "@ngrx/store-devtools": "^4.0.0",
+    "angular-tree-component": "^5.0.0",
     "angular2-datatable": "^0.6.0",
     "angular2-jwt": "^0.2.3",
     "angular2-moment": "^1.7.0",

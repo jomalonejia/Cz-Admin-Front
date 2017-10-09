@@ -1,6 +1,7 @@
 <div class="widgets">
   <div class="row">
     <div class="col-md-12">
+      <cz-tree></cz-tree>
       <cz-card title="Item List" baCardClass="with-scroll" class="data-table-container">
         <div class="panel panel-default">
           <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
@@ -19,6 +20,17 @@
                 </div>
                 <input class="form-control" [(ngModel)]="filterQuery" />
               </th>
+              <!--<th colspan="5">
+                <div class="btn-group" ngbDropdown>
+                  <button type="button" class="btn btn-primary test">Catagory</button>
+                  <button type="button" class="btn btn-primary" ngbDropdownToggle></button>
+                  <ul class="dropdown-menu">
+                    <li class="dropdown-item">Icon Button</li>
+                    <li class="dropdown-item">Hero Button</li>
+                    <li class="dropdown-item">Default</li>
+                  </ul>
+                </div>
+              </th>-->
             </tr>
             <tr>
               <th class="item-list-title-col">

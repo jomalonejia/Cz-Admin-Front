@@ -1,7 +1,6 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 
 import {AuthHttp} from './http';
-import {AuthInterceptor} from './interceptors';
 import {AuthGuardActivate} from './routerActivate';
 import {TokenService} from './token';
 

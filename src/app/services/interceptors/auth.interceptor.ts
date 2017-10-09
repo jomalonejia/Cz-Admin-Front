@@ -12,6 +12,7 @@ import * as fromAuth from '../../reducers/auth'
 import * as fromRoot from 'app/reducers';
 import * as auth from '../../actions/auth';
 import * as constants from 'app/constants';
+import {of} from 'rxjs/observable/of';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -34,23 +35,25 @@ export class AuthInterceptor implements HttpInterceptor {
       }
     });
 
-
-    return next.handle(req).do(evt => {
-      if (evt instanceof HttpResponse) {
-        if(evt.status === 401){
-          console.log('401')
-          //this.router.navigateByUrl('/');
-        }else if(evt.status === 202){
-          console.log(evt);
-          this.store.dispatch(new auth.LoginSuccessAction(evt.body));
-        }else if(evt.status === 200){
-          console.log(evt);
+    return next.handle(req)
+      .catch(err => {
+        if(err.status === 401){
+          this.router.navigateByUrl('auth/login');
         }
-        else{
-          console.log('other')
+        return of(err);
+      })
+      .do(evt => {
+        if (evt instanceof HttpResponse) {
+          if(evt.status === 202){
+            this.store.dispatch(new auth.LoginSuccessAction(evt.body));
+          }else if(evt.status === 200){
+            console.log(evt);
+          }
+          else{
+            console.log('other')
+          }
         }
-      }
-    });
+      });
 
   }
 }
