@@ -7,3 +7,4 @@ export * from './theme-switcher/theme-switcher.component';
 export * from './cz/czCard';
 export * from './cz/czImage';
 export * from './cz/czTree';
+export * from './cz/czPage';

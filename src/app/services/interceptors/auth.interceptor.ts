@@ -47,7 +47,6 @@ export class AuthInterceptor implements HttpInterceptor {
           if(evt.status === 202){
             this.store.dispatch(new auth.LoginSuccessAction(evt.body));
           }else if(evt.status === 200){
-            console.log(evt);
           }
           else{
             console.log('other')

@@ -10,10 +10,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class DashboardComponent {
 
-  constructor(private http:HttpClient){
-    this.http.get('api/item/test')
-      .subscribe(v => console.log(v));
+  constructor(){
+
   }
-
-
 }

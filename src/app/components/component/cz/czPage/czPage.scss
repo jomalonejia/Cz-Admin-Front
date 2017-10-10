@@ -1,0 +1,47 @@
+
+ul{
+  margin: 0 auto;
+}
+
+.ng2-smart-pagination-nav {
+  margin-top: 1.5rem;
+  .ng2-smart-pagination {
+    padding: 0;
+    font-family: Exo;
+    font-size: 1rem;
+    line-height: 1.25;
+    border: 2px solid #7659ff;
+    border-radius: .5rem;
+    display: flex;
+    .ng2-smart-page-link {
+      background-color: rgba(0, 0, 0, .2);
+      color: #fff;
+      background: transparent;
+      padding: .75rem 1.25rem;
+      border: none;
+      position: relative;
+      display: block;
+      margin-left: -1px;
+      line-height: 1.25;
+    }
+    .active{
+      background-color: #7659ff;
+    }
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0
+}
+
+.ng2-smart-page-item {
+  display: inline;
+  border-right: 1px solid #342e73;
+}

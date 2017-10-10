@@ -27,7 +27,8 @@ import {
   TinyMCEComponent,
   CzCard,
   CzImage,
-  CzTree
+  CzTree,
+  CzPage
 } from './component';
 
 import {
@@ -72,6 +73,7 @@ const COMPONENTS = [
   CzCard,
   CzImage,
   CzTree,
+  CzPage,
   OneColumnLayoutComponent,
   SampleLayoutComponent,
   ThreeColumnsLayoutComponent,

@@ -4,9 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { ItemComponent } from './item.component';
 import { SmartTableComponent } from './smart-table/smart-table.component';
 import { ItemListComponent} from './list/itemList.component';
-import {ItemEditComponent,
-        ItemEditContentComponent,
-        ItemEditImageComponent} from './list/component'
+import
+  { ItemEditComponent,
+    ItemEditContentComponent,
+    ItemEditImageComponent,
+    ItemAddComponent} from './list/component'
 
 const routes: Routes = [{
   path: '',
@@ -39,6 +41,7 @@ export const routedEntryComponents = [
   ItemEditComponent,
   ItemEditContentComponent,
   ItemEditImageComponent,
+  ItemAddComponent
 ]
 
 

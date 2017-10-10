@@ -1,9 +1,11 @@
 import {Component, ViewChild} from "@angular/core";
-
+import {HttpClient} from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   import { ItemEditComponent,
            ItemEditContentComponent,
            ItemEditImageComponent } from './component';
+import {Observable} from 'rxjs/Observable';
+
 
 @Component({
   selector: 'itemList',
@@ -13,38 +15,22 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export class ItemListComponent {
 
-  nodes = [
-    {
-      id: 1,
-      name: 'root1',
-      children: [
-        { id: 2, name: 'child1' },
-        { id: 3, name: 'child2' }
-      ]
-    },
-    {
-      id: 4,
-      name: 'root2',
-      children: [
-        { id: 5, name: 'child2.1' },
-        {
-          id: 6,
-          name: 'child2.2',
-          children: [
-            { id: 7, name: 'subsub' }
-          ]
-        }
-      ]
-    }
-  ];
 
+
+  categories$:Observable<Object>;
   data;
   filterQuery = "";
-  rowsOnPage = 10;
+  rowsOnPage = 5;
   sortBy = "email";
   sortOrder = "asc";
   name: string;
 
+
+
+  openAddModal(){
+    const activeModal = this.modalService.open(ItemEditComponent, { size: 'lg'});
+
+  }
 
 
   openEditModal() {
@@ -73,7 +59,12 @@ export class ItemListComponent {
     return a.city.length;
   }
 
-  constructor(private modalService:NgbModal) {
+  changePage(page){
+    console.log(page);
+  }
+
+  constructor(private modalService:NgbModal,private http:HttpClient) {
+
       this.data = [
         {
           title:'iphone8',
@@ -117,7 +108,67 @@ export class ItemListComponent {
             ''
           ]
         },
+        {
+          title:'小米not6',
+          price:998,
+          describe:'只要998，买不了吃亏！',
+          image:'http://otlht2gvo.bkt.clouddn.com/Nick.png',
+          minusImages:[
+            'http://otlht2gvo.bkt.clouddn.com/FgCT5ZtZiSXTC8tHZohHVBhrPxgc',
+            'http://otlht2gvo.bkt.clouddn.com/FhJjx2HL0l0OCLo6bb-MGKYc-UhG',
+            'http://otlht2gvo.bkt.clouddn.com/Fiv9XUxhQWeX2MdtrjPqRR30MhyD',
+            'http://otlht2gvo.bkt.clouddn.com/FmcEZZUaGhj9DKm9j_drFYh7BmNc',
+            '',
+            ''
+          ]
+        },
+        {
+          title:'小米not6',
+          price:998,
+          describe:'只要998，买不了吃亏！',
+          image:'http://otlht2gvo.bkt.clouddn.com/Nick.png',
+          minusImages:[
+            'http://otlht2gvo.bkt.clouddn.com/FgCT5ZtZiSXTC8tHZohHVBhrPxgc',
+            'http://otlht2gvo.bkt.clouddn.com/FhJjx2HL0l0OCLo6bb-MGKYc-UhG',
+            'http://otlht2gvo.bkt.clouddn.com/Fiv9XUxhQWeX2MdtrjPqRR30MhyD',
+            'http://otlht2gvo.bkt.clouddn.com/FmcEZZUaGhj9DKm9j_drFYh7BmNc',
+            '',
+            ''
+          ]
+        },
+        {
+          title:'小米not6',
+          price:998,
+          describe:'只要998，买不了吃亏！',
+          image:'http://otlht2gvo.bkt.clouddn.com/Nick.png',
+          minusImages:[
+            'http://otlht2gvo.bkt.clouddn.com/FgCT5ZtZiSXTC8tHZohHVBhrPxgc',
+            'http://otlht2gvo.bkt.clouddn.com/FhJjx2HL0l0OCLo6bb-MGKYc-UhG',
+            'http://otlht2gvo.bkt.clouddn.com/Fiv9XUxhQWeX2MdtrjPqRR30MhyD',
+            'http://otlht2gvo.bkt.clouddn.com/FmcEZZUaGhj9DKm9j_drFYh7BmNc',
+            '',
+            ''
+          ]
+        },
+        {
+          title:'小米not6',
+          price:998,
+          describe:'只要998，买不了吃亏！',
+          image:'http://otlht2gvo.bkt.clouddn.com/Nick.png',
+          minusImages:[
+            'http://otlht2gvo.bkt.clouddn.com/FgCT5ZtZiSXTC8tHZohHVBhrPxgc',
+            'http://otlht2gvo.bkt.clouddn.com/FhJjx2HL0l0OCLo6bb-MGKYc-UhG',
+            'http://otlht2gvo.bkt.clouddn.com/Fiv9XUxhQWeX2MdtrjPqRR30MhyD',
+            'http://otlht2gvo.bkt.clouddn.com/FmcEZZUaGhj9DKm9j_drFYh7BmNc',
+            '',
+            ''
+          ]
+        },
     ]
+  }
+
+  ngOnInit(){
+    this.categories$ = this.http.get('api/item/listCategories');
   }
 
 }

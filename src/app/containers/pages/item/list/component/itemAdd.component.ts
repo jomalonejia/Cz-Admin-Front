@@ -1,8 +1,10 @@
 import {Component} from '@angular/core';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ItemEditContentComponent} from './itemEditContent.component';
+import {ItemEditImageComponent} from './itemEditImage.component';
 
 @Component({
-  selector: 'cz-item-edit',
+  selector: 'cz-item-add',
   template: `
     <div class="modal1">
       <div class="modal-header">
@@ -16,19 +18,19 @@ import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
           <div class="form-group row">
             <label for="inputTitle" class="col-sm-3 col-form-label">Title</label>
             <div class="col-sm-9">
-              <input type="text" [value]="title" class="form-control" id="inputTitle" placeholder="Title">
+              <input type="text" class="form-control" id="inputTitle" placeholder="Title">
             </div>
           </div>
           <div class="form-group row">
             <label for="inputPrice" class="col-sm-3 col-form-label">Price</label>
             <div class="col-sm-9">
-              <input type="number" [value]="price" class="form-control" id="inputPrice" placeholder="Price">
+              <input type="number" class="form-control" id="inputPrice" placeholder="Price">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-3">Description</label>
             <div class="col-sm-9">
-              <textarea rows="5" [value]="describe" placeholder="Text Area" class="form-control"></textarea>
+              <textarea rows="5" placeholder="Text Area" class="form-control"></textarea>
             </div>
           </div>
          
@@ -41,7 +43,7 @@ import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
     </div>
   `,
 })
-export class ItemEditComponent {
+export class ItemAddComponent {
 
   title:string;
   price:number;

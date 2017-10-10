@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector:'cz-tree',
@@ -8,27 +8,7 @@ import {Component} from "@angular/core";
 
 export class CzTree{
 
-  data=[
-    {
-      name: 'root1',
-      children: [
-        { name: 'child1' },
-        { name: 'child2' }
-      ]
-    },
-    {
-      name: 'root2',
-      children: [
-        { name: 'child2.1', children: [] },
-        { name: 'child2.2', children: [
-          {name: 'grandchild2.2.1'}
-        ] }
-      ]
-    },
-    { name: 'root3' },
-    { name: 'root4', children: [] },
-    { name: 'root5', children: null }
-  ];
+  @Input() data;
 
   toggle(x){
     this.data[x]['open'] =  !this.data[x]['open'];

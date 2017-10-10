@@ -1,15 +1,16 @@
 <div class="widgets">
   <div class="row">
     <div class="col-md-12">
-      <cz-tree></cz-tree>
+      <cz-tree [data]="categories$ | async"></cz-tree>
       <cz-card title="Item List" baCardClass="with-scroll" class="data-table-container">
         <div class="panel panel-default">
-          <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+          <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"
+                 [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
             <thead>
             <tr>
               <th>
                 <div>
-                  <button type="button" class="btn btn-hero-primary btn-demo">Add</button>
+                  <button type="button" class="btn btn-hero-primary btn-demo" (click)="openAddModal()">Add</button>
                   <button type="button" class="btn btn-hero-primary btn-demo">Delete</button>
                 </div>
               </th>
@@ -18,7 +19,7 @@
                 <div *ngIf="filterQuery">
                   You chose: <i>{{filterQuery}}</i>
                 </div>
-                <input class="form-control" [(ngModel)]="filterQuery" />
+                <input class="form-control" [(ngModel)]="filterQuery"/>
               </th>
               <!--<th colspan="5">
                 <div class="btn-group" ngbDropdown>
@@ -52,24 +53,27 @@
             <tr id="item-table-line" *ngFor="let item of mf.data">
 
               <td class="item-list-title-col">{{item.title}}</td>
-              <td class="item-list-image-col"><img class="item-list-img" src={{item.image}} (click)="openImageModal()"></td>
+              <td class="item-list-image-col"><img class="item-list-img" src={{item.image}} (click)="openImageModal()">
+              </td>
               <td class="item-list-describe-col">{{item.describe}}</td>
               <td class="item-list-price-col">{{item.price}}</td>
               <td>
-                  <button class="btn btn-hero-secondary btn-demo"><i class="ion-close-round"></i></button>
-                  <button class="btn btn-hero-secondary btn-demo" (click)="openEditModal()"><i class="ion-edit"></i></button>
-                  <button class="btn btn-hero-secondary btn-demo" (click)="openContentModal()"><i class="ion-document-text"></i></button>
+                <button class="btn btn-hero-secondary btn-demo"><i class="ion-close-round"></i></button>
+                <button class="btn btn-hero-secondary btn-demo" (click)="openEditModal()"><i class="ion-edit"></i>
+                </button>
+                <button class="btn btn-hero-secondary btn-demo" (click)="openContentModal()"><i
+                  class="ion-document-text"></i></button>
               </td>
             </tr>
             </tbody>
             <tfoot>
-            <tr>
-              <td colspan="5">
-                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
-              </td>
-            </tr>
             </tfoot>
           </table>
+          <div class="cz-pagination-wrapper">
+            <div class="cz-pagination">
+              <cz-page [count]="data.length" (changePage)="changePage($event)"></cz-page>
+            </div>
+          </div>
         </div>
       </cz-card>
     </div>
