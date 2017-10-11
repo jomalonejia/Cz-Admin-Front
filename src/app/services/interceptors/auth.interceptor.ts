@@ -40,16 +40,12 @@ export class AuthInterceptor implements HttpInterceptor {
         if(err.status === 401){
           this.router.navigateByUrl('auth/login');
         }
-        return of(err);
+        return Observable.throw(err);
       })
       .do(evt => {
         if (evt instanceof HttpResponse) {
           if(evt.status === 202){
             this.store.dispatch(new auth.LoginSuccessAction(evt.body));
-          }else if(evt.status === 200){
-          }
-          else{
-            console.log('other')
           }
         }
       });

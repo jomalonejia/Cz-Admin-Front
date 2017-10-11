@@ -3,7 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   import { ItemEditComponent,
            ItemEditContentComponent,
-           ItemEditImageComponent } from './component';
+           ItemEditImageComponent,
+           ItemAddComponent } from './components';
 import {Observable} from 'rxjs/Observable';
 
 
@@ -28,8 +29,7 @@ export class ItemListComponent {
 
 
   openAddModal(){
-    const activeModal = this.modalService.open(ItemEditComponent, { size: 'lg'});
-
+    const activeModal = this.modalService.open(ItemAddComponent, { size: 'lg'});
   }
 
 
@@ -62,6 +62,7 @@ export class ItemListComponent {
   changePage(page){
     console.log(page);
   }
+
 
   constructor(private modalService:NgbModal,private http:HttpClient) {
 
@@ -168,7 +169,7 @@ export class ItemListComponent {
   }
 
   ngOnInit(){
-    this.categories$ = this.http.get('api/item/listCategories');
+    this.categories$ = this.http.get('api/category/listCategories');
   }
 
 }

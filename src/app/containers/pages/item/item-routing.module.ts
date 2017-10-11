@@ -1,14 +1,16 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
-import { ItemComponent } from './item.component';
-import { SmartTableComponent } from './smart-table/smart-table.component';
-import { ItemListComponent} from './list/itemList.component';
+import {ItemComponent} from './item.component';
+import {SmartTableComponent} from './smart-table/smart-table.component';
+import {ItemListComponent} from './list/itemList.component';
 import
-  { ItemEditComponent,
-    ItemEditContentComponent,
-    ItemEditImageComponent,
-    ItemAddComponent} from './list/component'
+{
+  ItemEditComponent,
+  ItemEditContentComponent,
+  ItemEditImageComponent,
+  ItemAddComponent
+} from './list/components';
 
 const routes: Routes = [{
   path: '',
@@ -19,8 +21,8 @@ const routes: Routes = [{
       component: SmartTableComponent,
     },
     {
-      path:'list',
-      component:ItemListComponent,
+      path: 'list',
+      component: ItemListComponent,
     }
   ],
 }];
@@ -29,7 +31,8 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TablesRoutingModule { }
+export class TablesRoutingModule {
+}
 
 export const routedComponents = [
   ItemComponent,
@@ -42,6 +45,6 @@ export const routedEntryComponents = [
   ItemEditContentComponent,
   ItemEditImageComponent,
   ItemAddComponent
-]
+];
 
 

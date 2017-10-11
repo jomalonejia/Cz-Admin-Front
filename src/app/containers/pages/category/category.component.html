@@ -1,0 +1,20 @@
+<nb-card>
+  <nb-card-header>
+    <span class="header-title">
+      Smart Table
+    </span>
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="btn">
+      <button type="button" class="btn btn-success btn-semi-round btn-demo btn-add" (click)="openAddModal()">Add</button>
+    </div>
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (deleteConfirm)="onDeleteConfirm($event)"
+      (editConfirm)="onEditConfirm($event)"
+      (createConfirm)="onCreateConfirm($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

@@ -110,18 +110,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
-    title: 'Editors',
-    icon: 'nb-title',
-    children: [
-      {
-        title: 'TinyMCE',
-        link: '/pages/editors/tinymce',
-      },
-      {
-        title: 'CKEditor',
-        link: '/pages/editors/ckeditor',
-      },
-    ],
+    title: 'Categroy',
+    icon: 'nb-tables',
+    link:'/pages/category'
   },
   {
     title: 'Item',

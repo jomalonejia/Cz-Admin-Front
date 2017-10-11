@@ -9,7 +9,6 @@ import { TreeModule } from 'angular-tree-component';
 import {DataFilterPipe} from './data-filter.pipe';
 import { ComponentsModule } from 'app/components/components.module';
 import { TablesRoutingModule, routedComponents,routedEntryComponents} from './item-routing.module';
-import { SmartTableService } from 'app/core/data/smart-table.service';
 import {ItemService} from './item.service';
 
 @NgModule({
@@ -29,7 +28,6 @@ import {ItemService} from './item.service';
     ...routedEntryComponents
   ],
   providers: [
-    SmartTableService,
     ItemService,
   ],
   entryComponents:[
