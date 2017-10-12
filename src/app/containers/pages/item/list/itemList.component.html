@@ -4,7 +4,7 @@
       <cz-tree [data]="categories$ | async"></cz-tree>
       <cz-card title="Item List" baCardClass="with-scroll" class="data-table-container">
         <div class="panel panel-default">
-          <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"
+          <table class="table table-striped" [mfData]="items | dataFilter : filterQuery" #mf="mfDataTable"
                  [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
             <thead>
             <tr>
@@ -35,7 +35,7 @@
             </tr>
             <tr>
               <th class="item-list-title-col">
-                <mfDefaultSorter by="title"><b>Title</b></mfDefaultSorter>
+                <mfDefaultSorter by="name"><b>Name</b></mfDefaultSorter>
               </th>
               <th class="item-list-image-col"><b>Image</b></th>
               <th class="item-list-describe-col">
@@ -52,7 +52,7 @@
             <tbody>
             <tr id="item-table-line" *ngFor="let item of mf.data">
 
-              <td class="item-list-title-col">{{item.title}}</td>
+              <td class="item-list-title-col">{{item.name}}</td>
               <td class="item-list-image-col"><img class="item-list-img" src={{item.image}} (click)="openImageModal()">
               </td>
               <td class="item-list-describe-col">{{item.describe}}</td>
@@ -71,7 +71,7 @@
           </table>
           <div class="cz-pagination-wrapper">
             <div class="cz-pagination">
-              <cz-page [count]="data.length" (changePage)="changePage($event)"></cz-page>
+             <!-- <cz-page [count]="data.length" (changePage)="changePage($event)"></cz-page>-->
             </div>
           </div>
         </div>

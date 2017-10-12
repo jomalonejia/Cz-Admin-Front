@@ -14,9 +14,9 @@ import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
       <div class="modal-body">
         <form>
           <div class="form-group row">
-            <label for="inputTitle" class="col-sm-3 col-form-label">Title</label>
+            <label for="inputName" class="col-sm-3 col-form-label">Title</label>
             <div class="col-sm-9">
-              <input type="text" [value]="title" class="form-control" id="inputTitle" placeholder="Title">
+              <input type="text" [value]="name" class="form-control" id="inputName" placeholder="Name">
             </div>
           </div>
           <div class="form-group row">
@@ -43,7 +43,7 @@ import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class ItemEditComponent {
 
-  title:string;
+  name:string;
   price:number;
   describe:string;
 

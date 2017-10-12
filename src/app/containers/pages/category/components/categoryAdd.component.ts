@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {CategoryService} from 'app/containers/pages/category/category.service';
 
@@ -9,19 +9,26 @@ import {CategoryService} from 'app/containers/pages/category/category.service';
       <nb-card>
         <nb-card-header>Add Category</nb-card-header>
         <nb-card-body>
-          <form>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Category name</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="category name">
+          <form #form="ngForm" (ngSubmit)="add(form.value)">
+            <div class="form-group" >
+              <label for="categoryName">Category name</label>
+              <input type="text" 
+                     name="categoryName" 
+                     class="form-control" 
+                     id="categoryName" 
+                     placeholder="category name" 
+                     ngModel>
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Pertain category</label>
-              <select class="form-control">
-                <option>Minsk</option>
-                <option>Gomel</option>
-                <option>Brest</option>
-                <option>Grodno</option>
-                <option>Mogilev</option>
+              <label for="pertainCategory">Pertain category</label>
+              <select class="form-control" 
+                      id="pertainCategory" 
+                      name="parentId" 
+                      ngModel>
+                <option></option>
+                <option *ngFor="let category of parentCategories" [value]="category.id">
+                  {{category.categoryName}}
+                </option>
               </select>
             </div>
             <button type="submit" class="btn btn-danger">Submit</button>
@@ -34,20 +41,32 @@ import {CategoryService} from 'app/containers/pages/category/category.service';
 export class CategoryAddComponent {
 
 
-  constructor(private activeModal: NgbActiveModal,
-              private categoryService:CategoryService) {
+  parentCategories;
 
 
+  add(obj){
+    console.log(obj);
+    this.categoryService.addCategory(obj)
+      .subscribe(v => {
+        this.activeModal.close();
+        window.location.reload();
+      });
   }
-
-  ngOnInit(){
-      this.categoryService.listParentCategories()
-        .subscribe(v => console.log(v));
-  }
-
 
   closeModal() {
     this.activeModal.close();
   }
+
+  constructor(private activeModal: NgbActiveModal,
+              private categoryService:CategoryService) {
+  }
+
+  ngOnInit(){
+      this.categoryService.listParentCategories()
+        .subscribe(parentCategories => {
+          this.parentCategories = parentCategories;
+        });
+  }
+
 }
 

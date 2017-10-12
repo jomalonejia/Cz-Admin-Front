@@ -1,20 +1,30 @@
 export const URL_PREFIX = 'api/';
 
-export const USER_PREFIX = 'user/';
-export const LOGIN_URL = URL_PREFIX + USER_PREFIX + 'login';
-export const LOGOUT_URL = URL_PREFIX + USER_PREFIX + 'logout';
-export const REGISTER_URL = URL_PREFIX + USER_PREFIX + 'register';
-export const GETSETTINGS_URL = URL_PREFIX + USER_PREFIX + 'getSettings';
-export const SETSETTINGS_URL = URL_PREFIX + USER_PREFIX + 'setSettings';
-export const GETUSERLIST_URL = URL_PREFIX + USER_PREFIX + 'listUserWithRole';
-export const UPDATEUSER_URL = URL_PREFIX + USER_PREFIX + 'updateUser';
-export const DELETEUSER_URL = URL_PREFIX + USER_PREFIX + 'deleteUser';
-export const LISTRELATEDUSERS_URL = URL_PREFIX + USER_PREFIX + 'listRelatedUsers';
-export const REFRESH_TOKEN_URL = URL_PREFIX + USER_PREFIX + 'refresh';
+export const USER_PREFIX = URL_PREFIX + 'user/';
+export const LOGIN_URL = USER_PREFIX + 'login';
+export const LOGOUT_URL = USER_PREFIX + 'logout';
+export const REGISTER_URL = USER_PREFIX + 'register';
+export const GETSETTINGS_URL = USER_PREFIX + 'getSettings';
+export const SETSETTINGS_URL = USER_PREFIX + 'setSettings';
+export const GETUSERLIST_URL = USER_PREFIX + 'listUserWithRole';
+export const UPDATEUSER_URL = USER_PREFIX + 'updateUser';
+export const DELETEUSER_URL = USER_PREFIX + 'deleteUser';
+export const LISTRELATEDUSERS_URL = USER_PREFIX + 'listRelatedUsers';
+export const REFRESH_TOKEN_URL = USER_PREFIX + 'refresh';
 
 
-export const ITEM_PREFIX = 'item/';
-export const ITEM_MINUS_IMAGE_URL = URL_PREFIX + ITEM_PREFIX + 'minusImage/update';
-export const ITEM_ADD_CONTENT_URL = URL_PREFIX + ITEM_PREFIX +'content/add';
+export const ITEM_PREFIX = URL_PREFIX + 'item/';
+export const ITEM_LIST_URL = ITEM_PREFIX + 'list';
+export const ITEM_ADD_URL = ITEM_PREFIX + 'add';
+export const ITEM_MINUS_IMAGE_URL = ITEM_PREFIX + 'minusImage/update';
+export const ITEM_ADD_CONTENT_URL = ITEM_PREFIX +'content/add';
+
+export const CATEGORY_PREFIX = URL_PREFIX + 'category/';
+export const CATEGORY_ADD = CATEGORY_PREFIX + 'add';
+export const CATEGORY_EDIT = CATEGORY_PREFIX + 'edit';
+export const CATEGORY_DELETE = CATEGORY_PREFIX + 'delete/';
+export const CATEGORY_LIST_CATEGORIES = CATEGORY_PREFIX + 'listCategories';
+export const CATEGORY_LIST_PARENT_CATEGORIES = CATEGORY_PREFIX + 'listParentCategories';
+export const CATEGORY_LIST_CHILD_CATEGORIES = CATEGORY_PREFIX + 'listChildCategories/';
 
 

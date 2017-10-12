@@ -13,8 +13,6 @@ import {ItemService} from './item.service';
 
 @NgModule({
   imports: [
-    FormsModule,
-    CommonModule,
     ComponentsModule,
     TablesRoutingModule,
     DataTableModule,

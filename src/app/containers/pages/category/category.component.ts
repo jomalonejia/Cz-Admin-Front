@@ -41,6 +41,10 @@ export class CategoryComponent {
         type: 'number',
         editable: false
       },
+      parentId:{
+        title: 'Parent Category',
+        type: 'string',
+      },
       categoryName: {
         title: 'Category Name',
         type: 'string',
@@ -52,16 +56,15 @@ export class CategoryComponent {
   source: LocalDataSource = new LocalDataSource();
 
   openAddModal() {
-    console.log('aa');
     const activeModal = this.modalService.open(CategoryAddComponent, {size: 'sm'});
   }
 
   constructor(private modalService: NgbModal,
               private http: HttpClient,
               private categoryService: CategoryService) {
-    this.http.get('api/category/listAllCategories')
+    this.http.get('api/category/listCategoriesDesc')
+      .catch(err => Observable.empty())
       .subscribe((v: any[]) => {
-        console.log(v);
         this.source.load(v);
       });
   }
@@ -72,7 +75,16 @@ export class CategoryComponent {
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
+      this.categoryService.deleteCategory(event.data.id)
+        .catch(err => {
+          event.confirm.reject();
+          return Observable.empty();
+        })
+        .subscribe(v => {
+          console.log(v)
+          event.confirm.resolve();
+        })
+
     } else {
       event.confirm.reject();
     }

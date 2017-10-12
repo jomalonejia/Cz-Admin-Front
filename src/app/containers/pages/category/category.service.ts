@@ -1,21 +1,35 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Category} from 'app/containers/pages/category/category.model';
 import {Observable} from 'rxjs/Observable';
+import * as constants from 'app/constants';
 
 @Injectable()
 export class CategoryService{
   constructor(private http:HttpClient){}
 
   public editCategory(category:Category):Observable<object>{
-    return this.http.post('api/category/edit',category);
+    return this.http.post(constants.CATEGORY_EDIT,category);
   }
 
   public addCategory(category:Category):Observable<object>{
-    return this.http.post('api/category/add',category);
+    return this.http.post(constants.CATEGORY_ADD,category);
+  }
+
+  public deleteCategory(id:number):Observable<object>{
+    return this.http.delete(constants.CATEGORY_DELETE+id,{});
+  }
+
+  public listCategories(){
+    return this.http.get(constants.CATEGORY_LIST_CATEGORIES);
   }
 
   public listParentCategories(){
-    return this.http.get('api/category/listParentCategories');
+    return this.http.get(constants.CATEGORY_LIST_PARENT_CATEGORIES);
   }
+
+  public listChildCategories(parentId:number){
+    return this.http.get(constants.CATEGORY_LIST_CHILD_CATEGORIES+parentId);
+  }
+
 }

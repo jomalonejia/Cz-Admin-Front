@@ -14,7 +14,7 @@ import {CategoryModule} from 'app/containers/pages/category/category.module';
     PagesRoutingModule,
     ComponentsModule,
     DashboardModule,
-    CategoryModule
+    CategoryModule.forRoot()
   ],
   declarations: [
     PagesComponent
