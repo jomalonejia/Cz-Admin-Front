@@ -15,13 +15,17 @@ export class ItemService{
   }
 
 
-  public add(obj):Observable<any>{
-    return this.http.post(constants.ITEM_ADD_URL,obj);
+  public add(item):Observable<any>{
+    return this.http.post(constants.ITEM_ADD_URL,item);
   }
 
-  public addContent(obj):Observable<any>{
-      return this.http.post(constants.ITEM_ADD_CONTENT_URL,obj);
+  public addContent(content):Observable<any>{
+      return this.http.post(constants.ITEM_ADD_CONTENT_URL,content);
   }
+
+  public update(item):Observable<any>{
+        return this.http.post(constants.ITEM_UPDATE_URL,item);
+    }
 
 
 }

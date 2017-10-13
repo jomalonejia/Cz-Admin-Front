@@ -8,18 +8,23 @@
                  [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
             <thead>
             <tr>
-              <th>
+              <th colspan="2">
                 <div>
                   <button type="button" class="btn btn-hero-primary btn-demo" (click)="openAddModal()">Add</button>
                   <button type="button" class="btn btn-hero-primary btn-demo">Delete</button>
                 </div>
               </th>
-              <th colspan="5">
+
+              <th colspan="2">
                 Filter by name:
                 <div *ngIf="filterQuery">
                   You chose: <i>{{filterQuery}}</i>
                 </div>
                 <input class="form-control" [(ngModel)]="filterQuery"/>
+              </th>
+              <th colspan="2">
+                Category:
+                <input class="form-control"/>
               </th>
               <!--<th colspan="5">
                 <div class="btn-group" ngbDropdown>
@@ -38,6 +43,7 @@
                 <mfDefaultSorter by="name"><b>Name</b></mfDefaultSorter>
               </th>
               <th class="item-list-image-col"><b>Image</b></th>
+              <th class="item-list-category-col"><b>Category</b></th>
               <th class="item-list-describe-col">
                 <b>Describe</b>
               </th>
@@ -50,16 +56,17 @@
             </tr>
             </thead>
             <tbody>
-            <tr id="item-table-line" *ngFor="let item of mf.data">
+            <tr id="item-table-line" *ngFor="let item of mf.data; let index = index">
 
               <td class="item-list-title-col">{{item.name}}</td>
               <td class="item-list-image-col"><img class="item-list-img" src={{item.image}} (click)="openImageModal()">
               </td>
+              <td class="item-list-category-col">{{item.category.categoryName}}</td>
               <td class="item-list-describe-col">{{item.describe}}</td>
               <td class="item-list-price-col">{{item.price}}</td>
               <td>
                 <button class="btn btn-hero-secondary btn-demo"><i class="ion-close-round"></i></button>
-                <button class="btn btn-hero-secondary btn-demo" (click)="openEditModal()"><i class="ion-edit"></i>
+                <button class="btn btn-hero-secondary btn-demo" (click)="openEditModal(index)"><i class="ion-edit"></i>
                 </button>
                 <button class="btn btn-hero-secondary btn-demo" (click)="openContentModal()"><i
                   class="ion-document-text"></i></button>

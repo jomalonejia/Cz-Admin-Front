@@ -24,6 +24,7 @@ import {StoreModule} from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { CustomRouterStateSerializer } from './components/utils';
 import {ServicesModule} from 'app/services/service.module';
+import {ToastModule, ToastOptions} from 'ng2-toastr';
 
 
 /*export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -37,6 +38,13 @@ import {ServicesModule} from 'app/services/service.module';
   }), http, options);
 }*/
 
+export class CustomOption extends ToastOptions {
+  maxShown = 3;
+  toastLife = 2000;
+  newestOnTop = false;
+  positionClass = 'toast-top-center';
+}
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -44,6 +52,7 @@ import {ServicesModule} from 'app/services/service.module';
     HttpModule,
     AppRoutingModule,
     NgbModule.forRoot(),
+    ToastModule.forRoot(),
     ComponentsModule.forRoot(),
     CoreModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
@@ -51,13 +60,15 @@ import {ServicesModule} from 'app/services/service.module';
     EffectsModule.forRoot([]),
     DBModule.provideDB(schema),
     StoreDevtoolsModule.instrument(),
-    ServicesModule.forRoot()
+    ServicesModule.forRoot(),
+
   ],
   declarations: [
     AppComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {provide: ToastOptions, useClass: CustomOption},
     AuthHttp,
     /*{ provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },*/
     /*{

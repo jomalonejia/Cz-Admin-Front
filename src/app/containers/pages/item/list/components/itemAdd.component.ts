@@ -1,10 +1,13 @@
-import {Component} from '@angular/core';
+import {Component, ViewContainerRef} from '@angular/core';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ItemEditContentComponent} from './itemEditContent.component';
 import {ItemEditImageComponent} from './itemEditImage.component';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CategoryService} from 'app/containers/pages/category/category.service';
 import {ItemService} from '../../item.service';
+import {ToasterService} from 'angular2-toaster';
+import {ToastsManager} from 'ng2-toastr';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'cz-item-add',
@@ -33,9 +36,9 @@ import {ItemService} from '../../item.service';
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Category</label>
               <div class="col-sm-4 input-group">
-                <select class="form-control" (change)="listChildCategories($event)">
+                <select class="form-control" (change)="listChildCategories($event.target.value)">
                   <option></option>
-                  <option *ngFor="let category of parentCategories" [value]="category.id">
+                  <option *ngFor="let category of parentCategories" [value]="category.categoryId">
                     {{category.categoryName}}
                   </option>
                 </select>
@@ -43,7 +46,7 @@ import {ItemService} from '../../item.service';
               <div class="col-sm-4 input-group">
                 <select class="form-control" [formControl]="categoryId">
                   <option></option>
-                  <option *ngFor="let category of childCategories" [value]="category.id">
+                  <option *ngFor="let category of childCategories" [value]="category.categoryId">
                     {{category.categoryName}}
                   </option>
                 </select>
@@ -78,8 +81,12 @@ export class ItemAddComponent {
 
   constructor(private itemService:ItemService,
               private categoryService:CategoryService,
+              private toasterService: ToasterService,
               private activeModal: NgbActiveModal,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private toastr: ToastsManager,
+              private vcr: ViewContainerRef) {
+
     this.form = fb.group({
       'name': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       'price': ['', Validators.compose([Validators.required])],
@@ -91,6 +98,8 @@ export class ItemAddComponent {
     this.price = this.form.controls['price'];
     this.categoryId = this.form.controls['categoryId'];
     this.describe = this.form.controls['describe'];
+
+    this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit(){
@@ -104,12 +113,18 @@ export class ItemAddComponent {
   add(obj){
     console.log(obj);
     this.itemService.add(obj)
-      .subscribe(v => console.log(v));
+      .catch(err => {
+        this.toastr.error('Add Failed', 'Oops!');
+        return Observable.empty();
+      })
+      .subscribe(v => {
+        this.toasterService.pop('Add Success', 'Success');
+        setTimeout(this.closeModal(),2000);
+      });
   }
 
-  listChildCategories(event){
-    console.log(event.target.value);
-    this.categoryService.listChildCategories(event.target.value)
+  listChildCategories(categoryId){
+    this.categoryService.listChildCategories(categoryId)
       .subscribe(childCategories => this.childCategories = childCategories);
   }
 

@@ -36,12 +36,15 @@ export class ItemListComponent {
   }
 
 
-  openEditModal() {
+  openEditModal(index) {
     const activeModal = this.modalService.open(ItemEditComponent, { size: 'lg'});
 
-    activeModal.componentInstance.name = this.items[0].name;
-    activeModal.componentInstance.price = this.items[0].price;
-    activeModal.componentInstance.describe = this.items[0].describe;
+    activeModal.componentInstance.itemId = this.items[index].itemId;
+    activeModal.componentInstance.name = this.items[index].name;
+    activeModal.componentInstance.price = this.items[index].price;
+    activeModal.componentInstance.categoryId = this.items[index].category.categoryId;
+    activeModal.componentInstance.parentCategoryId = this.items[index].category.parentCategoryId;
+    activeModal.componentInstance.describe = this.items[index].describe;
   }
 
   openImageModal(){
@@ -72,13 +75,15 @@ export class ItemListComponent {
               private modalService:NgbModal,
               private http:HttpClient) {
     this.itemService.listItems()
+      .catch(err => Observable.empty())
       .subscribe(items => {
-        this.items = items
+        this.items = items;
+        console.log(this.items);
       });
   }
 
   ngOnInit(){
-    this.categories$ = this.categoryService.listCategories();
+    /*this.categories$ = this.categoryService.listCategories();*/
   }
 
 }

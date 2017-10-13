@@ -36,12 +36,12 @@ export class CategoryComponent {
       confirmDelete: true,
     },
     columns: {
-      id: {
+      categoryId: {
         title: 'ID',
         type: 'number',
         editable: false
       },
-      parentId:{
+      parentCategoryId:{
         title: 'Parent Category',
         type: 'string',
       },
@@ -75,7 +75,7 @@ export class CategoryComponent {
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this.categoryService.deleteCategory(event.data.id)
+      this.categoryService.deleteCategory(event.data.categoryId)
         .catch(err => {
           event.confirm.reject();
           return Observable.empty();
@@ -95,6 +95,7 @@ export class CategoryComponent {
   }
 
   onEditConfirm(event): void {
+    console.log(event.newData);
     this.categoryService.editCategory(event.newData)
       .catch(err => {
         event.confirm.reject();

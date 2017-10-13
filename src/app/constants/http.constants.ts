@@ -16,6 +16,7 @@ export const REFRESH_TOKEN_URL = USER_PREFIX + 'refresh';
 export const ITEM_PREFIX = URL_PREFIX + 'item/';
 export const ITEM_LIST_URL = ITEM_PREFIX + 'list';
 export const ITEM_ADD_URL = ITEM_PREFIX + 'add';
+export const ITEM_UPDATE_URL = ITEM_PREFIX + 'update';
 export const ITEM_MINUS_IMAGE_URL = ITEM_PREFIX + 'minusImage/update';
 export const ITEM_ADD_CONTENT_URL = ITEM_PREFIX +'content/add';
 

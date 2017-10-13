@@ -23,10 +23,10 @@ import {CategoryService} from 'app/containers/pages/category/category.service';
               <label for="pertainCategory">Pertain category</label>
               <select class="form-control" 
                       id="pertainCategory" 
-                      name="parentId" 
+                      name="parentCategoryId" 
                       ngModel>
                 <option></option>
-                <option *ngFor="let category of parentCategories" [value]="category.id">
+                <option *ngFor="let category of parentCategories" [value]="category.categoryId">
                   {{category.categoryName}}
                 </option>
               </select>
