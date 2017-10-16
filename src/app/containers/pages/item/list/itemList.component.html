@@ -11,12 +11,12 @@
               <th colspan="2">
                 <div>
                   <button type="button" class="btn btn-hero-primary btn-demo" (click)="openAddModal()">Add</button>
-                  <button type="button" class="btn btn-hero-primary btn-demo">Delete</button>
+                  <button type="button" class="btn btn-hero-primary btn-demo" (click)="showSuccess()">Delete</button>
                 </div>
               </th>
 
               <th colspan="2">
-                Filter by name:
+                Filter by name:{{pagesCount}}
                 <div *ngIf="filterQuery">
                   You chose: <i>{{filterQuery}}</i>
                 </div>
@@ -78,7 +78,7 @@
           </table>
           <div class="cz-pagination-wrapper">
             <div class="cz-pagination">
-             <!-- <cz-page [count]="data.length" (changePage)="changePage($event)"></cz-page>-->
+              <cz-page [pagesCount]="pagesCount" (changePage)="changePage($event)"></cz-page>
             </div>
           </div>
         </div>

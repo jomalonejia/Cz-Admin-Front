@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, SimpleChanges} from '@angular/core';
 import * as _ from 'lodash';
 
 @Component({
@@ -8,23 +8,28 @@ import * as _ from 'lodash';
 })
 
 export class CzPage{
-  @Input() count:number;
+  @Input() pagesCount:number;
+
   @Output() changePage = new EventEmitter<any>();
 
-  protected pages: Array<any>;
+
   protected page: number = 1;
+  protected pages:number[] = [];
   protected perPage: number;
 
   constructor(){
 
   }
 
-  ngOnInit(){
-    this.pages = [1,2,3,4,5];
+  ngOnChanges(changes: SimpleChanges) {
+    const counts = changes.pagesCount.currentValue;
+    for(let i =1;i<counts+1;i++){
+      this.pages.push(i);
+    }
   }
 
   shouldShow(){
-    return this.count > 5;
+    return this.pages.length > 1;
   }
 
   getPage(){
@@ -42,7 +47,7 @@ export class CzPage{
   }
 
   getLast(){
-    return this.pages[this.pages.length-1];
+    return this.pages;
   }
 
 }

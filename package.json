@@ -35,7 +35,6 @@
     "angular2-datatable": "^0.6.0",
     "angular2-jwt": "^0.2.3",
     "angular2-moment": "^1.7.0",
-    "angular2-toaster": "^4.0.1",
     "angular2-uuid": "^1.1.1",
     "angular2-websocket": "^0.9.3",
     "bootstrap": "4.0.0-alpha.6",

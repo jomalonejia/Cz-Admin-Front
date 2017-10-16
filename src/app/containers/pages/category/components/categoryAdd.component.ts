@@ -45,7 +45,6 @@ export class CategoryAddComponent {
 
 
   add(obj){
-    console.log(obj);
     this.categoryService.addCategory(obj)
       .subscribe(v => {
         this.activeModal.close();

@@ -10,8 +10,8 @@ export class ItemService{
 
   }
 
-  public listItems():Observable<any>{
-    return this.http.get(constants.ITEM_LIST_URL);
+  public listItems(pageNum:number):Observable<any>{
+    return this.http.get(constants.ITEM_LIST_URL+pageNum);
   }
 
 

@@ -1,13 +1,10 @@
 import {Component, ViewContainerRef} from '@angular/core';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ItemEditContentComponent} from './itemEditContent.component';
-import {ItemEditImageComponent} from './itemEditImage.component';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CategoryService} from 'app/containers/pages/category/category.service';
 import {ItemService} from '../../item.service';
-import {ToasterService} from 'angular2-toaster';
-import {ToastsManager} from 'ng2-toastr';
 import {Observable} from 'rxjs/Observable';
+import {CustomToasterService} from 'app/services';
 
 @Component({
   selector: 'cz-item-add',
@@ -63,7 +60,7 @@ import {Observable} from 'rxjs/Observable';
       </div>
       <div class="modal-footer">
         <button class="btn btn-md btn-primary" (click)="closeModal()">Cancel</button>
-        <button class="btn btn-md btn-primary" (click)="add(form.value)">Update</button>
+        <button class="btn btn-md btn-primary" (click)="add(form.value)">Add</button>
       </div>
     </div>
   `,
@@ -81,11 +78,9 @@ export class ItemAddComponent {
 
   constructor(private itemService:ItemService,
               private categoryService:CategoryService,
-              private toasterService: ToasterService,
               private activeModal: NgbActiveModal,
               private fb: FormBuilder,
-              private toastr: ToastsManager,
-              private vcr: ViewContainerRef) {
+              private toasterService:CustomToasterService) {
 
     this.form = fb.group({
       'name': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
@@ -98,8 +93,6 @@ export class ItemAddComponent {
     this.price = this.form.controls['price'];
     this.categoryId = this.form.controls['categoryId'];
     this.describe = this.form.controls['describe'];
-
-    this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit(){
@@ -111,14 +104,13 @@ export class ItemAddComponent {
 
 
   add(obj){
-    console.log(obj);
     this.itemService.add(obj)
       .catch(err => {
-        this.toastr.error('Add Failed', 'Oops!');
+        this.toasterService.toasterTip({message:'success',type:''});
         return Observable.empty();
       })
       .subscribe(v => {
-        this.toasterService.pop('Add Success', 'Success');
+        this.toasterService.toasterTip({message:'success',type:''});
         setTimeout(this.closeModal(),2000);
       });
   }

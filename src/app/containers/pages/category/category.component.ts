@@ -81,7 +81,6 @@ export class CategoryComponent {
           return Observable.empty();
         })
         .subscribe(v => {
-          console.log(v)
           event.confirm.resolve();
         })
 
@@ -95,7 +94,6 @@ export class CategoryComponent {
   }
 
   onEditConfirm(event): void {
-    console.log(event.newData);
     this.categoryService.editCategory(event.newData)
       .catch(err => {
         event.confirm.reject();

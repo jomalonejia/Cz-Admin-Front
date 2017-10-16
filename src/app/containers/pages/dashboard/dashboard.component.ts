@@ -1,7 +1,7 @@
 import {Component, ViewContainerRef} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BodyOutputType, Toast, ToasterConfig, ToasterService} from 'angular2-toaster';
 import {ToastsManager} from 'ng2-toastr';
+import {CustomToasterService} from 'app/services/toaster';
 
 @Component({
   selector: 'ngx-dashboard',
@@ -10,12 +10,15 @@ import {ToastsManager} from 'ng2-toastr';
 })
 export class DashboardComponent {
 
-  constructor(public toastr: ToastsManager, vcr: ViewContainerRef) {
+  constructor(public toastr: ToastsManager,
+              vcr: ViewContainerRef,
+              private toasterService:CustomToasterService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
   showSuccess() {
-    this.toastr.success('You are awesome!', 'Success!');
+    /*this.toastr.success('You are awesome!', 'Success!');*/
+    this.toasterService.toasterTip({message:'success',type:''});
   }
 
   showError() {

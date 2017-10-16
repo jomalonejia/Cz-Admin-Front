@@ -5,6 +5,7 @@ import {AbstractControl, FormBuilder, FormGroup, NgForm, Validators} from '@angu
 import {ItemService} from '../../item.service';
 import {Observable} from 'rxjs/Observable';
 import {ToastsManager} from 'ng2-toastr';
+import {CustomToasterService} from 'app/services';
 
 @Component({
   selector: 'cz-item-edit',
@@ -86,10 +87,8 @@ export class ItemEditComponent {
   constructor(private itemService:ItemService,
               private activeModal: NgbActiveModal,
               private categoryService:CategoryService,
-              private fb: FormBuilder,
-              private toastr: ToastsManager,
-              private vcr: ViewContainerRef) {
-    this.toastr.setRootViewContainerRef(vcr);
+              private toasterService:CustomToasterService) {
+
   }
 
   ngOnInit(){
@@ -104,20 +103,17 @@ export class ItemEditComponent {
     this.categoryService.listChildCategories(categoryId)
       .subscribe(childCategories => {
         this.childCategories = childCategories;
-        console.log(this.childCategories);
-        console.log(this.categoryId);
       });
   }
 
   update(form:NgForm){
-    console.log(form.value);
     this.itemService.update(form.value)
       .catch(err => {
-        this.toastr.error('Update Failed', 'Oops!');
+        this.toasterService.toasterTip({message:'success',type:''});
         return Observable.empty();
       })
       .subscribe(v => {
-        this.toastr.success('Update Success!', 'Success!');
+        this.toasterService.toasterTip({message:'success',type:''});
         setTimeout(this.closeModal(),2000);
       });
   }

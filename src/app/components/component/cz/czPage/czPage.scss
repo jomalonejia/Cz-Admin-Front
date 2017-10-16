@@ -12,8 +12,9 @@ ul{
     line-height: 1.25;
     border: 2px solid #7659ff;
     border-radius: .5rem;
-    display: flex;
+    display: inline-block;
     .ng2-smart-page-link {
+      float: left;
       background-color: rgba(0, 0, 0, .2);
       color: #fff;
       background: transparent;

@@ -12,7 +12,7 @@ import {ComponentsModule} from "./components/components.module";
 import {CoreModule} from "./core/core.module";
 import * as constants from 'app/constants';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {AuthInterceptor} from 'app/services';
+import {AuthInterceptor,CustomToasterService} from 'app/services';
 
 
 import {RouterStateSerializer, StoreRouterConnectingModule} from '@ngrx/router-store';
@@ -70,6 +70,7 @@ export class CustomOption extends ToastOptions {
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     {provide: ToastOptions, useClass: CustomOption},
     AuthHttp,
+    CustomToasterService
     /*{ provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },*/
     /*{
       provide: AuthHttp,
