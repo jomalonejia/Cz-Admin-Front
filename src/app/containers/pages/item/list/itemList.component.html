@@ -57,19 +57,25 @@
             </thead>
             <tbody>
             <tr id="item-table-line" *ngFor="let item of mf.data; let index = index">
-
               <td class="item-list-title-col">{{item.name}}</td>
-              <td class="item-list-image-col"><img class="item-list-img" src={{item.image}} (click)="openImageModal()">
+              <td class="item-list-image-col">
+                <img class="item-list-img"
+                     [src]="item.image | czImagePipe"
+                     (click)="openImageModal(index,item.itemId)">
               </td>
               <td class="item-list-category-col">{{item.category.categoryName}}</td>
               <td class="item-list-describe-col">{{item.describe}}</td>
               <td class="item-list-price-col">{{item.price}}</td>
               <td>
-                <button class="btn btn-hero-secondary btn-demo"><i class="ion-close-round"></i></button>
-                <button class="btn btn-hero-secondary btn-demo" (click)="openEditModal(index)"><i class="ion-edit"></i>
+                <button class="btn btn-hero-secondary btn-demo" (click)="delete(item.itemId)">
+                  <i class="ion-close-round"></i>
                 </button>
-                <button class="btn btn-hero-secondary btn-demo" (click)="openContentModal()"><i
-                  class="ion-document-text"></i></button>
+                <button class="btn btn-hero-secondary btn-demo" (click)="openEditModal(index)">
+                  <i class="ion-edit"></i>
+                </button>
+                <button class="btn btn-hero-secondary btn-demo" (click)="openContentModal()">
+                  <i class="ion-document-text"></i>
+                </button>
               </td>
             </tr>
             </tbody>

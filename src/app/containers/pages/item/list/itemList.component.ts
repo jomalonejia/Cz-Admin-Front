@@ -60,15 +60,31 @@ export class ItemListComponent {
     activeModal.componentInstance.describe = this.items[index].describe;
   }
 
-  openImageModal() {
+  openImageModal(index,itemId) {
     const activeModal = this.modalService.open(ItemEditImageComponent, {size: 'lg'});
-    activeModal.componentInstance.image = this.items[0].image;
-    activeModal.componentInstance.minusImages = this.items[0].minusImages;
+    activeModal.componentInstance.image = this.items[index].image;;
+    activeModal.componentInstance.itemId = itemId;
   }
 
   openContentModal() {
     const activeModal = this.modalService.open(ItemEditContentComponent, {size: 'lg'});
   }
+
+  delete(itemId){
+    if (window.confirm('Are you sure you want to delete?')) {
+      console.log(itemId);
+      this.itemService.delete(itemId)
+        .catch(err => Observable.throw(err))
+        .subscribe(v => {
+          console.log(v);
+          window.location.reload();
+        });
+    }
+    else{
+      return ;
+    }
+  }
+
 
   toInt(num: string) {
     return +num;
@@ -80,7 +96,7 @@ export class ItemListComponent {
 
   changePage(page) {
     this.itemService.listItems(page)
-      .catch(err => Observable.empty())
+      .catch(err => Observable.throw(err))
       .subscribe(pageInfo => {
         this.items = pageInfo.list;
         this.pagesCount = pageInfo.pages;

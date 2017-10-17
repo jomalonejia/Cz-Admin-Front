@@ -40,8 +40,8 @@ import {
 } from './layouts';
 
 import {
-
-} from 'app/pipes/'
+  CzImagePipe
+} from './component/cz/pipes'
 
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
@@ -89,12 +89,16 @@ const NB_THEME_PROVIDERS = [
   ...NbMenuModule.forRoot().providers,
 ];
 
+const PIPES = [
+  CzImagePipe
+]
+
 
 
 @NgModule({
   imports: [...BASE_MODULES,...MODULES, ...NB_MODULES],
-  exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS],
-  declarations: [...COMPONENTS, ],
+  exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS,...PIPES],
+  declarations: [...COMPONENTS,...PIPES],
 })
 export class ComponentsModule {
   static forRoot(): ModuleWithProviders {

@@ -8,9 +8,10 @@
         <span class="sr-only">First</span>
       </a>
     </li>
+
     <li class="ng2-smart-page-item"
 
-        *ngFor="let page of getPages()">
+        *ngFor="let page of pages">
       <span class="ng2-smart-page-link"
             [ngClass]="{active: getPage() == page}"
             *ngIf="getPage() == page">{{ page }}
@@ -19,7 +20,7 @@
     </li>
     <li class="ng2-smart-page-item"
         [ngClass]="{disabled: getPage() == getLast()}">
-      <a class="ng2-smart-page-link page-link" href="#" (click)="getPage() == getLast() ? false : paginate(getLast())"
+      <a class="ng2-smart-page-link page-link" href="#" (click)="paginate(pagesCount)"
          aria-label="Last"> <span aria-hidden="true">&raquo;</span>
         <span class="sr-only">Last</span> </a>
     </li>

@@ -1,6 +1,7 @@
-import {Component, Inject} from '@angular/core';
-import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
+import {Component} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {ItemService} from '../../item.service';
+import {ItemImage} from 'app/models';
 
 
 @Component({
@@ -20,13 +21,13 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
         </button>
       </div>
       <div class="modal-body">
-        <nb-card size="small">
+        <nb-card size="medium">
           <nb-card-header>
             Index Images
           </nb-card-header>
           <nb-card-body>
             <div class="image-index">
-              <cz-image [size]="'large'" [image]="this.image"></cz-image>
+              <cz-image [size]="'large'" [image]="image"></cz-image>
             </div>
           </nb-card-body>
         </nb-card>
@@ -36,34 +37,43 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
           </nb-card-header>
           <nb-card-body>
             <ul>
-              <li *ngFor="let image of this.minusImages">
-                <cz-image [image]="image" [size]="'meduim'"></cz-image>
+              <li *ngFor="let image of images">
+                {{image.image}}
+                <!--<cz-image [image]="image.image | czImagePipe" [size]="'meduim'"></cz-image>-->
               </li>
             </ul>
           </nb-card-body>
         </nb-card>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-md btn-primary" (click)="closeModal()">Cancel</button>
-        <button class="btn btn-md btn-primary" (click)="saveItemContent()">Cancel</button>
+        <button class="btn btn-md btn-primary" (click)="closeModal()">Close</button>
       </div>
     </div>
   `
 })
 
 export class ItemEditImageComponent {
-
   image: string;
+  itemId: string;
+  images: object[] = new Array<object>(6);
   minusImages: string[];
 
-  constructor(private activeModal: NgbActiveModal) {
+  constructor(private activeModal: NgbActiveModal,
+              private itemService: ItemService) {
+   /* this.itemService.selectImages(this.itemId)
+      .subscribe(images => {
+        for (let i = 0; i < 6; i++) {
+          this.images[i] = {image:images[i] || ''}
+        }
+      });*/
+  }
+
+  ngOnInit() {
+
   }
 
   closeModal() {
     this.activeModal.close();
-  }
-
-  ngOnInit() {
   }
 
 }

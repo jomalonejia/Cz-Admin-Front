@@ -23,7 +23,7 @@ export class CzImage{
     const token = '';
 
     this.uploader = new FileUploader({
-      url: constants.ITEM_MINUS_IMAGE_URL,
+      url: constants.ITEM_IMAGES_UPDATE_URL,
       method: "POST",
       itemAlias: "itemImageUpload",
       authTokenHeader:constants.TOKEN_HEADER,

@@ -107,11 +107,12 @@ export class ItemAddComponent {
     this.itemService.add(obj)
       .catch(err => {
         this.toasterService.toasterTip({message:'success',type:''});
-        return Observable.empty();
+        return Observable.throw(err);
       })
       .subscribe(v => {
         this.toasterService.toasterTip({message:'success',type:''});
         setTimeout(this.closeModal(),2000);
+        window.location.reload();
       });
   }
 
