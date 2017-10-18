@@ -18,6 +18,7 @@ export const ITEM_LIST_URL = ITEM_PREFIX + 'list/';
 export const ITEM_ADD_URL = ITEM_PREFIX + 'add';
 export const ITEM_DELETE_URL = ITEM_PREFIX + 'delete/'
 export const ITEM_UPDATE_URL = ITEM_PREFIX + 'update';
+export const ITEM_UPDATE_IMAGE_URL = ITEM_UPDATE_URL + '/';
 export const ITEM_IMAGES_UPDATE_URL = ITEM_PREFIX + 'images/update/';
 export const ITEM_IMAGES_SELECT_URL = ITEM_PREFIX +'images/select/';
 export const ITEM_ADD_CONTENT_URL = ITEM_PREFIX +'content/add';

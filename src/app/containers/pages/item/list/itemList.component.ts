@@ -11,6 +11,7 @@ import {Observable} from 'rxjs/Observable';
 import {ItemService} from '../item.service';
 import {CategoryService} from 'app/containers/pages/category/category.service';
 import {CustomToasterService} from 'app/services/toaster';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -30,18 +31,16 @@ export class ItemListComponent {
   sortOrder = 'asc';O
   name: string;
   pagesCount: number;
+  pageNum:number = 1;
 
-  constructor(private itemService: ItemService,
+  constructor(private route:ActivatedRoute,
+              private itemService: ItemService,
               private categoryService: CategoryService,
               private modalService: NgbModal,
               private http: HttpClient,
               private toasterService: CustomToasterService) {
-    this.itemService.listItems(1)
-      .catch(err => Observable.empty())
-      .subscribe(pageInfo => {
-        this.items = pageInfo.list;
-        this.pagesCount = pageInfo.pages;
-      });
+
+    this.listItems(this.pageNum);
   }
 
   openAddModal() {
@@ -64,10 +63,22 @@ export class ItemListComponent {
     const activeModal = this.modalService.open(ItemEditImageComponent, {size: 'lg'});
     activeModal.componentInstance.image = this.items[index].image;;
     activeModal.componentInstance.itemId = itemId;
+    activeModal.result.then(() => { this.listItems(this.pageNum)},
+      () => { this.listItems(this.pageNum)})
   }
 
   openContentModal() {
     const activeModal = this.modalService.open(ItemEditContentComponent, {size: 'lg'});
+  }
+
+  listItems(pageNum:number){
+    this.itemService.listItems(pageNum)
+      .catch(err => Observable.empty())
+      .subscribe(pageInfo => {
+        this.items = pageInfo.list;
+        this.pagesCount = pageInfo.pages;
+        this.pageNum = pageInfo.pageNum;
+      });
   }
 
   delete(itemId){

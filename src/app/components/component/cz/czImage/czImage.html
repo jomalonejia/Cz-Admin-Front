@@ -22,8 +22,10 @@
     <i title="change image" class="ion-image" (click)="bringFileSelector()"></i>
     <i title="delete image" class="ion-close" (click)="removePicture();" ></i>
   </div>-->
-  <input type="file" hidden="true" id="fileUpload"
+  <input type="file" hidden="true" [id]="specificId"
          ng2FileSelect
          [uploader]="uploader"
          (change)="selectedFileOnChanged($event)"/>
+   <!--<input type="file" hidden="true" [id]="dynamicid" (change)="upload($event)"/>-->
+
 </div>

@@ -60,8 +60,8 @@
               <td class="item-list-title-col">{{item.name}}</td>
               <td class="item-list-image-col">
                 <img class="item-list-img"
-                     [src]="item.image | czImagePipe"
-                     (click)="openImageModal(index,item.itemId)">
+                     (click)="openImageModal(index,item.itemId)"
+                     [src]="item.image | czImagePipe" >
               </td>
               <td class="item-list-category-col">{{item.category.categoryName}}</td>
               <td class="item-list-describe-col">{{item.describe}}</td>

@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {ItemService} from '../../item.service';
 import {ItemImage} from 'app/models';
+import * as constants from 'app/constants/http.constants';
 
 
 @Component({
@@ -27,7 +28,14 @@ import {ItemImage} from 'app/models';
           </nb-card-header>
           <nb-card-body>
             <div class="image-index">
-              <cz-image [size]="'large'" [image]="image"></cz-image>
+              <cz-image 
+                [size]="'large'" 
+                [image]="image" 
+                [uploadUrl]="imageUploadUrl"
+                [uploadParam]="itemId"
+                [aluba]="itemId">
+                
+              </cz-image>
             </div>
           </nb-card-body>
         </nb-card>
@@ -37,9 +45,15 @@ import {ItemImage} from 'app/models';
           </nb-card-header>
           <nb-card-body>
             <ul>
-              <li *ngFor="let image of images">
-                {{image.image}}
-                <!--<cz-image [image]="image.image | czImagePipe" [size]="'meduim'"></cz-image>-->
+              <li *ngFor="let image of images; let index = index">
+                {{index}}
+                <cz-image
+                  [image]="image | czImagePipe" 
+                  [size]="'meduim'"
+                  [uploadUrl]="imagesUploadUrl"
+                  [uploadParam]="itemId + '/'+ index"
+                  [aluba]="index">
+                </cz-image>
               </li>
             </ul>
           </nb-card-body>
@@ -53,19 +67,26 @@ import {ItemImage} from 'app/models';
 })
 
 export class ItemEditImageComponent {
+
+  @Output() uploadSuccess = new EventEmitter<number>();
+
   image: string;
   itemId: string;
-  images: object[] = new Array<object>(6);
+  images;
   minusImages: string[];
+
+  imageUploadUrl:string = constants.ITEM_UPDATE_IMAGE_URL;
+  imagesUploadUrl:string = constants.ITEM_IMAGES_UPDATE_URL;
 
   constructor(private activeModal: NgbActiveModal,
               private itemService: ItemService) {
-   /* this.itemService.selectImages(this.itemId)
+    this.images = Array(6).fill('');
+    this.itemService.selectImages(this.itemId)
       .subscribe(images => {
         for (let i = 0; i < 6; i++) {
-          this.images[i] = {image:images[i] || ''}
+          this.images[i] = images[i] || '';
         }
-      });*/
+      });
   }
 
   ngOnInit() {
@@ -73,6 +94,7 @@ export class ItemEditImageComponent {
   }
 
   closeModal() {
+    this.uploadSuccess.emit()
     this.activeModal.close();
   }
 

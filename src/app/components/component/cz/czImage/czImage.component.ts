@@ -1,4 +1,4 @@
-import {Component, Input, Renderer2} from "@angular/core";
+import {Component, EventEmitter, Input, Output, Renderer2} from '@angular/core';
 import {FileItem, FileUploader, ParsedResponseHeaders} from "ng2-file-upload";
 import * as constants from 'app/constants';
 
@@ -12,6 +12,10 @@ export class CzImage{
 
   @Input() image:string;
   @Input() size:string;
+  @Input() uploadUrl:string;
+  @Input() uploadParam:string;
+  @Input() aluba:string;
+  specificId:string = 'fileUpload';
 
   defaultPicture = constants.DEFAULT_IMAGE_URL;
 
@@ -19,23 +23,27 @@ export class CzImage{
 
   constructor(private renderer:Renderer2){
 
-    //const token = JSON.parse(localStorage.getItem('login'))['token'];
-    const token = '';
+  }
 
+
+
+  ngOnInit(){
+
+    this.specificId += (this.aluba);
+
+    const token = JSON.parse(localStorage.getItem('auth'))['token'];
     this.uploader = new FileUploader({
-      url: constants.ITEM_IMAGES_UPDATE_URL,
+      /* url: constants.ITEM_IMAGES_UPDATE_URL,*/
+      url:this.uploadUrl+this.uploadParam,
       method: "POST",
-      itemAlias: "itemImageUpload",
+      itemAlias: "imageUpload",
       authTokenHeader:constants.TOKEN_HEADER,
       authToken:token,
       autoUpload:true
     });
-  }
-
-  ngOnInit(){
     this.uploader.onSuccessItem = (item:FileItem, response:string, status:number, headers:ParsedResponseHeaders) => {
       if (status == 200) {
-        console.log(response);
+        this.image = response;
       }else {
         console.log('error');
       }
@@ -44,12 +52,16 @@ export class CzImage{
   }
 
   bringFileSelector():boolean {
-    this.renderer.selectRootElement('#fileUpload').click();
+    this.renderer.selectRootElement('#' + this.specificId).click();
     return false;
   }
 
+  selectedFileOnChanged(event){
+
+  }
+
   removePicture(){
-    console.log('aa');
+    console.log('remove');
   }
 
 
