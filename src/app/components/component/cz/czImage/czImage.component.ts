@@ -14,8 +14,8 @@ export class CzImage{
   @Input() size:string;
   @Input() uploadUrl:string;
   @Input() uploadParam:string;
-  @Input() aluba:string;
-  specificId:string = 'fileUpload';
+  @Input() specificId:string;
+  id:string = 'fileUpload-';
 
   defaultPicture = constants.DEFAULT_IMAGE_URL;
 
@@ -29,7 +29,7 @@ export class CzImage{
 
   ngOnInit(){
 
-    this.specificId += (this.aluba);
+    this.id += this.specificId;
 
     const token = JSON.parse(localStorage.getItem('auth'))['token'];
     this.uploader = new FileUploader({
@@ -52,7 +52,7 @@ export class CzImage{
   }
 
   bringFileSelector():boolean {
-    this.renderer.selectRootElement('#' + this.specificId).click();
+    this.renderer.selectRootElement('#' + this.id).click();
     return false;
   }
 

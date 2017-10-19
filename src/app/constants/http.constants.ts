@@ -28,7 +28,7 @@ export const CATEGORY_PREFIX = URL_PREFIX + 'category/';
 export const CATEGORY_ADD = CATEGORY_PREFIX + 'add';
 export const CATEGORY_EDIT = CATEGORY_PREFIX + 'edit';
 export const CATEGORY_DELETE = CATEGORY_PREFIX + 'delete/';
-export const CATEGORY_LIST_CATEGORIES = CATEGORY_PREFIX + 'listCategories';
+export const CATEGORY_LIST_TREE_CATEGORIES = CATEGORY_PREFIX + 'listTreeCategories';
 export const CATEGORY_LIST_PARENT_CATEGORIES = CATEGORY_PREFIX + 'listParentCategories';
 export const CATEGORY_LIST_CHILD_CATEGORIES = CATEGORY_PREFIX + 'listChildCategories/';
 

@@ -1,5 +1,12 @@
-<button class="btn btn-default" (click)="showSuccess()">Toastr Tester</button>
-<button class="btn btn-default" (click)="showError()">Toastr Tester</button>
-<button class="btn btn-default" (click)="showWarning()">Toastr Tester</button>
-<button class="btn btn-default" (click)="showInfo()">Toastr Tester</button>
-<button class="btn btn-default" (click)="showCustom()">Toastr Tester</button>
+<div class="row">
+  <div class="col">
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button class="dropdown-item">Action - 1</button>
+        <button class="dropdown-item">Another Action</button>
+        <button class="dropdown-item">Something else is here</button>
+      </div>
+    </div>
+  </div>
+</div>

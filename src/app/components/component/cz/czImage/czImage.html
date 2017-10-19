@@ -1,10 +1,12 @@
 <div class="picture-group" [ngClass]="{uploading: uploadInProgress}">
   <div class="picture-wrapper {{size}}" >
-    <img  [src]="image" class="img-thumbnail" *ngIf="image"
+    <img  [src]="image" class="img-thumbnail"
+          *ngIf="image"
           (click)="bringFileSelector()">
     <img  [src]="defaultPicture"
           class="img-thumbnail"
-          *ngIf="!!!image && !!defaultPicture">
+          *ngIf="!!!image && !!defaultPicture"
+          (click)="bringFileSelector()">
     <div class="loading" *ngIf="uploader.isUploading">
       <div class="spinner">
         <div class="double-bounce1"></div>
@@ -22,7 +24,7 @@
     <i title="change image" class="ion-image" (click)="bringFileSelector()"></i>
     <i title="delete image" class="ion-close" (click)="removePicture();" ></i>
   </div>-->
-  <input type="file" hidden="true" [id]="specificId"
+  <input type="file" hidden="true" [id]="id"
          ng2FileSelect
          [uploader]="uploader"
          (change)="selectedFileOnChanged($event)"/>

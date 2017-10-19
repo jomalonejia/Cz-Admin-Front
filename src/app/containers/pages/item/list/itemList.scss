@@ -7,9 +7,11 @@ td, th {
 .item-list-title-col {
   width: 15%;
 }
+
 .item-list-describe-col {
   width: 15%;
 }
+
 .item-list-describe-col {
   width: 30%;
 }
@@ -47,9 +49,15 @@ td, th {
   border-bottom: 1px solid #eceeef;
 }
 
-.cz-pagination{
+.cz-pagination {
   max-width: 350px;
   margin: 0 auto;
+}
+
+.dropdown-item-category {
+  width: 80%;
+  margin-left: 10%;
+  cursor: pointer;
 }
 
 

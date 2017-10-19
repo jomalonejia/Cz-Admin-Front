@@ -26,6 +26,10 @@ export class ItemService {
     return this.http.get(constants.ITEM_LIST_URL + pageNum);
   }
 
+  public listItemsByCategory(categoryId:number,pageNum: number): Observable<any> {
+    return this.http.get(constants.ITEM_LIST_URL + categoryId + '/' + pageNum);
+  }
+
   public selectImages(itemId:string):Observable<any> {
     return this.http.get(constants.ITEM_IMAGES_SELECT_URL+itemId);
   }

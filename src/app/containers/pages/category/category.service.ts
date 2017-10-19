@@ -20,8 +20,8 @@ export class CategoryService{
     return this.http.delete(constants.CATEGORY_DELETE+id,{});
   }
 
-  public listCategories(){
-    return this.http.get(constants.CATEGORY_LIST_CATEGORIES);
+  public listTreeCategories(){
+    return this.http.get(constants.CATEGORY_LIST_TREE_CATEGORIES);
   }
 
   public listParentCategories(){

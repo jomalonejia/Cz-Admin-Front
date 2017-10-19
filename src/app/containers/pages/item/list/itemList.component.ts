@@ -22,8 +22,8 @@ import {ActivatedRoute} from '@angular/router';
 
 export class ItemListComponent {
 
-
-  categories$: Observable<Object>;
+  pageInfo$:Observable<any>;
+  categories$: Observable<object>;
   items;
   filterQuery = '';
   rowsOnPage = 5;
@@ -37,10 +37,21 @@ export class ItemListComponent {
               private itemService: ItemService,
               private categoryService: CategoryService,
               private modalService: NgbModal,
-              private http: HttpClient,
               private toasterService: CustomToasterService) {
 
-    this.listItems(this.pageNum);
+   /* this.pageInfo$ = this.itemService.listItems(this.pageNum);
+    this.pageInfo$
+      .catch(err => Observable.empty())
+      .subscribe(pageInfo => {
+        this.pagesCount = pageInfo.pages;
+        this.items = pageInfo.list;
+      });*/
+   this.listItems(this.pageNum);
+  }
+
+  ngAfterViewInit(){
+    this.categories$ = this.categoryService.listTreeCategories();
+
   }
 
   openAddModal() {
@@ -87,7 +98,6 @@ export class ItemListComponent {
       this.itemService.delete(itemId)
         .catch(err => Observable.throw(err))
         .subscribe(v => {
-          console.log(v);
           window.location.reload();
         });
     }
@@ -96,6 +106,15 @@ export class ItemListComponent {
     }
   }
 
+  toggleCategory(categoryId:number){
+     this.itemService.listItemsByCategory(categoryId,this.pageNum)
+       .catch(err => Observable.empty())
+       .subscribe(pageInfo => {
+         this.items = pageInfo.list;
+         this.pagesCount = pageInfo.pages;
+         this.pageNum = pageInfo.pageNum;
+       });
+  }
 
   toInt(num: string) {
     return +num;
@@ -106,12 +125,7 @@ export class ItemListComponent {
   };
 
   changePage(page) {
-    this.itemService.listItems(page)
-      .catch(err => Observable.throw(err))
-      .subscribe(pageInfo => {
-        this.items = pageInfo.list;
-        this.pagesCount = pageInfo.pages;
-      });
+    this.itemService.listItems(page);
   }
 
   showSuccess() {

@@ -3,6 +3,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {ItemService} from '../../item.service';
 import {ItemImage} from 'app/models';
 import * as constants from 'app/constants/http.constants';
+import {Observable} from 'rxjs/Observable';
 
 
 @Component({
@@ -33,7 +34,7 @@ import * as constants from 'app/constants/http.constants';
                 [image]="image" 
                 [uploadUrl]="imageUploadUrl"
                 [uploadParam]="itemId"
-                [aluba]="itemId">
+                [specificId]="itemId">
                 
               </cz-image>
             </div>
@@ -45,14 +46,13 @@ import * as constants from 'app/constants/http.constants';
           </nb-card-header>
           <nb-card-body>
             <ul>
-              <li *ngFor="let image of images; let index = index">
-                {{index}}
+              <li *ngFor="let image of images$ | async ; let index = index">
                 <cz-image
-                  [image]="image | czImagePipe" 
+                  [image]="image.url | czImagePipe" 
                   [size]="'meduim'"
                   [uploadUrl]="imagesUploadUrl"
-                  [uploadParam]="itemId + '/'+ index"
-                  [aluba]="index">
+                  [uploadParam]="itemId + '/'+ image.position"
+                  [specificId]="image.position">
                 </cz-image>
               </li>
             </ul>
@@ -72,7 +72,7 @@ export class ItemEditImageComponent {
 
   image: string;
   itemId: string;
-  images;
+  images$:Observable<any>;
   minusImages: string[];
 
   imageUploadUrl:string = constants.ITEM_UPDATE_IMAGE_URL;
@@ -80,17 +80,11 @@ export class ItemEditImageComponent {
 
   constructor(private activeModal: NgbActiveModal,
               private itemService: ItemService) {
-    this.images = Array(6).fill('');
-    this.itemService.selectImages(this.itemId)
-      .subscribe(images => {
-        for (let i = 0; i < 6; i++) {
-          this.images[i] = images[i] || '';
-        }
-      });
+
   }
 
   ngOnInit() {
-
+    this.images$ = this.itemService.selectImages(this.itemId);
   }
 
   closeModal() {

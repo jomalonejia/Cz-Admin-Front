@@ -16,27 +16,39 @@
               </th>
 
               <th colspan="2">
-                Filter by name:{{pagesCount}}
+                Filter by name:
                 <div *ngIf="filterQuery">
                   You chose: <i>{{filterQuery}}</i>
                 </div>
                 <input class="form-control" [(ngModel)]="filterQuery"/>
               </th>
               <th colspan="2">
-                Category:
-                <input class="form-control"/>
-              </th>
-              <!--<th colspan="5">
-                <div class="btn-group" ngbDropdown>
-                  <button type="button" class="btn btn-primary test">Catagory</button>
-                  <button type="button" class="btn btn-primary" ngbDropdownToggle></button>
-                  <ul class="dropdown-menu">
-                    <li class="dropdown-item">Icon Button</li>
-                    <li class="dropdown-item">Hero Button</li>
-                    <li class="dropdown-item">Default</li>
-                  </ul>
+                <div class="row">
+                  <div class="col">
+                    <div ngbDropdown class="d-inline-block">
+                      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Category</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button class="dropdown-item dropdown-item-category"
+                                (click)="listItems(1)">
+                          所有分类
+                        </button>
+                        <br>
+                        <div *ngFor="let category of categories$ | async">
+                          <div class="dropdown-header">{{category.name}}</div>
+                          <button class="dropdown-item dropdown-item-category"
+                                  *ngFor="let childCategory of category.children"
+                                  (click)="toggleCategory(childCategory.id)">
+                            {{childCategory.name}}
+                          </button>
+                       </div>
+                       <!-- <button class="dropdown-item">Action - 1</button>
+                        <button >Another Action</button>
+                        <button class="dropdown-item">Something else is here</button>-->
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </th>-->
+              </th>
             </tr>
             <tr>
               <th class="item-list-title-col">

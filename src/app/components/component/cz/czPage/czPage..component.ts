@@ -9,15 +9,10 @@ import * as _ from 'lodash';
 
 export class CzPage{
   private _pagesCount:number;
-
-
   @Input() set pagesCount(value: number) {
     this._pagesCount = value;
-    for(let i =1;i<value+1;i++){
-      this.pages.push(i);
-    }
+    this.pages = Array(value).fill('').map((_,idx) => idx+1);
   }
-
   get pagesCount(): number {
     return this._pagesCount;
   }
@@ -30,6 +25,10 @@ export class CzPage{
 
   constructor(){
 
+  }
+
+  range(start, end) {
+    return  Array(6).fill(null)
   }
 
   /*ngOnChanges(changes: SimpleChanges) {
