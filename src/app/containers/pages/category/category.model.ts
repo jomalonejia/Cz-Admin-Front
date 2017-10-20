@@ -1,13 +1,13 @@
 export class Category {
   private id:number;
   private parentId:number;
-  private categoryName:string;
+  private name:string;
 
 
-  constructor(id: number, parentId: number, categoryName: string) {
+  constructor(id: number, parentId: number, name: string) {
     this.id = id;
     this.parentId = parentId;
-    this.categoryName = categoryName;
+    this.name = name;
   }
 }
 

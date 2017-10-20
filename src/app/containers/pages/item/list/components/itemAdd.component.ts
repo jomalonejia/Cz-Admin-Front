@@ -35,16 +35,16 @@ import {CustomToasterService} from 'app/services';
               <div class="col-sm-4 input-group">
                 <select class="form-control" (change)="listChildCategories($event.target.value)">
                   <option></option>
-                  <option *ngFor="let category of parentCategories" [value]="category.categoryId">
-                    {{category.categoryName}}
+                  <option *ngFor="let category of parentCategories" [value]="category.id">
+                    {{category.name}}
                   </option>
                 </select>
               </div>
               <div class="col-sm-4 input-group">
                 <select class="form-control" [formControl]="categoryId">
                   <option></option>
-                  <option *ngFor="let category of childCategories" [value]="category.categoryId">
-                    {{category.categoryName}}
+                  <option *ngFor="let category of childCategories" [value]="category.id">
+                    {{category.name}}
                   </option>
                 </select>
               </div>

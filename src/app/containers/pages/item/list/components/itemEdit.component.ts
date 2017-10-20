@@ -38,9 +38,9 @@ import {CustomToasterService} from 'app/services';
               <select class="form-control" (change)="listChildCategories($event.target.value)">
                 <option></option>
                 <option *ngFor="let category of parentCategories" 
-                        [value]="category.categoryId" 
-                        [selected]="category.categoryId == parentCategoryId">
-                  {{category.categoryName}}
+                        [value]="category.id" 
+                        [selected]="category.id == parentCategoryId">
+                  {{category.name}}
                 </option>
               </select>
             </div>
@@ -48,9 +48,9 @@ import {CustomToasterService} from 'app/services';
               <select class="form-control" name="categoryId" [(ngModel)]="categoryId">
                 <option></option>
                 <option *ngFor="let category of childCategories" 
-                        [value]="category.categoryId"
-                        [selected]="category.categoryId == categoryId">
-                  {{category.categoryName}}
+                        [value]="category.id"
+                        [selected]="category.id == categoryId">
+                  {{category.name}}
                 </option>
               </select>
             </div>

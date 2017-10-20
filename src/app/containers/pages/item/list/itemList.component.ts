@@ -39,13 +39,6 @@ export class ItemListComponent {
               private modalService: NgbModal,
               private toasterService: CustomToasterService) {
 
-   /* this.pageInfo$ = this.itemService.listItems(this.pageNum);
-    this.pageInfo$
-      .catch(err => Observable.empty())
-      .subscribe(pageInfo => {
-        this.pagesCount = pageInfo.pages;
-        this.items = pageInfo.list;
-      });*/
    this.listItems(this.pageNum);
   }
 
@@ -62,11 +55,11 @@ export class ItemListComponent {
   openEditModal(index) {
     const activeModal = this.modalService.open(ItemEditComponent, {size: 'lg'});
 
-    activeModal.componentInstance.itemId = this.items[index].itemId;
+    activeModal.componentInstance.itemId = this.items[index].id;
     activeModal.componentInstance.name = this.items[index].name;
     activeModal.componentInstance.price = this.items[index].price;
-    activeModal.componentInstance.categoryId = this.items[index].category.categoryId;
-    activeModal.componentInstance.parentCategoryId = this.items[index].category.parentCategoryId;
+    activeModal.componentInstance.categoryId = this.items[index].category.id;
+    activeModal.componentInstance.parentCategoryId = this.items[index].category.parentId;
     activeModal.componentInstance.describe = this.items[index].describe;
   }
 

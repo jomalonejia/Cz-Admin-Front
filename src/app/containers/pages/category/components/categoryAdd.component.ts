@@ -13,7 +13,7 @@ import {CategoryService} from 'app/containers/pages/category/category.service';
             <div class="form-group" >
               <label for="categoryName">Category name</label>
               <input type="text" 
-                     name="categoryName" 
+                     name="name" 
                      class="form-control" 
                      id="categoryName" 
                      placeholder="category name" 
@@ -23,11 +23,11 @@ import {CategoryService} from 'app/containers/pages/category/category.service';
               <label for="pertainCategory">Pertain category</label>
               <select class="form-control" 
                       id="pertainCategory" 
-                      name="parentCategoryId" 
+                      name="parentId" 
                       ngModel>
                 <option></option>
-                <option *ngFor="let category of parentCategories" [value]="category.categoryId">
-                  {{category.categoryName}}
+                <option *ngFor="let category of parentCategories" [value]="category.id">
+                  {{category.name}}
                 </option>
               </select>
             </div>

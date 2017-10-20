@@ -72,14 +72,14 @@
               <td class="item-list-title-col">{{item.name}}</td>
               <td class="item-list-image-col">
                 <img class="item-list-img"
-                     (click)="openImageModal(index,item.itemId)"
+                     (click)="openImageModal(index,item.id)"
                      [src]="item.image | czImagePipe" >
               </td>
-              <td class="item-list-category-col">{{item.category.categoryName}}</td>
+              <td class="item-list-category-col">{{item.category.name}}</td>
               <td class="item-list-describe-col">{{item.describe}}</td>
               <td class="item-list-price-col">{{item.price}}</td>
               <td>
-                <button class="btn btn-hero-secondary btn-demo" (click)="delete(item.itemId)">
+                <button class="btn btn-hero-secondary btn-demo" (click)="delete(item.id)">
                   <i class="ion-close-round"></i>
                 </button>
                 <button class="btn btn-hero-secondary btn-demo" (click)="openEditModal(index)">

@@ -36,16 +36,16 @@ export class CategoryComponent {
       confirmDelete: true,
     },
     columns: {
-      categoryId: {
+      id: {
         title: 'ID',
         type: 'number',
         editable: false
       },
-      parentCategoryId:{
+      parentid: {
         title: 'Parent Category',
         type: 'string',
       },
-      categoryName: {
+      name: {
         title: 'Category Name',
         type: 'string',
       },
@@ -82,7 +82,7 @@ export class CategoryComponent {
         })
         .subscribe(v => {
           event.confirm.resolve();
-        })
+        });
 
     } else {
       event.confirm.reject();

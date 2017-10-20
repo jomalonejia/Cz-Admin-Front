@@ -85,6 +85,7 @@ export class ItemEditImageComponent {
 
   ngOnInit() {
     this.images$ = this.itemService.selectImages(this.itemId);
+    this.images$.subscribe(v => console.log(v));
   }
 
   closeModal() {
