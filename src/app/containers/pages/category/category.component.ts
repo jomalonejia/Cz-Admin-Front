@@ -7,7 +7,8 @@ import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/catch';
 
 import {CategoryService} from './category.service';
-import {CategoryAddComponent} from './components';
+import {CategoryAddComponent,CategoryEditComponent} from './components';
+
 
 @Component({
   selector: 'cz-category',
@@ -106,5 +107,11 @@ export class CategoryComponent {
           event.confirm.reject();
         }
       });
+  }
+
+  select(event){
+    console.log(event);
+    const activeModal = this.modalService.open(CategoryEditComponent, {size: 'lg'});
+    activeModal.componentInstance.item = event.data;
   }
 }

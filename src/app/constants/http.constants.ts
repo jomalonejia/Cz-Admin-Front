@@ -16,7 +16,7 @@ export const REFRESH_TOKEN_URL = USER_PREFIX + 'refresh';
 export const ITEM_PREFIX = URL_PREFIX + 'item/';
 export const ITEM_LIST_URL = ITEM_PREFIX + 'list/';
 export const ITEM_ADD_URL = ITEM_PREFIX + 'add';
-export const ITEM_DELETE_URL = ITEM_PREFIX + 'delete/'
+export const ITEM_DELETE_URL = ITEM_PREFIX + 'delete/';
 export const ITEM_UPDATE_URL = ITEM_PREFIX + 'update';
 export const ITEM_UPDATE_IMAGE_URL = ITEM_UPDATE_URL + '/';
 export const ITEM_IMAGES_UPDATE_URL = ITEM_PREFIX + 'images/update/';
@@ -31,5 +31,8 @@ export const CATEGORY_DELETE = CATEGORY_PREFIX + 'delete/';
 export const CATEGORY_LIST_TREE_CATEGORIES = CATEGORY_PREFIX + 'listTreeCategories';
 export const CATEGORY_LIST_PARENT_CATEGORIES = CATEGORY_PREFIX + 'listParentCategories';
 export const CATEGORY_LIST_CHILD_CATEGORIES = CATEGORY_PREFIX + 'listChildCategories/';
+
+export const PARAM_PREFIX = URL_PREFIX + 'param/';
+export const PARAM_LIST_URL = PARAM_PREFIX + 'list';
 
 

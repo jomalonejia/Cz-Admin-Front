@@ -22,38 +22,38 @@ import {ActivatedRoute} from '@angular/router';
 
 export class ItemListComponent {
 
-  pageInfo$:Observable<any>;
+  pageInfo$: Observable<any>;
   categories$: Observable<object>;
   items;
   filterQuery = '';
   rowsOnPage = 5;
   sortBy = 'email';
-  sortOrder = 'asc';O
+  sortOrder = 'asc';
   name: string;
   pagesCount: number;
-  pageNum:number = 1;
+  pageNum: number = 1;
 
-  constructor(private route:ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private itemService: ItemService,
               private categoryService: CategoryService,
               private modalService: NgbModal,
               private toasterService: CustomToasterService) {
 
-   this.listItems(this.pageNum);
+    this.listItems(this.pageNum);
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.categories$ = this.categoryService.listTreeCategories();
 
   }
 
   openAddModal() {
-    const activeModal = this.modalService.open(ItemAddComponent, {size: 'lg'});
+    const activeModal = this.modalService.open(ItemAddComponent, {size: 'lg', backdrop: 'static',});
   }
 
 
   openEditModal(index) {
-    const activeModal = this.modalService.open(ItemEditComponent, {size: 'lg'});
+    const activeModal = this.modalService.open(ItemEditComponent, {size: 'lg', backdrop: 'static',});
 
     activeModal.componentInstance.itemId = this.items[index].id;
     activeModal.componentInstance.name = this.items[index].name;
@@ -63,19 +63,24 @@ export class ItemListComponent {
     activeModal.componentInstance.describe = this.items[index].describe;
   }
 
-  openImageModal(index,itemId) {
+  openImageModal(index, itemId) {
     const activeModal = this.modalService.open(ItemEditImageComponent, {size: 'lg'});
-    activeModal.componentInstance.image = this.items[index].image;;
+    activeModal.componentInstance.image = this.items[index].image;
+    ;
     activeModal.componentInstance.itemId = itemId;
-    activeModal.result.then(() => { this.listItems(this.pageNum)},
-      () => { this.listItems(this.pageNum)})
+    activeModal.result.then(() => {
+        this.listItems(this.pageNum);
+      },
+      () => {
+        this.listItems(this.pageNum);
+      });
   }
 
   openContentModal() {
     const activeModal = this.modalService.open(ItemEditContentComponent, {size: 'lg'});
   }
 
-  listItems(pageNum:number){
+  listItems(pageNum: number) {
     this.itemService.listItems(pageNum)
       .catch(err => Observable.empty())
       .subscribe(pageInfo => {
@@ -85,7 +90,7 @@ export class ItemListComponent {
       });
   }
 
-  delete(itemId){
+  delete(itemId) {
     if (window.confirm('Are you sure you want to delete?')) {
       console.log(itemId);
       this.itemService.delete(itemId)
@@ -94,19 +99,19 @@ export class ItemListComponent {
           window.location.reload();
         });
     }
-    else{
-      return ;
+    else {
+      return;
     }
   }
 
-  toggleCategory(categoryId:number){
-     this.itemService.listItemsByCategory(categoryId,this.pageNum)
-       .catch(err => Observable.empty())
-       .subscribe(pageInfo => {
-         this.items = pageInfo.list;
-         this.pagesCount = pageInfo.pages;
-         this.pageNum = pageInfo.pageNum;
-       });
+  toggleCategory(categoryId: number) {
+    this.itemService.listItemsByCategory(categoryId, this.pageNum)
+      .catch(err => Observable.empty())
+      .subscribe(pageInfo => {
+        this.items = pageInfo.list;
+        this.pagesCount = pageInfo.pages;
+        this.pageNum = pageInfo.pageNum;
+      });
   }
 
   toInt(num: string) {

@@ -56,12 +56,30 @@ import {CustomToasterService} from 'app/services';
             </div>
           </div>
           <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Category</label>
+            <div class="col-sm-4 input-group">
+              <select class="form-control" >
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+              </select>
+            </div>
+            <div class="col-sm-4 input-group">
+              <select class="form-control" name="categoryId">
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
             <label class="col-sm-3">Description</label>
             <div class="col-sm-9">
               <textarea rows="5"  name="describe" placeholder="Text Area" class="form-control" [(ngModel)]="describe"></textarea>
             </div>
           </div>
-         
         </form>
       </div>
       <div class="modal-footer">

@@ -4,7 +4,9 @@ import {CategoryComponent} from './category.component';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {ComponentsModule} from 'app/components/components.module';
 import {CategoryService} from './category.service';
-import {CategoryAddComponent} from './components';
+import {CategoryAddComponent,
+        CategoryEditComponent} from './components';
+
 
 
 @NgModule({
@@ -14,10 +16,12 @@ import {CategoryAddComponent} from './components';
   ],
   declarations: [
     CategoryComponent,
-    CategoryAddComponent
+    CategoryAddComponent,
+    CategoryEditComponent
   ],
   entryComponents:[
-    CategoryAddComponent
+    CategoryAddComponent,
+    CategoryEditComponent
   ],
   providers:[
     CategoryService

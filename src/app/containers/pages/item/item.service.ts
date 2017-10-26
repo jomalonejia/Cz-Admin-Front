@@ -38,5 +38,8 @@ export class ItemService {
     return this.http.post(constants.ITEM_ADD_CONTENT_URL, content);
   }
 
+  public listParams(): Observable<any>{
+    return this.http.get(constants.PARAM_LIST_URL);
+  }
 }
 

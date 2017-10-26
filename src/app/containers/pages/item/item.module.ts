@@ -1,17 +1,18 @@
-import { NgModule } from '@angular/core';
-import {FormsModule } from '@angular/forms';
-import {CommonModule} from "@angular/common";
-import { Ng2SmartTableModule } from 'ng2-smart-table';
-import { DataTableModule } from "angular2-datatable";
-import { QuillEditorModule } from 'ngx-quill-editor';
-import { TreeModule } from 'angular-tree-component';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {Ng2SmartTableModule} from 'ng2-smart-table';
+import {DataTableModule} from 'angular2-datatable';
+import {QuillEditorModule} from 'ngx-quill-editor';
+import {TreeModule} from 'angular-tree-component';
 import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
+import {ColorPickerModule} from 'ngx-color-picker';
+
 
 import {DataFilterPipe} from './data-filter.pipe';
-import { ComponentsModule } from 'app/components/components.module';
-import { TablesRoutingModule, routedComponents,routedEntryComponents} from './item-routing.module';
+import {ComponentsModule} from 'app/components/components.module';
+import {TablesRoutingModule, routedComponents, routedEntryComponents} from './item-routing.module';
 import {ItemService} from './item.service';
-
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {ItemService} from './item.service';
     DataTableModule,
     Ng2SmartTableModule,
     QuillEditorModule,
-    TreeModule
+    TreeModule,
+    ColorPickerModule
   ],
   declarations: [
     DataFilterPipe,
@@ -32,8 +34,9 @@ import {ItemService} from './item.service';
   providers: [
     ItemService,
   ],
-  entryComponents:[
+  entryComponents: [
     ...routedEntryComponents
   ]
 })
-export class ItemModule { }
+export class ItemModule {
+}
