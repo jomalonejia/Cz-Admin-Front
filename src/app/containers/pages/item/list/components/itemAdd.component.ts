@@ -5,6 +5,7 @@ import {CategoryService} from 'app/containers/pages/category/category.service';
 import {ItemService} from '../../item.service';
 import {Observable} from 'rxjs/Observable';
 import {CustomToasterService} from 'app/services';
+import {Param} from 'app/containers/pages/item/param.model';
 
 
 @Component({
@@ -62,12 +63,13 @@ import {CustomToasterService} from 'app/services';
             </div>
             <div class="col-sm-4 input-group">
               <div class="param-values" *ngIf="paramId != 1;else color_content">
-                <div *ngFor="let childParam of childParams">
+                <div *ngFor="let childParam of childParams;let index = index">
                   <nb-checkbox
                     (change)="onChange(childParam.id,
                                         childParam.paramId,
                                         childParam.paramValue,
-                                         $event.target.checked)">
+                                         $event.target.checked,
+                                         index)">
                     {{childParam.paramValue}}
                   </nb-checkbox>
                 </div>
@@ -83,24 +85,29 @@ import {CustomToasterService} from 'app/services';
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Item Params</label>
             <div class="col-sm-8 input-group param-container">
-              <!--<span class="color-span" *ngFor="let color of colors;let index = index" [style.backgroundColor]="color">
-                <i class="ion-close-round" (click)="removeColor(index)"></i>
-              </span>-->
-              <div *ngFor="let key of paramKeys()">
-                <div class="param-detail-line" *ngIf="key != 1;else color_container">
-                  <b>{{itemParam[key].paramDescribe}}:</b>
-                  <span class="param-detail" *ngFor="let param of itemParam[key].childParams">
-                     {{param.name}}
-                   </span>
+              <div *ngFor="let itemParam of itemParams">
+                <div class="param-detail-line" *ngIf="itemParam.id != 1; else color_container">
+                  <b *ngIf="itemParam.paramValues.length > 0 ">{{itemParam.paramDescribe}}</b>
+                  <div class="param-detail-block">
+                     <span class="param-detail" *ngFor="let paramValue of itemParam.paramValues">
+                        {{paramValue.paramValue}}
+                    </span>
+                  </div>
                 </div>
                 <ng-template #color_container>
-                  <b>{{itemParam[key].paramDescribe}}:</b>
-                  <span class="color-span" *ngFor="let color of itemParam[key].childParams;let index = index" [style.backgroundColor]="color">
-                    {{color}}
-                    <i class="ion-close-round" (click)="removeColor(index)"></i>
-                  </span>
+                  <div class="param-detail-line">
+                    <b *ngIf="itemParam.paramValues.length > 0 ">{{itemParam.paramDescribe}}</b>
+                    <div class="param-detail-block">
+                      <span class="color-span" *ngFor="let paramValue of itemParam.paramValues;let index = index"
+                            [style.backgroundColor]="paramValue.paramValue">
+                        <i class="ion-close-round" (click)="removeColor(itemParam.id,index)"></i>
+                      </span>
+                    </div>
+                  </div>
                 </ng-template>
               </div>
+
+
             </div>
           </div>
           <div class="form-group row">
@@ -136,28 +143,33 @@ import {CustomToasterService} from 'app/services';
     }
 
     .param-detail-line {
+      display: inline-flex;
+      margin-bottom: 20px;
+    }
+
+    .param-detail-block {
       display: flex;
       flex-wrap: wrap;
-      margin-top: 13px;
+      margin-left: 15px;
     }
 
     .param-detail {
-      margin-left: 15px;
+      margin-left: 20px;
     }
 
     .color-span {
       position: relative;
-      width: 50px;
+      width: 68px;
+      height: 35px;
       border-radius: .5rem;
-      margin: 20px;
-
+      margin-left: 20px;
     }
 
     .ion-close-round {
       position: absolute;
       font-size: 15px;
       cursor: pointer;
-      margin-left: 2%;
+      right: 1%;
     }
 
     .ion-close-round:hover {
@@ -184,7 +196,7 @@ export class ItemAddComponent {
 
   //itemParam:Map<number,string[]> = new Map<number,string[]>();
 
-  itemParam: any = {};
+  itemParams: Param[] = [];
   color: string = '#127bdc';
 
   constructor(private itemService: ItemService,
@@ -221,18 +233,19 @@ export class ItemAddComponent {
 
 
   add(obj) {
-    obj.params = this.itemParam;
+    obj.params = this.itemParams;
     console.log(obj);
-     /*this.itemService.add(obj)
-     .catch(err => {
-     this.toasterService.toasterTip({message:'success',type:''});
-     return Observable.throw(err);
-     })
-     .subscribe(v => {
-     this.toasterService.toasterTip({message:'success',type:''});
-     setTimeout(this.closeModal(),2000);
-     window.location.reload();
-     });*/
+    this.itemService.add(obj)
+      .catch(err => {
+        this.toasterService.toasterTip({message: 'success', type: ''});
+        return Observable.throw(err);
+      })
+      .subscribe(v => {
+        console.log(v);
+        /*this.toasterService.toasterTip({message: 'success', type: ''});
+        setTimeout(this.closeModal(), 2000);
+        window.location.reload();*/
+      });
   }
 
   listChildCategories(categoryId) {
@@ -249,33 +262,42 @@ export class ItemAddComponent {
      paramValuesFormArray.controls = [];*/
   }
 
-  onChange(childParamId: string, paramId: number, paramValue: string, isChecked: boolean) {
+  onChange(childParamId: number,
+           paramId: number,
+           paramValue: string,
+           isChecked: boolean,
+           index: number) {
     if (isChecked) {
-      if (this.itemParam[paramId]) {
-        this.itemParam[paramId].childParams.push({id: childParamId, name: paramValue});
+      let findItemParam = this.itemParams.find(ele => ele.id == paramId);
+      if (findItemParam) {
+        findItemParam.paramValues.push({id: childParamId, paramValue: paramValue});
       } else {
-        this.itemParam[paramId] = {paramDescribe: this.paramDescribe, childParams: [{id: childParamId, name: paramValue}]};
+        this.itemParams.push({id: paramId, paramDescribe: this.paramDescribe, paramValues: [{id: childParamId, paramValue: paramValue}]});
       }
     } else {
-      let index = this.itemParam[paramId].childParam.indexOf({id: childParamId, name: paramValue});
-      this.itemParam[paramId].childParams.splice(index, 1);
+      this.itemParams.find(ele => ele.id == paramId).paramValues.splice(index, 1);
     }
+
+    console.log(this.itemParams);
   }
 
   changeColor(color, paramId) {
-    if (this.itemParam[paramId]) {
-      this.itemParam[paramId].childParams.push(color);
+    let findItemParam = this.itemParams.find(ele => ele.id == paramId);
+    if (findItemParam) {
+      findItemParam.paramValues.push({id: -1, paramValue: color});
     } else {
-      this.itemParam[paramId] = {paramDescribe: this.paramDescribe, childParams: [color]};
+      this.itemParams.push({id: +paramId, paramDescribe: this.paramDescribe, paramValues: [{id: -1, paramValue: color}]});
     }
+
+    console.log(this.itemParams);
   }
 
-  removeColor(index) {
-    this.itemParam.childParams.splice(index, 1);
+  removeColor(paramId, index) {
+    this.itemParams.find(ele => ele.id == paramId).paramValues.splice(index, 1);
   }
 
   paramKeys(): number[] {
-    return Object.keys(this.itemParam).map(Number);
+    return Object.keys(this.itemParams).map(Number);
   }
 
   closeModal() {
