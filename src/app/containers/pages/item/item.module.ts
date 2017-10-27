@@ -13,6 +13,7 @@ import {DataFilterPipe} from './data-filter.pipe';
 import {ComponentsModule} from 'app/components/components.module';
 import {TablesRoutingModule, routedComponents, routedEntryComponents} from './item-routing.module';
 import {ItemService} from './item.service';
+import {ItemParamPipe} from './item.param.pipe'
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import {ItemService} from './item.service';
   ],
   declarations: [
     DataFilterPipe,
+    ItemParamPipe,
     ...routedComponents,
     ...routedEntryComponents
   ],
