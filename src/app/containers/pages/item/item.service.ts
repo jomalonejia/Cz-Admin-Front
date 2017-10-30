@@ -41,5 +41,9 @@ export class ItemService {
   public listParams(): Observable<any>{
     return this.http.get(constants.PARAM_LIST_URL);
   }
+
+  public listParamsById(itemId:string): Observable<any>{
+    return this.http.get(constants.PARAM_LIST_URL+itemId);
+  }
 }
 

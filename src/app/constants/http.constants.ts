@@ -33,6 +33,6 @@ export const CATEGORY_LIST_PARENT_CATEGORIES = CATEGORY_PREFIX + 'listParentCate
 export const CATEGORY_LIST_CHILD_CATEGORIES = CATEGORY_PREFIX + 'listChildCategories/';
 
 export const PARAM_PREFIX = URL_PREFIX + 'param/';
-export const PARAM_LIST_URL = PARAM_PREFIX + 'list';
+export const PARAM_LIST_URL = PARAM_PREFIX + 'list/';
 
 

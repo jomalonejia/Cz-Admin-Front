@@ -92,7 +92,6 @@ export class ItemListComponent {
 
   delete(itemId) {
     if (window.confirm('Are you sure you want to delete?')) {
-      console.log(itemId);
       this.itemService.delete(itemId)
         .catch(err => Observable.throw(err))
         .subscribe(v => {

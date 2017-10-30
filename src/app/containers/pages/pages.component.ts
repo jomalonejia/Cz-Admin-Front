@@ -3,6 +3,7 @@ import {Component, ViewContainerRef} from '@angular/core';
 import { MENU_ITEMS } from './pages-menu';
 import {ToastsManager} from 'ng2-toastr';
 import {CustomToasterService} from 'app/services/toaster';
+import {Toaster} from 'app/models';
 
 @Component({
   selector: 'cz-pages',
@@ -25,8 +26,12 @@ export class PagesComponent {
 
   ngOnInit(){
     this.toasterService.$toaster
-      .subscribe(v => {
-        this.toastr.success("success","success");
+      .subscribe((toaster:Toaster) => {
+        if(toaster.type == 'success'){
+          this.toastr.success(toaster.message,"success");
+        }else if (toaster.type == 'error'){
+          this.toastr.error(toaster.message,"error");
+        }
         // [BUG] dashboard to list would not show ,fix it later
       });
   }

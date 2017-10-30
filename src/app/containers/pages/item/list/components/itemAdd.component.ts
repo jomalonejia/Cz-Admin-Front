@@ -65,8 +65,7 @@ import {Param} from 'app/containers/pages/item/param.model';
               <div class="param-values" *ngIf="paramId != 1;else color_content">
                 <div *ngFor="let childParam of childParams;let index = index">
                   <nb-checkbox
-                    (change)="onChange(childParam.id,
-                                        childParam.paramId,
+                    (change)="changeParam(childParam.id,
                                         childParam.paramValue,
                                          $event.target.checked,
                                          index)">
@@ -106,8 +105,6 @@ import {Param} from 'app/containers/pages/item/param.model';
                   </div>
                 </ng-template>
               </div>
-
-
             </div>
           </div>
           <div class="form-group row">
@@ -187,17 +184,18 @@ export class ItemAddComponent {
 
   paramId: number;
   paramDescribe: string;
+  childParams;
 
   parentCategories;
   childCategories;
 
   params;
-  childParams;
+
 
   //itemParam:Map<number,string[]> = new Map<number,string[]>();
 
   itemParams: Param[] = [];
-  color: string = '#127bdc';
+  color: string = '#FAAF3A';
 
   constructor(private itemService: ItemService,
               private categoryService: CategoryService,
@@ -227,24 +225,21 @@ export class ItemAddComponent {
     this.itemService.listParams()
       .subscribe(params => {
         this.params = params;
-        console.log(params);
       });
   }
 
 
-  add(obj) {
-    obj.params = this.itemParams;
-    console.log(obj);
-    this.itemService.add(obj)
+  add(item) {
+    item.params = this.itemParams;
+    this.itemService.add(item)
       .catch(err => {
         this.toasterService.toasterTip({message: 'success', type: ''});
         return Observable.throw(err);
       })
       .subscribe(v => {
-        console.log(v);
-        /*this.toasterService.toasterTip({message: 'success', type: ''});
+        this.toasterService.toasterTip({message: 'success', type: ''});
         setTimeout(this.closeModal(), 2000);
-        window.location.reload();*/
+        window.location.reload();
       });
   }
 
@@ -262,34 +257,29 @@ export class ItemAddComponent {
      paramValuesFormArray.controls = [];*/
   }
 
-  onChange(childParamId: number,
-           paramId: number,
+  changeParam(childParamId: number,
            paramValue: string,
            isChecked: boolean,
            index: number) {
     if (isChecked) {
-      let findItemParam = this.itemParams.find(ele => ele.id == paramId);
+      let findItemParam = this.itemParams.find(ele => ele.id == this.paramId);
       if (findItemParam) {
         findItemParam.paramValues.push({id: childParamId, paramValue: paramValue});
       } else {
-        this.itemParams.push({id: paramId, paramDescribe: this.paramDescribe, paramValues: [{id: childParamId, paramValue: paramValue}]});
+        this.itemParams.push({id: this.paramId, paramDescribe: this.paramDescribe, paramValues: [{id: childParamId, paramValue: paramValue}]});
       }
     } else {
-      this.itemParams.find(ele => ele.id == paramId).paramValues.splice(index, 1);
+      this.itemParams.find(ele => ele.id == this.paramId).paramValues.splice(index, 1);
     }
-
-    console.log(this.itemParams);
   }
 
   changeColor(color, paramId) {
     let findItemParam = this.itemParams.find(ele => ele.id == paramId);
     if (findItemParam) {
-      findItemParam.paramValues.push({id: -1, paramValue: color});
+      findItemParam.paramValues.push({id: null, paramValue: color});
     } else {
-      this.itemParams.push({id: +paramId, paramDescribe: this.paramDescribe, paramValues: [{id: -1, paramValue: color}]});
+      this.itemParams.push({id: +paramId, paramDescribe: this.paramDescribe, paramValues: [{id: null, paramValue: color}]});
     }
-
-    console.log(this.itemParams);
   }
 
   removeColor(paramId, index) {
