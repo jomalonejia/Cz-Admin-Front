@@ -93,9 +93,14 @@ export class ItemListComponent {
   delete(itemId) {
     if (window.confirm('Are you sure you want to delete?')) {
       this.itemService.delete(itemId)
-        .catch(err => Observable.throw(err))
+        .catch(err => {
+          this.toasterService.toasterTip({message: 'Delete Failed!', type: 'error'});
+          return Observable.throw(err)
+        })
         .subscribe(v => {
-          window.location.reload();
+          this.toasterService.toasterTip({message: 'Delete Success!', type: 'success'});
+          setTimeout(window.location.reload(),1000)
+
         });
     }
     else {

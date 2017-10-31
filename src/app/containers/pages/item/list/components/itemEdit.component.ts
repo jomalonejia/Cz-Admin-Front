@@ -70,10 +70,8 @@ import {Param} from '../../param.model';
               <div class="param-values" *ngIf="paramId != 1;else color_content">
                 <div *ngFor="let childParam of childParams;let index = index">
                   <nb-checkbox
-                    [value]="itemSelectedParamValue.indexOf(childParam.id) != -1"
-                    (change)="changeParam(childParam.id,
-                                        childParam.paramValue,
-                                         $event.target.checked)">
+                    [value]="itemSelectedParamValue.includes(childParam.paramValue)"
+                    (change)="changeParam(childParam.paramValue,$event.target.checked)">
                     {{childParam.paramValue}}
                   </nb-checkbox>
                 </div>
@@ -87,25 +85,37 @@ import {Param} from '../../param.model';
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Item Params</label>
+            <label *ngIf="itemParams.length > 0" class="col-sm-3 col-form-label">Item Params</label>
             <div class="col-sm-8 input-group param-container">
               <div *ngFor="let itemParam of itemParams">
                 <div class="param-detail-line" *ngIf="itemParam.id != 1; else color_container">
-                  <b *ngIf="itemParam.paramValues.length > 0 ">{{itemParam.paramDescribe}}</b>
+                  <b *ngIf="itemParam.paramDetails.length > 0 ">{{itemParam.paramDescribe}}</b>
                   <div class="param-detail-block">
-                     <span class="param-detail" *ngFor="let paramValue of itemParam.paramValues">
-                        {{paramValue.paramValue}}
-                    </span>
+                    <div class="param-detail" *ngFor="let paramDetail of itemParam.paramDetails">
+                      {{paramDetail.paramValue}}
+                      <input class="param-number" 
+                             type="number" 
+                             min="0" 
+                             [value]="paramDetail.inventory"
+                             (change)="changeNumber(itemParam.id,paramDetail.paramValue,$event.target.value)">
+                      <i class="ion-calculator param-icon"></i>
+                    </div>
                   </div>
                 </div>
                 <ng-template #color_container>
                   <div class="param-detail-line">
-                    <b *ngIf="itemParam.paramValues.length > 0 ">{{itemParam.paramDescribe}}</b>
+                    <b *ngIf="itemParam.paramDetails.length > 0 ">{{itemParam.paramDescribe}}</b>
                     <div class="param-detail-block">
-                      <span class="color-span" *ngFor="let paramValue of itemParam.paramValues;let index = index"
-                            [style.backgroundColor]="paramValue.paramValue">
+                      <div class="color-div" *ngFor="let paramDetail of itemParam.paramDetails;let index = index"
+                           [style.backgroundColor]="paramDetail.paramValue">
                         <i class="ion-close-round" (click)="removeColor(itemParam.id,index)"></i>
-                      </span>
+                        <i class="ion-calculator color-icon"></i>
+                        <input class="param-number color-number"
+                               type="number"
+                               min="0"
+                               [value]="paramDetail.inventory"
+                               (change)="changeNumber(itemParam.id,paramDetail.paramValue,$event.target.value)">
+                      </div>
                     </div>
                   </div>
                 </ng-template>
@@ -151,6 +161,7 @@ import {Param} from '../../param.model';
     .param-detail-block {
       display: flex;
       flex-wrap: wrap;
+      flex-direction: column;
       margin-left: 15px;
     }
 
@@ -158,12 +169,13 @@ import {Param} from '../../param.model';
       margin-left: 20px;
     }
 
-    .color-span {
+    .color-div {
       position: relative;
       width: 68px;
       height: 35px;
       border-radius: .5rem;
       margin-left: 20px;
+      margin-bottom: 15px;
     }
 
     .ion-close-round {
@@ -176,6 +188,38 @@ import {Param} from '../../param.model';
     .ion-close-round:hover {
       font-size: 22px;
     }
+
+    .param-number {
+      background: transparent;
+      border:0;
+      border-bottom: 1px dashed #83a4c5;
+      width: 75px;
+      color:#fff;
+      text-align: right;
+      margin-left:20px;
+      float:right;
+    }
+    
+    .color-number{
+      position: absolute;
+      left: 110%;
+      height: 35px;
+    }
+    
+    .param-icon{
+      float: right;
+      position: relative;
+      left: 30px;
+      top: 2px;
+    }
+    
+    .color-icon{
+      position: absolute;
+      left: 140%;
+      font-size: 20px;
+      top: 10px;
+    }
+    
   `],
 })
 export class ItemEditComponent {
@@ -237,10 +281,10 @@ export class ItemEditComponent {
     this.paramId = paramId;
     const find = this.params.find(param => param.id == paramId);
     this.paramDescribe = find.paramDescribe;
-    this.childParams = find.paramValues;
+    this.childParams = find.paramDetails;
     const selectedFind = this.itemParams.find(param => param.id == paramId);
     if (selectedFind) {
-      this.itemSelectedParamValue = selectedFind.paramValues.map(itemParam => itemParam.id);
+      this.itemSelectedParamValue = selectedFind.paramDetails.map(paramDetail => paramDetail.paramValue);
     }
   }
 
@@ -260,38 +304,67 @@ export class ItemEditComponent {
       });
   }
 
-  changeParam(childParamId: number,
-              paramValue: string,
-              isChecked: boolean) {
-    if (isChecked) {
-      let findItemParam = this.itemParams.find(ele => ele.id == this.paramId);
-      if (findItemParam) {
-        findItemParam.paramValues.push({id: childParamId, paramValue: paramValue});
+  changeParam(paramValue: string, isChecked: boolean) {
+
+    const foundItemParam = this.itemParams.find(ele => ele.id == this.paramId);
+    if(foundItemParam){
+      if(isChecked){
+        foundItemParam.paramDetails.push({paramValue: paramValue, inventory: 0});
+      }else{
+        foundItemParam.paramDetails.splice(foundItemParam.paramDetails.findIndex(paramDetail => paramDetail.paramValue == paramValue), 1);
+        if (foundItemParam.paramDetails.length <= 0) {
+          this.itemParams.splice(this.itemParams.findIndex(param => param.id == this.paramId));
+        }
+      }
+    }else{
+      this.itemParams.push({
+        id: this.paramId,
+        paramDescribe: this.paramDescribe,
+        paramDetails: [{paramValue: paramValue, inventory: 0}]
+      });
+    }
+
+   /* if (isChecked) {
+      let foundItemParam = this.itemParams.find(ele => ele.id == this.paramId);
+      if (foundItemParam) {
+        foundItemParam.paramDetails.push({paramValue: paramValue, inventory: 0});
       } else {
         this.itemParams.push({
           id: this.paramId,
           paramDescribe: this.paramDescribe,
-          paramValues: [{id: childParamId, paramValue: paramValue}]
+          paramDetails: [{paramValue: paramValue, inventory: 0}]
         });
       }
     } else {
-      const findItemParam = this.itemParams.find(ele => ele.id == this.paramId).paramValues;
-      const index = findItemParam.indexOf({id: childParamId, paramValue: paramValue});
-      findItemParam.splice(index, 1);
-    }
+      const foundItemParam = this.itemParams.find(ele => ele.id == this.paramId).paramDetails;
+      foundItemParam.splice(foundItemParam.findIndex(paramDetail => paramDetail.paramValue == paramValue), 1);
+      if (foundItemParam.length <= 0) {
+        this.itemParams.splice(this.itemParams.findIndex(param => param.id == this.paramId));
+      }
+    }*/
   }
 
   changeColor(color, paramId) {
-    let findItemParam = this.itemParams.find(ele => ele.id == paramId);
-    if (findItemParam) {
-      findItemParam.paramValues.push({id: null, paramValue: color});
+    let foundItemParam = this.itemParams.find(ele => ele.id == paramId);
+    if (foundItemParam) {
+      foundItemParam.paramDetails.push({paramValue: color, inventory: 0});
     } else {
-      this.itemParams.push({id: +paramId, paramDescribe: this.paramDescribe, paramValues: [{id: null, paramValue: color}]});
+      this.itemParams.push({id: +paramId, paramDescribe: this.paramDescribe, paramDetails: [{paramValue: color, inventory: 0}]});
     }
   }
 
   removeColor(paramId, index) {
-    this.itemParams.find(ele => ele.id == paramId).paramValues.splice(index, 1);
+    const foundItamColorParam = this.itemParams.find(ele => ele.id == paramId).paramDetails;
+    foundItamColorParam.splice(index, 1);
+    if (foundItamColorParam.length <= 0) {
+      this.itemParams.splice(this.itemParams.findIndex(param => param.id == paramId));
+    }
+  }
+
+  changeNumber(paramId:number,paramValue:string,number:number){
+    this.itemParams.find(itemParam => itemParam.id == paramId).
+      paramDetails.find(paramDetail => paramDetail.paramValue == paramValue)
+      .inventory = number;
   }
 
   closeModal() {

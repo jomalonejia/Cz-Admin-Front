@@ -1,5 +1,4 @@
-export class ParamValue{
-  public id:number;
+export class ParamDetail{
   public paramValue:string;
-
+  public inventory:number;
 }

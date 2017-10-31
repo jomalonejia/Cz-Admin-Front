@@ -29,7 +29,7 @@ import {
   CzCard,
   CzImage,
   CzTree,
-  CzPage
+  CzPage,
 } from './component';
 
 import {
