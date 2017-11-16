@@ -1,7 +1,7 @@
 # CzAdmin-Front
 
 The front page of cz-admin project<br />
-The backend data need [Cz-Admin-Server](https://github.com/jomalonejia/Cz-Admin-Server) 
+The backend data need [Cz-Admin-Server](https://github.com/jomalonejia/Cz-Admin-Server)<br />
 The wechat data need [Cz-Admin-Message-Server](https://github.com/jomalonejia/Cz-Admin-Message-Server)
 
 Stack
