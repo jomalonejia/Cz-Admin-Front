@@ -58,6 +58,7 @@ export class ItemListComponent {
     activeModal.componentInstance.itemId = this.items[index].id;
     activeModal.componentInstance.name = this.items[index].name;
     activeModal.componentInstance.price = this.items[index].price;
+    activeModal.componentInstance.discount = this.items[index].discount;
     activeModal.componentInstance.categoryId = this.items[index].category.id;
     activeModal.componentInstance.parentCategoryId = this.items[index].category.parentId;
     activeModal.componentInstance.describe = this.items[index].describe;

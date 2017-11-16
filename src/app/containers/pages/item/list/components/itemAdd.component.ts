@@ -33,6 +33,23 @@ import {Param} from 'app/containers/pages/item/param.model';
             </div>
           </div>
           <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Discount</label>
+            <div class="col-sm-8">
+              <select [formControl]="discount" class="form-control">
+                <option value="1" [selected]="true">100%</option>
+                <option value="0.1">10%</option>
+                <option value="0.2">20%</option>
+                <option value="0.3">30%</option>
+                <option value="0.4">40%</option>
+                <option value="0.5">50%</option>
+                <option value="0.6">60%</option>
+                <option value="0.7">70%</option>
+                <option value="0.8">80%</option>
+                <option value="0.9">90%</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
             <label class="col-sm-3 col-form-label">Category</label>
             <div class="col-sm-4 input-group">
               <select class="form-control" (change)="listChildCategories($event.target.value)">
@@ -223,6 +240,7 @@ export class ItemAddComponent {
   public form: FormGroup;
   public name: AbstractControl;
   public price: AbstractControl;
+  public discount: AbstractControl;
   public categoryId: AbstractControl;
   public describe: AbstractControl;
 
@@ -246,12 +264,14 @@ export class ItemAddComponent {
     this.form = fb.group({
       'name': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       'price': ['', Validators.compose([Validators.required])],
+      'discount': ['', Validators.compose([Validators.required])],
       'categoryId': ['', Validators.compose([Validators.required])],
       'describe': ['', Validators.compose([Validators.required, Validators.minLength(6)])]
     });
 
     this.name = this.form.controls['name'];
     this.price = this.form.controls['price'];
+    this.discount = this.form.controls['discount'];
     this.categoryId = this.form.controls['categoryId'];
     this.describe = this.form.controls['describe'];
   }
@@ -262,7 +282,6 @@ export class ItemAddComponent {
     this.itemService.listParams()
       .subscribe(params => {
         this.params = params;
-        console.log(params);
       });
   }
 

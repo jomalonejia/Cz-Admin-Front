@@ -30,4 +30,14 @@ $ npm start
 
 server would on localhost:4200
 
+Screenshots
+-------------
+
+![image](https://github.com/jomalonejia/Cz-Admin-Front/blob/master/screenshots/item.png)<br />
+![image](https://github.com/jomalonejia/Cz-Admin-Front/blob/master/screenshots/item_1.png)<br />
+![image](https://github.com/jomalonejia/Cz-Admin-Front/blob/master/screenshots/item_2.png)<br />
+![image](https://github.com/jomalonejia/Cz-Admin-Front/blob/master/screenshots/message.png)<br />
+![image](https://github.com/jomalonejia/Cz-Admin-Front/blob/master/screenshots/category.png)<br />
+
+
 
