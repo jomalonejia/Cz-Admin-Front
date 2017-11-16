@@ -1,6 +1,7 @@
 # CzAdmin-Front
 
-The front page of cz-admin project
+The front page of cz-admin project<br />
+The backend data need [Cz-Admin-Server](https://github.com/jomalonejia/Cz-Admin-Server) server
 
 Stack
 -----
