@@ -2,7 +2,7 @@ import {Component, ViewContainerRef} from '@angular/core';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {CategoryService} from 'app/containers/pages/category/category.service';
-import {ItemService} from '../../item.service';
+import {ItemService} from '../../services';
 import {Observable} from 'rxjs/Observable';
 import {CustomToasterService} from 'app/services';
 import {Param} from 'app/containers/pages/item/param.model';

@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {ItemService} from '../../item.service';
+import {ItemService} from '../../services';
 
 @Component({
   selector: 'item-edit-content',

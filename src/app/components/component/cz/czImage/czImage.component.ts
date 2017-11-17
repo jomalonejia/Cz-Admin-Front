@@ -15,6 +15,7 @@ export class CzImage{
   @Input() uploadUrl:string;
   @Input() uploadParam:string;
   @Input() specificId:string;
+  @Output() uploadImageSuccess:EventEmitter<string> = new EventEmitter<string>();
   id:string = 'fileUpload-';
 
   defaultPicture = constants.DEFAULT_IMAGE_URL;
@@ -44,6 +45,7 @@ export class CzImage{
     this.uploader.onSuccessItem = (item:FileItem, response:string, status:number, headers:ParsedResponseHeaders) => {
       if (status == 200) {
         this.image = response;
+        this.uploadImageSuccess.next(response);
       }else {
         console.log('error');
       }

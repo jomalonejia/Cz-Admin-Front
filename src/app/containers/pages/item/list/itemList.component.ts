@@ -8,7 +8,7 @@ import {
   ItemAddComponent
 } from './components';
 import {Observable} from 'rxjs/Observable';
-import {ItemService} from '../item.service';
+import {ItemService} from '../services';
 import {CategoryService} from 'app/containers/pages/category/category.service';
 import {CustomToasterService} from 'app/services/toaster';
 import {ActivatedRoute} from '@angular/router';

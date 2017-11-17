@@ -121,11 +121,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'List',
         link: '/pages/item/list',
-      },
-      {
-        title: 'Smart Table',
-        link: '/pages/item/smart-table',
-      },
+      }
     ],
   },
   {

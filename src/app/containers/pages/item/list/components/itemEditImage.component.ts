@@ -1,9 +1,13 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {ItemService} from '../../item.service';
-import {ItemImage} from 'app/models';
+import {ItemService} from '../../services';
+import * as fromRootItem from 'app/containers/pages/item/reducers'
+import * as fromItem from 'app/containers/pages/item/reducers/item'
+import * as itemActions from 'app/containers/pages/item/actions'
 import * as constants from 'app/constants/http.constants';
 import {Observable} from 'rxjs/Observable';
+import {Store} from '@ngrx/store';
+
 
 
 @Component({
@@ -34,8 +38,8 @@ import {Observable} from 'rxjs/Observable';
                 [image]="image" 
                 [uploadUrl]="imageUploadUrl"
                 [uploadParam]="itemId"
-                [specificId]="itemId">
-                
+                [specificId]="itemId"
+                (uploadImageSuccess)="uploadImageSuccess($event)">
               </cz-image>
             </div>
           </nb-card-body>
@@ -73,19 +77,22 @@ export class ItemEditImageComponent {
   image: string;
   itemId: string;
   images$:Observable<any>;
-  minusImages: string[];
 
   imageUploadUrl:string = constants.ITEM_UPDATE_IMAGE_URL;
   imagesUploadUrl:string = constants.ITEM_IMAGES_UPDATE_URL;
 
   constructor(private activeModal: NgbActiveModal,
-              private itemService: ItemService) {
-
+              private itemService: ItemService,
+              private store: Store<fromItem.State>) {
+    this.images$ = this.store.select(fromRootItem.getImages);
   }
 
   ngOnInit() {
-    this.images$ = this.itemService.selectImages(this.itemId);
-    this.images$.subscribe(v => console.log(v));
+    this.store.dispatch(new itemActions.GetItemImagesAction(this.itemId));
+  }
+
+  uploadImageSuccess(imageUrl){
+    this.store.dispatch(new itemActions.UploadMainImageAction(imageUrl));
   }
 
   closeModal() {

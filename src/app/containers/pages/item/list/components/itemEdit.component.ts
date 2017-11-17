@@ -1,11 +1,10 @@
-import {Component, ViewContainerRef} from '@angular/core';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Component} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {CategoryService} from 'app/containers/pages/category/category.service';
-import {AbstractControl, FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
+import {NgForm} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
-import {ToastsManager} from 'ng2-toastr';
 import {CustomToasterService} from 'app/services';
-import {ItemService} from '../../item.service';
+import {ItemService} from '../../services';
 import {Param} from '../../param.model';
 
 @Component({

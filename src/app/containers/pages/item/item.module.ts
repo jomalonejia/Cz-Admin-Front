@@ -12,8 +12,12 @@ import {ColorPickerModule} from 'ngx-color-picker';
 import {DataFilterPipe} from './data-filter.pipe';
 import {ComponentsModule} from 'app/components/components.module';
 import {TablesRoutingModule, routedComponents, routedEntryComponents} from './item-routing.module';
-import {ItemService} from './item.service';
+import {ItemService} from './services';
 import {ItemParamPipe} from './item.param.pipe'
+import {StoreModule} from '@ngrx/store';
+import {reducers} from './reducers';
+import {EffectsModule} from '@ngrx/effects';
+import {ItemEffects} from './effects'
 
 
 @NgModule({
@@ -25,7 +29,9 @@ import {ItemParamPipe} from './item.param.pipe'
     Ng2SmartTableModule,
     QuillEditorModule,
     TreeModule,
-    ColorPickerModule
+    ColorPickerModule,
+    StoreModule.forFeature('item', reducers),
+    EffectsModule.forFeature([ItemEffects]),
   ],
   declarations: [
     DataFilterPipe,
