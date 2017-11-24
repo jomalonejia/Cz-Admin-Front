@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {ItemService} from '../../services';
+import {ItemService} from '../services';
 import * as fromRootItem from 'app/containers/pages/item/reducers'
 import * as fromItem from 'app/containers/pages/item/reducers/item'
 import * as itemActions from 'app/containers/pages/item/actions'

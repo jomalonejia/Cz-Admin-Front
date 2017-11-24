@@ -1,1 +1,1 @@
-export * from './czPage..component';
+export * from './czPage.component';

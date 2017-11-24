@@ -1,19 +1,13 @@
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {CommonModule} from '@angular/common';
-import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {DataTableModule} from 'angular2-datatable';
 import {QuillEditorModule} from 'ngx-quill-editor';
 import {TreeModule} from 'angular-tree-component';
 import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
 import {ColorPickerModule} from 'ngx-color-picker';
-
-
-import {DataFilterPipe} from './data-filter.pipe';
+import {DataFilterPipe,ItemParamPipe} from './pipes';
 import {ComponentsModule} from 'app/components/components.module';
-import {TablesRoutingModule, routedComponents, routedEntryComponents} from './item-routing.module';
+import {ItemRoutingModule, routedComponents, routedEntryComponents} from './item-routing.module';
 import {ItemService} from './services';
-import {ItemParamPipe} from './item.param.pipe'
 import {StoreModule} from '@ngrx/store';
 import {reducers} from './reducers';
 import {EffectsModule} from '@ngrx/effects';
@@ -24,9 +18,8 @@ import {ItemEffects} from './effects'
   imports: [
     ComponentsModule,
     NgbDropdownModule,
-    TablesRoutingModule,
+    ItemRoutingModule,
     DataTableModule,
-    Ng2SmartTableModule,
     QuillEditorModule,
     TreeModule,
     ColorPickerModule,

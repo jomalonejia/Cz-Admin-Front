@@ -1,0 +1,53 @@
+<div class="widgets">
+  <div class="row">
+    <div class="col-md-12">
+      <cz-card title="Orders" baCardClass="with-scroll" class="data-table-container">
+        <div class="panel panel-default">
+          <table class="table table-striped" [mfData]="orders" #mf="mfDataTable"
+                 [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+            <thead>
+            <tr>
+              <th colspan="6">
+                Filter by name:
+                <div *ngIf="filterQuery">
+                  You chose: <i>{{filterQuery}}</i>
+                </div>
+                <input class="form-control" [(ngModel)]="filterQuery"/>
+              </th>
+            </tr>
+            <tr>
+              <th class="order-list-name-col"><b>Name</b></th>
+              <th class="order-list-image-col"><b>Image</b></th>
+              <th class="order-list-price-col"><b>Total price</b></th>
+              <th class="order-list-status-col"><b>Status</b></th>
+              <th class="order-list-operation-col">Operation</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr id="item-table-line" *ngFor="let order of mf.data; let index = index">
+              <td class="order-list-name-col">{{order.itemName}}</td>
+              <td class="order-list-image-col">
+                <img class="order-list-img" [src]="order.image | czImagePipe" >
+              </td>
+              <td class="order-list-price-col">{{order.totalPrice}}</td>
+              <td class="order-list-status-col">{{order.status | orderStatus}}</td>
+              <td>
+                <button class="btn btn-hero-secondary btn-demo" (click)="openEditModal(index)">
+                  <i class="ion-edit"></i>
+                </button>
+              </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+          </table>
+          <div class="cz-pagination-wrapper">
+            <div class="cz-pagination">
+              <cz-page [pagesCount]="pagesCount" (changePage)="changePage($event)"></cz-page>
+            </div>
+          </div>
+        </div>
+      </cz-card>
+    </div>
+  </div>
+</div>

@@ -17,7 +17,7 @@ export class CategoryService{
   }
 
   public deleteCategory(id:number):Observable<object>{
-    return this.http.delete(constants.CATEGORY_DELETE+id,{});
+    return this.http.delete(`${constants.CATEGORY_DELETE}/${id}`,{});
   }
 
   public listTreeCategories(){
@@ -29,7 +29,7 @@ export class CategoryService{
   }
 
   public listChildCategories(parentId:number){
-    return this.http.get(constants.CATEGORY_LIST_CHILD_CATEGORIES+parentId);
+    return this.http.get(`${constants.CATEGORY_LIST_CHILD_CATEGORIES}/${parentId}`);
   }
 
 }

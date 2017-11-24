@@ -2,36 +2,28 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
 import {ItemComponent} from './item.component';
-import {ItemListComponent} from './list/itemList.component';
 import
 {
   ItemEditComponent,
   ItemEditContentComponent,
   ItemEditImageComponent,
   ItemAddComponent
-} from './list/components';
+} from './components';
 
 const routes: Routes = [{
   path: '',
   component: ItemComponent,
-  children: [
-    {
-      path: 'list',
-      component: ItemListComponent,
-    }
-  ],
 }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TablesRoutingModule {
+export class ItemRoutingModule {
 }
 
 export const routedComponents = [
   ItemComponent,
-  ItemListComponent,
 ];
 
 export const routedEntryComponents = [

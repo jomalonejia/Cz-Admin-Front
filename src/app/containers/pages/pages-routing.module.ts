@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {PagesComponent} from './pages.component';
 import {DashboardComponent} from './dashboard';
+import {OrderComponent} from './order';
 import {CategoryComponent} from './category';
 
 const routes: Routes = [{
@@ -21,8 +22,10 @@ const routes: Routes = [{
       path: 'item',
       loadChildren: './item/item.module#ItemModule'
     },
-
-
+    {
+      path: 'order',
+      component: OrderComponent
+    }
   ]
 }];
 

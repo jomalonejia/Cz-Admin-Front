@@ -37,6 +37,6 @@ export class MessageService{
 
   public listRelatedUsers(userId:Number){
     let params = new HttpParams().set('userId', userId+'');
-    return this.http.get(constants.LISTRELATEDUSERS_URL,{params:params});
+    return this.http.get(constants.LIST_RELATED_USERS_URL,{params:params});
   }
 }

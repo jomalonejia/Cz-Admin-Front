@@ -1,0 +1,56 @@
+
+td, th {
+  text-align: center;
+}
+
+.order-list-name-col {
+  width: 35%;
+}
+
+.order-list-price-col {
+  width: 15%;
+}
+
+.order-list-image-col {
+  width: 10%;
+
+  .order-list-img {
+    width: 45px;
+  }
+}
+
+.order-list-operation-col {
+  width: 10%;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.card {
+  background: none;
+}
+
+.card-header {
+  background: none;
+}
+
+#item-table-line {
+  line-height: 3;
+  border-bottom: 1px solid #eceeef;
+}
+
+.cz-pagination {
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.dropdown-item-category {
+  width: 80%;
+  margin-left: 10%;
+  cursor: pointer;
+}
+
+
+
+

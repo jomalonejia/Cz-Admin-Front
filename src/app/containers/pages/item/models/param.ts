@@ -1,4 +1,4 @@
-import {ParamDetail} from './paramValue.model';
+import {ParamDetail} from './paramValue';
 
 export class Param{
   public id:number;
