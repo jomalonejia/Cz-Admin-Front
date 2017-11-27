@@ -31,6 +31,8 @@ export class PagesComponent {
           this.toastr.success(toaster.message,"success");
         }else if (toaster.type == 'error'){
           this.toastr.error(toaster.message,"error");
+        }else if (toaster.type == 'warning'){
+          this.toastr.warning(toaster.message,"warning");
         }
         // [BUG] dashboard to list would not show ,fix it later
       });

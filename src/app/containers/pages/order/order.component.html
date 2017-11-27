@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <cz-card title="Orders" baCardClass="with-scroll" class="data-table-container">
         <div class="panel panel-default">
-          <table class="table table-striped" [mfData]="orders" #mf="mfDataTable"
+          <table class="table table-striped" [mfData]="orders$ | async" #mf="mfDataTable"
                  [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
             <thead>
             <tr>
@@ -32,7 +32,7 @@
               <td class="order-list-price-col">{{order.totalPrice}}</td>
               <td class="order-list-status-col">{{order.status | orderStatus}}</td>
               <td>
-                <button class="btn btn-hero-secondary btn-demo" (click)="openEditModal(index)">
+                <button class="btn btn-hero-secondary btn-demo" (click)="openEditModal(order.id)">
                   <i class="ion-edit"></i>
                 </button>
               </td>

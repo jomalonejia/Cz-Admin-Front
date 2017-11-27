@@ -37,5 +37,6 @@ export const PARAM_LIST_URL = PARAM_PREFIX + '/list';
 
 export const ORDER_PREFIX = URL_PREFIX + '/order';
 export const ORDER_LIST_URL = ORDER_PREFIX + '/list';
+export const ORDER_UPDATE_STATUS_URL = ORDER_PREFIX + '/updateStatus';
 
 

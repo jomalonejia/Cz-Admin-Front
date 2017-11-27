@@ -7,7 +7,7 @@ export interface ItemRootState {
 }
 
 export interface State extends fromRoot.State {
-  item: ItemRootState;
+  itemRoot: ItemRootState;
 }
 
 export const reducers = {
