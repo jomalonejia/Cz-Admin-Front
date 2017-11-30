@@ -36,8 +36,8 @@ export class ItemService {
     return this.http.get(`${constants.ITEM_IMAGES_SELECT_URL}/${itemId}`);
   }
 
-  public addContent(content): Observable<any> {
-    return this.http.post(constants.ITEM_ADD_CONTENT_URL, content);
+  public updateContent(content): Observable<any> {
+    return this.http.post(constants.ITEM_UPDATE_CONTENT_URL, content);
   }
 
   public listParams(): Observable<any>{

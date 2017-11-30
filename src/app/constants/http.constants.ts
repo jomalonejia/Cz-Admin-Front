@@ -21,7 +21,7 @@ export const ITEM_UPDATE_URL = ITEM_PREFIX + '/update';
 export const ITEM_UPDATE_IMAGE_URL = ITEM_UPDATE_URL + '';
 export const ITEM_IMAGES_UPDATE_URL = ITEM_PREFIX + '/images/update';
 export const ITEM_IMAGES_SELECT_URL = ITEM_PREFIX +'/images/select';
-export const ITEM_ADD_CONTENT_URL = ITEM_PREFIX +'/content/add';
+export const ITEM_UPDATE_CONTENT_URL = ITEM_PREFIX +'/content/update';
 
 
 export const CATEGORY_PREFIX = URL_PREFIX + '/category';

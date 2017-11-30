@@ -17,15 +17,16 @@ import {Toaster} from 'app/models';
 export class PagesComponent {
 
   menu = MENU_ITEMS;
+  loading:boolean = false;
 
   constructor(private toastr: ToastsManager,
               private vcr: ViewContainerRef,
-              private toasterService:CustomToasterService ){
+              private toasterService:CustomToasterService){
     this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit(){
-    this.toasterService.$toaster
+    this.toasterService.toaster$
       .subscribe((toaster:Toaster) => {
         if(toaster.type == 'success'){
           this.toastr.success(toaster.message,"success");

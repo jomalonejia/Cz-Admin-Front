@@ -4,9 +4,9 @@ import {Toaster} from 'app/models';
 
 @Injectable()
 export class CustomToasterService {
-  public $toaster = new Subject<Toaster>();
+  public toaster$ = new Subject<Toaster>();
 
   public toasterTip(toaster:Toaster){
-    this.$toaster.next(toaster)
+    this.toaster$.next(toaster)
   }
 }

@@ -7,7 +7,7 @@ import {TokenService} from './token';
 const SERVICES = [
   AuthHttp,
   AuthGuardActivate,
-  TokenService
+  TokenService,
 ]
 
 

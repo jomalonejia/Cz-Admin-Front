@@ -7,6 +7,7 @@ import {ComponentsModule} from 'app/components/components.module';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {CategoryModule} from './category/category.module';
 import {OrderModule} from './order/order.module';
+import {LoadingModule} from 'ngx-loading';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import {OrderModule} from './order/order.module';
     ComponentsModule,
     DashboardModule,
     OrderModule,
+    LoadingModule,
     CategoryModule.forRoot()
   ],
   declarations: [

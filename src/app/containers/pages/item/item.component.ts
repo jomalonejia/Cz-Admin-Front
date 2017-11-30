@@ -60,7 +60,6 @@ export class ItemComponent {
   openImageModal(index, itemId) {
     const activeModal = this.modalService.open(ItemEditImageComponent, {size: 'lg'});
     activeModal.componentInstance.image = this.items[index].image;
-    ;
     activeModal.componentInstance.itemId = itemId;
     activeModal.result.then(() => {
         this.listItems(this.pageNum);
@@ -70,8 +69,10 @@ export class ItemComponent {
       });
   }
 
-  openContentModal() {
+  openContentModal(index) {
     const activeModal = this.modalService.open(ItemEditContentComponent, {size: 'lg'});
+    activeModal.componentInstance.itemId = this.items[index].id;
+    activeModal.componentInstance.content = this.items[index].content;
   }
 
   listItems(pageNum: number) {

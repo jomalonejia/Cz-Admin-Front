@@ -12,7 +12,6 @@ import * as fromAuth from '../../reducers/auth'
 import * as fromRoot from 'app/reducers';
 import * as auth from '../../actions/auth';
 import * as constants from 'app/constants';
-import {of} from 'rxjs/observable/of';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -34,6 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
         'cz-admin-token':  `${constants.TOKEN_PRIFIX}${this.token}`
       }
     });
+
 
     return next.handle(req)
       .catch(err => {

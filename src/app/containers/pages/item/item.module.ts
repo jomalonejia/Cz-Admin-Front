@@ -12,6 +12,7 @@ import {StoreModule} from '@ngrx/store';
 import {reducers} from './reducers';
 import {EffectsModule} from '@ngrx/effects';
 import {ItemEffects} from './effects'
+import {LoadingModule} from 'ngx-loading';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {ItemEffects} from './effects'
     QuillEditorModule,
     TreeModule,
     ColorPickerModule,
+    LoadingModule,
     StoreModule.forFeature('item', reducers),
     EffectsModule.forFeature([ItemEffects]),
   ],

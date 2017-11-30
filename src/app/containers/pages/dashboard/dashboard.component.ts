@@ -36,4 +36,6 @@ export class DashboardComponent {
   showCustom() {
     this.toastr.custom('<span style="color: red">Message in red.</span>', null, {enableHTML: true});
   }
+
+
 }
