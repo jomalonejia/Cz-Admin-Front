@@ -42,7 +42,7 @@ export class ItemEditContentComponent {
 
   public content;
   public editorOptions = {
-    placeholder: 'insert content...'
+    placeholder: 'Insert content...'
   };
 
   constructor(private activeModal: NgbActiveModal,
