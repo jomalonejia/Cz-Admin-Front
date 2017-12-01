@@ -9,6 +9,11 @@ import {ItemAddComponent,
   ItemEditComponent,
   ItemEditContentComponent,
   ItemEditImageComponent} from './components';
+import {Store} from '@ngrx/store';
+import * as fromRootItem from './reducers';
+import * as fromItem from './reducers/item';
+import * as itemActions from './actions';
+import {Page} from 'app/models';
 
 @Component({
   selector: 'page-item',
@@ -18,21 +23,29 @@ import {ItemAddComponent,
 export class ItemComponent {
   categories$: Observable<object>;
   items;
+  pageInfo$:Observable<any>;
   filterQuery = '';
   rowsOnPage = 5;
   sortBy = 'email';
   sortOrder = 'asc';
   name: string;
-  pagesCount: number;
   pageNum: number = 1;
   pageSize: number = 5;
 
   constructor(private itemService: ItemService,
+              private store: Store<fromItem.State>,
               private categoryService: CategoryService,
               private modalService: NgbModal,
               private toasterService: CustomToasterService) {
 
-    this.listItems(this.pageNum);
+
+    this.pageInfo$ = this.store.select(fromRootItem.getItemsInfo);
+    this.pageInfo$.subscribe(pageInfo => this.items = pageInfo.list);
+
+  }
+
+  ngOnInit(){
+    this.store.dispatch(new itemActions.ListItemsAction(new Page(1,this.pageSize)))
   }
 
   ngAfterViewInit() {
@@ -62,10 +75,10 @@ export class ItemComponent {
     activeModal.componentInstance.image = this.items[index].image;
     activeModal.componentInstance.itemId = itemId;
     activeModal.result.then(() => {
-        this.listItems(this.pageNum);
+        this.changePage(this.pageNum);
       },
       () => {
-        this.listItems(this.pageNum);
+        this.changePage(this.pageNum);
       });
   }
 
@@ -73,16 +86,6 @@ export class ItemComponent {
     const activeModal = this.modalService.open(ItemEditContentComponent, {size: 'lg'});
     activeModal.componentInstance.itemId = this.items[index].id;
     activeModal.componentInstance.content = this.items[index].content;
-  }
-
-  listItems(pageNum: number) {
-    this.itemService.listItems(pageNum,this.pageSize)
-      .catch(err => Observable.empty())
-      .subscribe(pageInfo => {
-        this.items = pageInfo.list;
-        this.pagesCount = pageInfo.pages;
-        this.pageNum = pageInfo.pageNum;
-      });
   }
 
   delete(itemId) {
@@ -108,8 +111,6 @@ export class ItemComponent {
       .catch(err => Observable.empty())
       .subscribe(pageInfo => {
         this.items = pageInfo.list;
-        this.pagesCount = pageInfo.pages;
-        this.pageNum = pageInfo.pageNum;
       });
   }
 
@@ -122,7 +123,7 @@ export class ItemComponent {
   };
 
   changePage(page) {
-    this.listItems(page);
+    this.store.dispatch(new itemActions.ListItemsAction(new Page(page,this.pageSize)))
   }
 
   showSuccess() {

@@ -82,7 +82,6 @@ export class ItemEditImageComponent {
   imagesUploadUrl:string = constants.ITEM_IMAGES_UPDATE_URL;
 
   constructor(private activeModal: NgbActiveModal,
-              private itemService: ItemService,
               private store: Store<fromItem.State>) {
     this.images$ = this.store.select(fromRootItem.getImages);
   }
@@ -96,7 +95,7 @@ export class ItemEditImageComponent {
   }
 
   closeModal() {
-    this.uploadSuccess.emit()
+    this.uploadSuccess.emit();
     this.activeModal.close();
   }
 

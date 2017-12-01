@@ -50,8 +50,12 @@ td, th {
 }
 
 .cz-pagination {
-  max-width: 350px;
-  margin: 0 auto;
+  display: inline-block;
+  margin:{
+    left: 24%;
+    top:2em;
+    bottom: 2em;
+  }
 }
 
 .dropdown-item-category {

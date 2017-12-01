@@ -3,61 +3,56 @@ import * as _ from 'lodash';
 
 @Component({
   selector: 'cz-page',
-  styleUrls:['./czPage.scss'],
-  templateUrl:'./czPage.html'
+  styleUrls: ['./czPage.scss'],
+  templateUrl: './czPage.html'
 })
 
-export class CzPage{
-  private _pagesCount:number;
-  @Input() set pagesCount(value: number) {
-    this._pagesCount = value;
-    this.pages = Array(value).fill('').map((_,idx) => idx+1);
+export class CzPage {
+
+  protected pages: number[] = [];
+ /* private paginationLength: number = 10;
+  private quotient: number = 0;
+  private currentQuotient: number = 0;*/
+  private _pageInfo: any;
+
+  @Input() set pageInfo(value: any) {
+    this._pageInfo = value;
+    /*console.log(this._pageInfo)
+    this.quotient = Math.floor(this._pageInfo.pages / this.paginationLength);
+    this.currentQuotient = Math.floor(this._pageInfo.pageNum / this.paginationLength);
+    let length = 0;
+    console.log(this.quotient);
+    console.log(this.currentQuotient);
+    if (this.currentQuotient < this.quotient) {
+      length = 10;
+    } else if (this.quotient == Math.floor(this._pageInfo.pageNum / this.paginationLength)) {
+      length = this._pageInfo.pages;
+    }
+    this.pages = Array(length).fill('').map((_, idx) => idx + (this.paginationLength * this.currentQuotient + 1));*/
+    /*this.cardinal = this._pageInfo.pageNum <= this.paginationLength ? 0 : this._pageInfo.pageNum / this.paginationLength;
+     const length =
+     this.cardinal == this._pageInfo.pages / this.paginationLength
+     ? this._pageInfo - this.cardinal * this.paginationLength
+     :this._pageInfo.pages - this.cardinal * this.paginationLength;
+     this.pages = Array.from({length: length}, (v, k) => this.paginationLength * this.cardinal + k + 1)*/
   }
-  get pagesCount(): number {
-    return this._pagesCount;
+
+  get pageInfo(): any {
+    return this._pageInfo;
   }
 
   @Output() changePage = new EventEmitter<any>();
 
 
-  protected page: number = 1;
-  protected pages:number[] = [];
-
-  constructor(){
+  constructor() {
 
   }
 
-  range(start, end) {
-    return  Array(6).fill(null)
+  ngOnInit() {
   }
 
-  /*ngOnChanges(changes: SimpleChanges) {
-    const counts = changes.pagesCount.currentValue;
-    for(let i =1;i<counts+1;i++){
-      this.pages.push(i);
-    }
-  }*/
-
-  shouldShow(){
-    return this.pages.length > 1;
-  }
-
-  getPage(){
-    return this.page;
-  }
-
-  getPages(){
-    return this.pages;
-  }
-
-  paginate(page){
-    this.page = page;
+  paginate(page) {
     this.changePage.emit(page);
     return false;
   }
-
-  getLast(){
-    return this.pagesCount;
-  }
-
 }

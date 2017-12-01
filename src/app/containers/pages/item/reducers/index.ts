@@ -24,6 +24,12 @@ export const getItemState = createSelector(
 
 export const getImages = createSelector(
   getItemState,
-  fromItem.getImages
+  fromItem.getImages,
 )
+
+export const getItemsInfo = createSelector(
+  getItemState,
+  fromItem.getItemsInfo
+)
+
 

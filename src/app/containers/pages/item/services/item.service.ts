@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import * as constants from 'app/constants';
 import {HttpClient, HttpParams} from '@angular/common/http';
+import {Page} from 'app/models';
+import {ItemContent} from 'app/containers/pages/item/models/itemContent';
 
 @Injectable()
 export class ItemService {
@@ -22,8 +24,8 @@ export class ItemService {
     return this.http.post(constants.ITEM_UPDATE_URL, item);
   }
 
-  public listItems(pageNum: number,pageSize:number): Observable<any> {
-    const params = new HttpParams().set('pageNum',pageNum.toString()).set('pageSize', pageSize.toString());
+  public listItems(page:Page): Observable<any> {
+    const params = new HttpParams().set('pageNum',page.pageNum.toString()).set('pageSize', page.pageSize.toString());
     return this.http.get(`${constants.ITEM_LIST_URL}`,{params:params});
   }
 
@@ -36,8 +38,8 @@ export class ItemService {
     return this.http.get(`${constants.ITEM_IMAGES_SELECT_URL}/${itemId}`);
   }
 
-  public updateContent(content): Observable<any> {
-    return this.http.post(constants.ITEM_UPDATE_CONTENT_URL, content);
+  public updateContent(itemContent:ItemContent): Observable<any> {
+    return this.http.post(constants.ITEM_UPDATE_CONTENT_URL, itemContent);
   }
 
   public listParams(): Observable<any>{

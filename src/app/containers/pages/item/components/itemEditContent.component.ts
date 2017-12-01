@@ -2,6 +2,10 @@ import {Component, Inject} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {ItemService} from '../services';
 import {CustomToasterService} from 'app/services/toaster';
+import {Store} from '@ngrx/store';
+import * as itemActions from '../actions';
+import * as fromItem from '../reducers/item';
+import {ItemContent} from 'app/containers/pages/item/models/itemContent';
 import {Observable} from 'rxjs/Observable';
 
 @Component({
@@ -40,12 +44,13 @@ export class ItemEditContentComponent {
   loading: boolean = false;
   itemId: string;
 
-  public content;
+  public content:string;
   public editorOptions = {
     placeholder: 'Insert content...'
   };
 
   constructor(private activeModal: NgbActiveModal,
+              private store: Store<fromItem.State>,
               private itemService: ItemService,
               private toasterService: CustomToasterService) {
   }
@@ -56,18 +61,20 @@ export class ItemEditContentComponent {
 
   saveItemContent() {
     this.loading = true;
-    this.itemService.updateContent({itemId:this.itemId,content: this.content})
+    const itemContent = new ItemContent(this.itemId,this.content);
+    this.itemService.updateContent(itemContent)
       .catch(err => {
         this.loading = false;
         this.toasterService.toasterTip({message: 'Save Content Failed!', type: 'error'});
         return Observable.throw(err);
       })
       .subscribe(v => {
+        this.store.dispatch(new itemActions.UpdateItemContentSuccess(itemContent));
         this.loading = false;
         this.toasterService.toasterTip({message: 'Save Content Success!', type: 'success'});
-        setTimeout(this.closeModal(), 2000);
-      });
+        setTimeout(this.closeModal(), 1500);
 
+      });
   }
 
 
