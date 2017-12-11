@@ -1,4 +1,5 @@
 import * as item from '../actions';
+import {ItemContent} from 'app/containers/pages/item/models/itemContent';
 
 export interface State {
   itemsInfo: any,
@@ -29,8 +30,12 @@ export function reducer(state: State = initialState, action: item.itemActions): 
         images: [...newImages]
       };
     case item.UPDATE_ITEM_CONTENT_SUCCESS:
-      console.log(action.payload);
-      return state;
+      const newItemsInfoState = state.itemsInfo;
+      newItemsInfoState.list.map(item => item.id == action.payload['itemId'] ? item.content = action.payload['content'] : item)
+      return {
+        ...state,
+        itemsInfo:newItemsInfoState
+      }
     default:
       return state;
   }

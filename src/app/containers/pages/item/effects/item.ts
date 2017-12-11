@@ -36,7 +36,10 @@ export class ItemEffects {
         .catch(err => {
           throw err;
         })
-        .map(res => new actions.ListItemsSuccessAction(res))
+        .map(res => {
+          console.log(res)
+          return new actions.ListItemsSuccessAction(res)
+        })
     });
 
   @Effect()
