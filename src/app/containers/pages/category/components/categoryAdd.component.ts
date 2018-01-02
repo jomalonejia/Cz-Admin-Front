@@ -47,8 +47,8 @@ export class CategoryAddComponent {
   add(obj){
     this.categoryService.addCategory(obj)
       .subscribe(v => {
-        this.activeModal.close();
-        window.location.reload();
+        //this.activeModal.close();
+        //window.location.reload();
       });
   }
 
